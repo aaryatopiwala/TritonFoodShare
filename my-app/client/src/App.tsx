@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import {BrowserRouter, Route, Router, Routes} from "react-router-dom";
 import EventSubmission from './views/EventSubmission';
+import {EventDisplay} from './views/EventDisplay';
 
 function App() {
   return (
@@ -19,6 +20,10 @@ function App() {
           /* add a new path to your page!! 
           <Route path="/events" element={<DisplayEvents />} />
           */}
+
+          <Route path = "/eventdisplay" element = {
+            <EventDisplay/>}/>
+
         </Routes>
       </div>
     </BrowserRouter>
