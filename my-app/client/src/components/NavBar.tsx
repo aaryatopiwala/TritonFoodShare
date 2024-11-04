@@ -1,6 +1,5 @@
 import React from 'react';
-import './NavBar.css'; // Create or update the CSS file accordingly
-//import logo from '../path/to/logo.png'; // Replace with the correct path to your logo
+import './NavBar.css';
 
 function NavBar() {
   return (
