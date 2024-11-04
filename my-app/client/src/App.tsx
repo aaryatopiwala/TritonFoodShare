@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import {BrowserRouter, Route, Router, Routes} from "react-router-dom";
 import EventSubmission from './views/EventSubmission';
+import NavBar from './components/NavBar';
 
 import {EventDisplay} from './views/EventDisplay';
 
@@ -11,8 +12,14 @@ import { AppProvider } from './context/AppContext';
 
 function App() {
   return (
+
+
+    
+
     <AppProvider>
+      
       <BrowserRouter>
+<NavBar/>
       <div>
         <Routes>
           <Route path="/" element={
