@@ -3,11 +3,16 @@ import logo from './logo.svg';
 import './App.css';
 import {BrowserRouter, Route, Router, Routes} from "react-router-dom";
 import EventSubmission from './views/EventSubmission';
+
 import {EventDisplay} from './views/EventDisplay';
+
+import { AppProvider } from './context/AppContext';
+
 
 function App() {
   return (
-    <BrowserRouter>
+    <AppProvider>
+      <BrowserRouter>
       <div>
         <Routes>
           <Route path="/" element={
@@ -27,6 +32,8 @@ function App() {
         </Routes>
       </div>
     </BrowserRouter>
+    </AppProvider>
+    
   );
 }
 
