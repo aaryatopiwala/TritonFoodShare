@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #ffffff; /* Adjust background color if needed */
+    background-color: #ffffff; 
     padding: 1rem 2rem;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }
@@ -13,7 +13,7 @@
   }
   
   .navbar-logo {
-    width: 70px; /* Adjust as necessary */
+    width: 70px; 
     height: 70px;
     margin-right: 1rem;
   }
