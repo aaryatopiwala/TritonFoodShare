@@ -8,7 +8,7 @@ export const EventDisplay = () => {
   const [events] = useState<FoodEvent[]>(dummyEventList);
 
   return(
-    <div className = "page-container">
+    <div className = "page-container-display">
         <div className = "box">
             <h1>Active Events</h1>
             <h3>Events that are sharing food right now!</h3>
