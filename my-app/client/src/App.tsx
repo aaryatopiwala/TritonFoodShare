@@ -5,10 +5,21 @@ import {BrowserRouter, Route, Router, Routes} from "react-router-dom";
 import EventSubmission from './views/EventSubmission';
 import NavBar from './components/NavBar';
 
+import {EventDisplay} from './views/EventDisplay';
+
+import { AppProvider } from './context/AppContext';
+
+
 function App() {
   return (
-    <BrowserRouter>
-    <NavBar/>
+
+
+    
+
+    <AppProvider>
+      
+      <BrowserRouter>
+<NavBar/>
       <div>
         <Routes>
           <Route path="/" element={
@@ -21,9 +32,15 @@ function App() {
           /* add a new path to your page!! 
           <Route path="/events" element={<DisplayEvents />} />
           */}
+
+          <Route path = "/eventdisplay" element = {
+            <EventDisplay/>}/>
+
         </Routes>
       </div>
     </BrowserRouter>
+    </AppProvider>
+    
   );
 }
 
