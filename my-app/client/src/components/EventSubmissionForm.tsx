@@ -1,110 +1,117 @@
 import React, { useState, useContext } from "react";
-import { AppContext, AppProvider } from "../context/AppContext";
+import { AppContext } from "../context/AppContext";
 import { FoodEvent } from "../types/types";
 
 const EventSubmissionForm = () => {
-  // Exercise: Consume the AppContext here
-  // const expenses = useContext(AppContext).expenses;
-  // const setExpenses = useContext(AppContext).setExpenses;
-  
-  const {foodEvents, setfoodEvents} = useContext(AppContext);
+  const { foodEvents, setfoodEvents } = useContext(AppContext);
 
-  // Exercise: Create name and cost to state variables
   const [orgName, setOrgName] = useState("");
   const [foodName, setFoodName] = useState("");
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState("");
   const [location, setLocation] = useState("");
-  
+
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-  // Exercise: Add add new expense to expenses context array
-  
-    const newFoodEvent: FoodEvent = {id : (foodEvents.length+1), orgName : orgName, foodName: foodName, quantity: quantity, location: location };
-    // console.log(expenses);
-    //createFoodEvent(newFoodEvent);
-    const updatedFoodEvents = [...foodEvents, newFoodEvent];
-    // console.log(expenses);
-    
-    setfoodEvents(updatedFoodEvents);
-    console.log(foodEvents); 
+
+    //refactor = move all of the stye to the css file
+    const newFoodEvent: FoodEvent = {
+      id: foodEvents.length + 1,
+      orgName,
+      foodName,
+      quantity: parseInt(quantity),
+      location,
+    };
+
+    setfoodEvents([...foodEvents, newFoodEvent]);
+    console.log(foodEvents);
+  };
+
+  const inputStyle = {
+    width: '484px', // original width
+    height: '40px', // original height
+    borderRadius: '8px',
+    padding: '8px',
+    boxSizing: 'border-box' as const,
+    border: '1px solid #e0e0e0',
+    fontSize: '14px',
+  };
+
+  const labelStyle = {
+    fontSize: '14px',
+    marginBottom: '8px',
+    display: 'block',
+  };
+
+  const containerStyle = {
+    width: '532px', // original width
+    height: '742px', // original height
+    backgroundColor: '#fff',
+    padding: '20px',
+    boxSizing: 'border-box' as const,
+    border: '1px solid #ccc',
+    borderRadius: '8px',
   };
 
   return (
-    <form onSubmit={onSubmit}>
-      <div className="row">
-        <div className="col-sm">
-          <label htmlFor="orgName">orgName</label>
+    <div style={containerStyle}>
+      <form onSubmit={onSubmit}>
+        <div style={{ marginBottom: '24px' }}>
+          <label htmlFor="orgName" style={labelStyle}>Organization Name</label>
           <input
             required
             type="text"
-            placeholder="orgName"
-            data-testid ="orgName"
-            className="form-control"
-            id="name"
+            placeholder="Who are you?"
+            data-testid="orgName"
+            id="orgName"
             value={orgName}
-            // HINT: onChange={}
-            onChange={(event) => 
-              setOrgName(event.target.value)
-            }
-          ></input>
+            onChange={(event) => setOrgName(event.target.value)}
+            style={inputStyle}
+          />
         </div>
-        <div className="col-sm">
-          <label htmlFor="foodName">foodName</label>
+        <div style={{ marginBottom: '24px' }}>
+          <label htmlFor="foodName" style={labelStyle}>Food Name</label>
           <input
             required
             type="text"
-            placeholder="foodName"
-            data-testid ="foodName"
-            className="form-control"
-            id="name"
+            placeholder="chipotle"
+            data-testid="foodName"
+            id="foodName"
             value={foodName}
-            // HINT: onChange={}
-            onChange={(event) => 
-              setFoodName(event.target.value)
-            }
-          ></input>
+            onChange={(event) => setFoodName(event.target.value)}
+            style={inputStyle}
+          />
         </div>
-        <div className="col-sm">
-          <label htmlFor="quantity">Quantity</label>
+        <div style={{ marginBottom: '24px' }}>
+          <label htmlFor="quantity" style={labelStyle}>Quantity</label>
           <input
             required
             type="number"
-            placeholder="123"
-            data-testid ="quantity"
-            className="form-control"
-            id="cost"
+            placeholder="23"
+            data-testid="quantity"
+            id="quantity"
             value={quantity}
-            // HINT: onChange={}
-            onChange={(event) => 
-              setQuantity(event.target.valueAsNumber)
-            }
-          ></input>
+            onChange={(event) => setQuantity(event.target.value)}
+            style={inputStyle}
+          />
         </div>
-        <div className="col-sm">
-          <label htmlFor="location">location</label>
-          <input
+        <div style={{ marginBottom: '24px' }}>
+          <label htmlFor="location" style={labelStyle}>Location Description</label>
+          <textarea
             required
-            type="text"
-            placeholder="location"
-            data-testid ="location"
-            className="form-control"
-            id="name"
+            placeholder="CSE building"
+            data-testid="location"
+            id="location"
             value={location}
-            // HINT: onChange={}
-            onChange={(event) => 
-              setLocation(event.target.value)
-            }
-          ></input>
+            onChange={(event) => setLocation(event.target.value)}
+            style={{ ...inputStyle, height: '80px', resize: 'none' }}
+          />
         </div>
-        <div className="col-sm">
-          <button type="submit" 
-          className="btn btn-primary mt-3">
-            Save
-          </button>
-        </div>
-      </div>
-    </form>
+        <button type="submit" style={{ width: '100%', height: '40px', borderRadius: '8px', backgroundColor: '#4CAF50', color: 'white', fontSize: '16px', border: 'none' }}>
+          Submit
+        </button>
+      </form>
+    </div>
   );
 };
 

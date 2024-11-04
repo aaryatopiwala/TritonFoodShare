@@ -40,9 +40,9 @@
 .page-container {
   display: flex;
   flex-direction: column;
-  align-items: center; 
+  align-items: flex-start; 
   padding: 20px;       /* Optional: Adds some padding to the page */
-  background-color: lightgray;
+  background-color: #f6f6f6;
 }
 
 .box{
