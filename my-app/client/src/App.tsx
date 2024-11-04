@@ -3,10 +3,12 @@ import logo from './logo.svg';
 import './App.css';
 import {BrowserRouter, Route, Router, Routes} from "react-router-dom";
 import EventSubmission from './views/EventSubmission';
+import NavBar from './components/NavBar';
 
 function App() {
   return (
     <BrowserRouter>
+    <NavBar/>
       <div>
         <Routes>
           <Route path="/" element={
