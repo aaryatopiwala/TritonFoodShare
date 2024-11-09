@@ -5,4 +5,5 @@ export interface FoodEvent {
     quantity: string;
     location: string;
     description: string;
+    headcount: number;
 }

@@ -19,7 +19,7 @@ export async function createFoodEventServer(req: Request, res: Response, db: Dat
             return res.status(400).send({ error: "Missing required fields" });
         }
  
-        await db.run('INSERT INTO expenses (id, orgName, foodName, quantity, location, description) VALUES (?, ?, ?, ?, ?, ?);', [id, orgName, foodName, quantity, location, description]);
+        await db.run('INSERT INTO expenses (id, orgName, foodName, quantity, location, description, headcount) VALUES (?, ?, ?, ?, ?, ?);', [id, orgName, foodName, quantity, location, description, 0]);
         res.status(201).send({ id, orgName, foodName, quantity, location, description });
  
     } catch (error) {

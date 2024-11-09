@@ -15,7 +15,8 @@ const initDB = async () => {
         foodName TEXT,
         quantity TEXT,
         location TEXT,
-        description TEXT
+        description TEXT,
+        headcount INTEGER NOT NULL
         );
     `);
     return db;
