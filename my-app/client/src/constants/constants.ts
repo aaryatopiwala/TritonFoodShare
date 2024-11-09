@@ -1,4 +1,7 @@
 import { FoodEvent } from "../types/types"
+
+export const API_BASE_URL = "http://localhost:8080";
+
 export const dummyEventList = [
     {
         id: 1,
