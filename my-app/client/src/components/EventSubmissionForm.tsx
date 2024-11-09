@@ -9,6 +9,7 @@ const EventSubmissionForm = () => {
   const [foodName, setFoodName] = useState("");
   const [quantity, setQuantity] = useState("");
   const [location, setLocation] = useState("");
+  const [description, setDescription] = useState("");
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -21,6 +22,8 @@ const EventSubmissionForm = () => {
       foodName,
       quantity: parseInt(quantity),
       location,
+      description,
+      headcount:0
     };
 
     setfoodEvents([...foodEvents, newFoodEvent]);
@@ -104,6 +107,18 @@ const EventSubmissionForm = () => {
             id="location"
             value={location}
             onChange={(event) => setLocation(event.target.value)}
+            style={{ ...inputStyle, height: '80px', resize: 'none' }}
+          />
+        </div>
+        <div style={{ marginBottom: '24px' }}>
+          <label htmlFor="description" style={labelStyle}>Location Description</label>
+          <textarea
+            required
+            placeholder="Description of my event"
+            data-testid="description"
+            id="description"
+            value={description}
+            onChange={(event) => setDescription(event.target.value)}
             style={{ ...inputStyle, height: '80px', resize: 'none' }}
           />
         </div>
