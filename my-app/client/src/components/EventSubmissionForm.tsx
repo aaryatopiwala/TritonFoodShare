@@ -21,6 +21,8 @@ const EventSubmissionForm = () => {
       foodName,
       quantity: parseInt(quantity),
       location,
+      description: '',
+      headcount: 0,
     };
 
     setfoodEvents([...foodEvents, newFoodEvent]);
