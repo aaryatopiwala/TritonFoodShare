@@ -21,10 +21,9 @@ app.listen(port, () => {
     const db = await initDB();
 
     // Root endpoint to get test if the server is running
-    app.get("/", (req: Request, res: Response) => { // Include req as the first parameter
+    app.get("/", (req: Request, res: Response) => {
         res.status(200).send({ "data": "Hello, TypeScript Express!" });
     });
 
     createFoodEventsEndpoints(app, db);
 })();
-

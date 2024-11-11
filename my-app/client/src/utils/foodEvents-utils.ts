@@ -42,3 +42,17 @@ export const fetchFoodEvents = async (): Promise<FoodEvent[]> => {
 	console.log("response in fetchFoodEvents", foodEventsList);
 	return foodEventsList;
 };
+
+// Function to update the headcount of a food event. Method: POST
+export const updateFoodEventHeadcount = async (eventId: number, newHeadcount: number): Promise<void> => {
+  const response = await fetch(`${API_BASE_URL}/foodEvents/${eventId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ headcount: newHeadcount }),
+  });
+  if (!response.ok) {
+    throw new Error("Failed to update headcount");
+  }
+};
