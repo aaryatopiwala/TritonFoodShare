@@ -13,6 +13,8 @@ const FoodEventItem = (currentFoodEvent: FoodEvent) => {
       <div>{currentFoodEvent.foodName}</div>
       <div>{currentFoodEvent.quantity}</div>
       <div>{currentFoodEvent.location}</div>
+      <div>{currentFoodEvent.description}</div>
+      <div>{currentFoodEvent.headcount}</div>
     </li>
   );
 };
