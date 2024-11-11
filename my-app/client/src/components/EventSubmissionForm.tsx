@@ -1,10 +1,12 @@
 import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import { FoodEvent } from "../types/types";
 import './EventSubmissionForm.css';
 
 const EventSubmissionForm = () => {
   const { foodEvents, setfoodEvents } = useContext(AppContext);
+  const navigate = useNavigate();
 
   const [orgName, setOrgName] = useState("");
   const [foodName, setFoodName] = useState("");
@@ -30,6 +32,10 @@ const EventSubmissionForm = () => {
     setFoodName("");
     setQuantity("");
     setLocation("");
+  };
+
+  const handleViewActiveEvents = () => {
+    navigate("/eventdisplay");
   };
 
   return (
@@ -118,7 +124,7 @@ const EventSubmissionForm = () => {
             <p>Submit a form to view it here!</p>
           </div>
         )}
-        <button className="view-active-events-button">
+        <button className="view-active-events-button" onClick={handleViewActiveEvents}>
           View Active Events
         </button>
       </div>
