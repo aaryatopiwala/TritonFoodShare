@@ -27,4 +27,3 @@ app.listen(port, () => {
 
     createFoodEventsEndpoints(app, db);
 })();
-
