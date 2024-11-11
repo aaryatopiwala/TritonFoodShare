@@ -6,13 +6,14 @@ export async function createFoodEventServer(req: Request, res: Response, db: Dat
 
     try {
         // Type casting the request body to the expected format.
-        const { id, orgName, foodName, quantity, location, description } = req.body as { 
+        const { id, orgName, foodName, quantity, location, description, headcount } = req.body as { 
             id: string, 
             orgName: string, 
             foodName: string, 
             quantity: string, 
             location: string, 
-            description: string 
+            description: string,
+            headcount: number 
         };
  
         if (!id || !orgName || !foodName) {
@@ -56,4 +57,33 @@ export async function getFoodEvents(req: Request, res: Response, db: Database) {
         return res.status(400).send({ error: 'Food Events could not be retrieved'});
     }
     
+}
+
+// Utility function to update the headcount of a food event
+export async function updateFoodEventHeadcount(req: Request, res: Response, db: Database) {
+    const { eventId, currentHeadcount } = req.body as { 
+        eventId: string, 
+        currentHeadcount: number 
+    };
+
+    if (!eventId || currentHeadcount === undefined) {
+        return res.status(400).send({ error: "Missing required fields: eventId or currentHeadcount" });
+    }
+
+    try {
+        // Query the event to ensure it exists
+        const event = await db.get('SELECT * FROM foodEvents WHERE id = ?;', [eventId]);
+
+        if (!event) {
+            return res.status(404).send({ error: "Food Event not found" });
+        }
+
+        // Update the headcount (increment or decrement based on the action)
+        await db.run('UPDATE foodEvents SET headcount = ? WHERE id = ?;', [currentHeadcount, eventId]);
+
+        res.status(200).send({ message: 'Reservation updated successfully' });
+    } catch (error) {
+        console.error('Error updating headcount:', error);
+        return res.status(500).send({ error: 'Failed to update reservation' });
+    }
 }
