@@ -9,7 +9,7 @@ export const dummyEventList = [
         foodName: "Food1",
         quantity: 1,
         location: "Location1",
-        description: "",
+        description: "Description1",
         headcount: 0
     },
     {
@@ -18,7 +18,7 @@ export const dummyEventList = [
         foodName: "Food2",
         quantity: 2,
         location: "Location2",
-        description: "",
+        description: "Description2",
         headcount: 0
     },
     {
@@ -27,7 +27,7 @@ export const dummyEventList = [
         foodName: "Food3",
         quantity: 3,
         location: "Location3",
-        description: "",
+        description: "Description3",
         headcount: 0
     },
     {
@@ -36,7 +36,7 @@ export const dummyEventList = [
         foodName: "Food4",
         quantity: 4,
         location: "Location4",
-        description: "",
+        description: "Description4",
         headcount: 0
     },
 ]

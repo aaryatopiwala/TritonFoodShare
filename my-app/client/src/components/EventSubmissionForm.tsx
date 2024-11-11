@@ -51,7 +51,7 @@ const EventSubmissionForm = () => {
       foodName,
       quantity: parseInt(quantity),
       location,
-      description,
+      description: '',
       headcount: 0,
     };
 

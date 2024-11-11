@@ -14,7 +14,8 @@ const MyEventsList = () => {
   return (
     <ul className="list-group">
       {foodEvents.map((foodEvent: FoodEvent) => (
-        <FoodEventItem id={foodEvent.id} orgName={foodEvent.orgName} foodName={foodEvent.foodName} quantity={foodEvent.quantity} location={foodEvent.location} description={foodEvent.description} headcount={foodEvent.headcount} />
+        <FoodEventItem id={foodEvent.id} orgName={foodEvent.orgName} foodName={foodEvent.foodName} quantity={foodEvent.quantity} location={foodEvent.location} description={foodEvent.description || ''}
+        headcount={foodEvent.headcount || 0}    />
       ))}
     </ul> 
   );
