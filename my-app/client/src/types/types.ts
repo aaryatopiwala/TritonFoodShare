@@ -4,6 +4,6 @@ export type FoodEvent = {
     foodName: string;
     quantity: number;
     location: string;
-    description?: string;
-    headcount?: number;
+    description: string;
+    headcount: number;
 };
