@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { AppContext } from "../context/AppContext";
 import { FoodEvent } from "../types/types";
+import './EventSubmissionForm.css';
 
 const EventSubmissionForm = () => {
   const { foodEvents, setfoodEvents } = useContext(AppContext);
@@ -13,8 +14,6 @@ const EventSubmissionForm = () => {
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-
-    //refactor = move all of the stye to the css file
     const newFoodEvent: FoodEvent = {
       id: foodEvents.length + 1,
       orgName,
@@ -26,93 +25,103 @@ const EventSubmissionForm = () => {
     };
 
     setfoodEvents([...foodEvents, newFoodEvent]);
-    console.log(foodEvents);
-  };
 
-  const inputStyle = {
-    width: '484px', // original width
-    height: '40px', // original height
-    borderRadius: '8px',
-    padding: '8px',
-    boxSizing: 'border-box' as const,
-    border: '1px solid #e0e0e0',
-    fontSize: '14px',
-  };
-
-  const labelStyle = {
-    fontSize: '14px',
-    marginBottom: '8px',
-    display: 'block',
-  };
-
-  const containerStyle = {
-    width: '532px', // original width
-    height: '742px', // original height
-    backgroundColor: '#fff',
-    padding: '20px',
-    boxSizing: 'border-box' as const,
-    border: '1px solid #ccc',
-    borderRadius: '8px',
+    setOrgName("");
+    setFoodName("");
+    setQuantity("");
+    setLocation("");
   };
 
   return (
-    <div style={containerStyle}>
-      <form onSubmit={onSubmit}>
-        <div style={{ marginBottom: '24px' }}>
-          <label htmlFor="orgName" style={labelStyle}>Organization Name</label>
-          <input
-            required
-            type="text"
-            placeholder="Who are you?"
-            data-testid="orgName"
-            id="orgName"
-            value={orgName}
-            onChange={(event) => setOrgName(event.target.value)}
-            style={inputStyle}
-          />
-        </div>
-        <div style={{ marginBottom: '24px' }}>
-          <label htmlFor="foodName" style={labelStyle}>Food Name</label>
-          <input
-            required
-            type="text"
-            placeholder="chipotle"
-            data-testid="foodName"
-            id="foodName"
-            value={foodName}
-            onChange={(event) => setFoodName(event.target.value)}
-            style={inputStyle}
-          />
-        </div>
-        <div style={{ marginBottom: '24px' }}>
-          <label htmlFor="quantity" style={labelStyle}>Quantity</label>
-          <input
-            required
-            type="number"
-            placeholder="23"
-            data-testid="quantity"
-            id="quantity"
-            value={quantity}
-            onChange={(event) => setQuantity(event.target.value)}
-            style={inputStyle}
-          />
-        </div>
-        <div style={{ marginBottom: '24px' }}>
-          <label htmlFor="location" style={labelStyle}>Location Description</label>
-          <textarea
-            required
-            placeholder="CSE building"
-            data-testid="location"
-            id="location"
-            value={location}
-            onChange={(event) => setLocation(event.target.value)}
-            style={{ ...inputStyle, height: '80px', resize: 'none' }}
-          />
-        </div>
-        <button type="submit" style={{ width: '100%', height: '40px', borderRadius: '8px', backgroundColor: '#4CAF50', color: 'white', fontSize: '16px', border: 'none' }}>
-          Submit
+    <div className="submission-container">
+      <div className="form-section">
+        <form onSubmit={onSubmit}>
+          <div className="form-group">
+            <label htmlFor="orgName" className="label">Organization Name</label>
+            <input
+              required
+              type="text"
+              placeholder="Who are you?"
+              data-testid="orgName"
+              id="orgName"
+              value={orgName}
+              onChange={(event) => setOrgName(event.target.value)}
+              className="custom-input"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="foodName" className="label">Food Name</label>
+            <input
+              required
+              type="text"
+              placeholder="What would you like to share? Ex. Chipotle Burritos"
+              data-testid="foodName"
+              id="foodName"
+              value={foodName}
+              onChange={(event) => setFoodName(event.target.value)}
+              className="custom-input"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="quantity" className="label">Quantity</label>
+            <input
+              required
+              type="number"
+              placeholder="Enter the number of servings that are available"
+              data-testid="quantity"
+              id="quantity"
+              value={quantity}
+              onChange={(event) => setQuantity(event.target.value)}
+              className="custom-input"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="location" className="label">Location Description</label>
+            <textarea
+              required
+              placeholder="Please be descriptive as possible (ex. building, room number, directions to get there, etc.)"
+              data-testid="location"
+              id="location"
+              value={location}
+              onChange={(event) => setLocation(event.target.value)}
+              className="custom-textarea"
+            />
+          </div>
+          <button type="submit" className="submit-button">
+            Submit
+          </button>
+        </form>
+      </div>
+
+      <div className="events-section">
+        {foodEvents.length > 0 ? (
+          <>
+            <h2>My Events</h2>
+            <p>These are all your past submissions</p>
+            <div className="events-list">
+              {foodEvents.map((event) => (
+                <div key={event.id} className="event-card">
+                  <img src="https://via.placeholder.com/64" alt="Event" />
+                  <div className="event-card-content">
+                    <h3>{event.orgName} - {event.foodName}</h3>
+                    <p><strong>Location:</strong> {event.location}</p>
+                    <p><strong>Quantity:</strong> {event.quantity}</p>
+                  </div>
+                  <button className="edit-button">Edit Event</button>
+                </div>
+              ))}
+            </div>
+          </>
+        ) : (
+          <div className="no-events-message">
+            <p>You have no submissions so far.</p>
+            <p>Submit a form to view it here!</p>
+          </div>
+        )}
+        <button className="view-active-events-button">
+          View Active Events
         </button>
-      </form>
+      </div>
     </div>
   );
 };
