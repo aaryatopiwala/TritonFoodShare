@@ -31,11 +31,11 @@ function App() {
                       <EventSubmission />
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                      <p>You have no submissions so far.</p>
-                      <p>Submit a form to view it here!</p>
+                    <p style={{ fontFamily: 'Roboto, sans-serif', color: 'gray', fontSize: '28px', marginBottom: '8px'}}>You have no submissions so far.</p>
+                    <p style={{ fontFamily: 'Roboto, sans-serif', color: 'gray', fontSize: '28px', marginTop: '0px' }}>Submit a form to view it here!</p>
                       <button style={{ backgroundColor: '#4CAF50', color: 'white', padding: '10px 20px', borderRadius: '8px', border: 'none', fontSize: '16px' }}>
                         View Active Events
-                      </button>
+                    </button>
                     </div>
                   </div>
                 }

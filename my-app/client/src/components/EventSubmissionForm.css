@@ -1,5 +1,30 @@
 .custom-input {
-    width: 484px;
-    height: 40px;
-    border-radius: 8px;
-  }
+  width: 484px;
+  height: 40px;
+  border-radius: 8px;
+  padding: 8px;
+  box-sizing: border-box;
+  border: 1px solid #e0e0e0;
+  font-size: 14px;
+}
+
+.custom-label {
+  font-size: 14px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.custom-container {
+  width: 532px;
+  height: 742px;
+  background-color: #fff;
+  padding: 20px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.custom-textarea {
+  height: 80px;
+  resize: none;
+}
