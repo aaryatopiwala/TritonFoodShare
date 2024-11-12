@@ -1,17 +1,46 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import Select, { SingleValue } from 'react-select';
 import { AppContext } from "../context/AppContext";
 import { FoodEvent } from "../types/types";
 import './EventSubmissionForm.css';
+
+interface OptionType {
+  value: string;
+  label: string;
+}
 
 const EventSubmissionForm = () => {
   const { foodEvents, setfoodEvents } = useContext(AppContext);
   const navigate = useNavigate();
 
+  const [selectedOptionLocation, setSelectedOptionLocation] = useState<SingleValue<OptionType>>(null);
+  const locationOptions = [
+    { value: 'cseBuilding', label: 'CSE Building' },
+    { value: 'WLH', label: 'Warren Lecture Hall' },
+    { value: 'CENTER', label: 'Center Hall' },
+    { value: 'FAH', label: 'Franklin Antonio Hall' },
+  ];
+  const handleChangeLocation = (selectedOption: SingleValue<OptionType>) => {
+    setSelectedOptionLocation(selectedOption);
+  };
+
+  const [selectedOptionDiet, setSelectedOptionDiet] = useState<SingleValue<OptionType>>(null);
+  const dietOptions = [
+    { value: 'vegetarian', label: 'Vegetarian' },
+    { value: 'halal', label: 'Halal' },
+    { value: 'kosher', label: 'Kosher' },
+    { value: 'vegan', label: 'Vegan' },
+  ];
+  const handleChangeDiet = (selectedOption: SingleValue<OptionType>) => {
+    setSelectedOptionDiet(selectedOption);
+  };
+
   const [orgName, setOrgName] = useState("");
   const [foodName, setFoodName] = useState("");
   const [quantity, setQuantity] = useState("");
   const [location, setLocation] = useState("");
+  const [description, setDescription] = useState("");
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -21,8 +50,8 @@ const EventSubmissionForm = () => {
       orgName,
       foodName,
       quantity: parseInt(quantity),
-      location,
-      description: '',
+      location: selectedOptionLocation?.label || location,
+      description,
       headcount: 0,
     };
 
@@ -32,6 +61,8 @@ const EventSubmissionForm = () => {
     setFoodName("");
     setQuantity("");
     setLocation("");
+    setSelectedOptionLocation(null);
+    setSelectedOptionDiet(null);
   };
 
   const handleViewActiveEvents = () => {
@@ -91,6 +122,28 @@ const EventSubmissionForm = () => {
               value={location}
               onChange={(event) => setLocation(event.target.value)}
               className="custom-textarea"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="BigLocation" className="label">Search for location</label>
+            <Select
+              id="BigLocation"
+              value={selectedOptionLocation}
+              onChange={handleChangeLocation}
+              options={locationOptions}
+              placeholder="Search for your location..."
+              isSearchable
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="diet" className="label">Dietary Tags</label>
+            <Select
+              id="diet"
+              value={selectedOptionDiet}
+              onChange={handleChangeDiet}
+              options={dietOptions}
+              placeholder="Search for tags..."
+              isSearchable
             />
           </div>
           <button type="submit" className="submit-button">

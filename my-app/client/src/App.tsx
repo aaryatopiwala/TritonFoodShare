@@ -30,13 +30,6 @@ function App() {
                     <div style={{ marginRight: '300px'}}>
                       <EventSubmission />
                     </div>
-                    {/* <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                      <p>You have no submissions so far.</p>
-                      <p>Submit a form to view it here!</p>
-                      <button style={{ backgroundColor: '#4CAF50', color: 'white', padding: '10px 20px', borderRadius: '8px', border: 'none', fontSize: '16px' }}>
-                        View Active Events
-                      </button>
-                    </div> */}
                   </div>
                 }
               />
