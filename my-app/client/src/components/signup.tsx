@@ -1,15 +1,15 @@
 import React from 'react';
-import './login.css'; 
+import './signup.css'; 
 import NavBar from './NavBar';
 
-const LoginPage = () => {
+const SignUpPage = () => {
     return (
         <div className="App">
     {/* <NavBar /> Navbar stays fixed or at the top */}
-    <div className="login-page">
-        <div className="login-container">
-            <div className="login-box">
-                <h1>Login!</h1>
+    <div className="signup-page">
+        <div className="signup-container">
+            <div className="signup-box">
+                <h1>Sign Up!</h1>
                 <form>
                     <label htmlFor="email">Email</label>
                     <input type="email" id="email" placeholder="Enter your email" required />
@@ -17,9 +17,9 @@ const LoginPage = () => {
                     <label htmlFor="password">Password</label>
                     <input type="password" id="password" placeholder="Enter your password" required />
 
-                    <button type="submit">Log in</button>
+                    <button type="submit">Sign Up</button>
                 </form>
-                <p>Don’t have an account? <a href="/signup">Sign up here!</a></p>
+                <p>Already have an account? <a href="/login">Login here!</a></p>
             </div>
         </div>
     </div>
@@ -27,4 +27,4 @@ const LoginPage = () => {
     );
 };
 
-export default LoginPage;
+export default SignUpPage;

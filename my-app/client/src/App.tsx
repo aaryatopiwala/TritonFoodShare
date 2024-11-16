@@ -7,6 +7,7 @@ import NavBar from './components/NavBar';
 import { EventDisplay } from './views/EventDisplay';
 import { AppProvider } from './context/AppContext';
 import Login from './components/login';
+import Signup from './components/signup';
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
               />
               <Route path="/eventdisplay" element={<EventDisplay />} />
               <Route path="/login" element={<Login/>} />
+              <Route path="/signup" element={<Signup/>} />
             </Routes>
           </div>
         </BrowserRouter>
