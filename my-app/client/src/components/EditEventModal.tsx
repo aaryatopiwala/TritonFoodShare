@@ -1,19 +1,38 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Select, { SingleValue } from 'react-select';
 import { AppContext } from "../context/AppContext";
 import { FoodEvent } from "../types/types";
 import './EventSubmissionForm.css';
-import EditEventButton from "./EditEventButton";
+import './EditEventModal.css'; // Import the CSS file
+
+import Modal from './Modal';
 
 interface OptionType {
-  value: string;
-  label: string;
-}
+    value: string;
+    label: string;
+  }
 
-const EventSubmissionForm = () => {
+  export interface NewsletterModalData {
+    email: string;
+    digestType: string;
+  }
+
+  interface EditEventModalProps {
+    isOpen: boolean;
+    onClose: () => void;
+    event: FoodEvent;
+  }
+
+const EditEventModal: React.FC<EditEventModalProps> = ({
+  isOpen,
+  onClose,
+  event,
+}) => {
+
+  const focusInputRef = useRef<HTMLInputElement | null>(null);
+  
   const { foodEvents, setfoodEvents } = useContext(AppContext);
-  const navigate = useNavigate();
 
   const [selectedOptionLocation, setSelectedOptionLocation] = useState<SingleValue<OptionType>>(null);
   const locationOptions = [
@@ -37,43 +56,55 @@ const EventSubmissionForm = () => {
     setSelectedOptionDiet(selectedOption);
   };
 
-  const [orgName, setOrgName] = useState("");
-  const [foodName, setFoodName] = useState("");
-  const [quantity, setQuantity] = useState("");
-  const [location, setLocation] = useState("");
+  const [orgName, setOrgName] = useState(event.orgName);
+  const [foodName, setFoodName] = useState(event.foodName);
+  const [quantity, setQuantity] = useState(event.quantity.toString());
+  const [location, setLocation] = useState(event.location);
   const [description, setDescription] = useState("");
 
-  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-    const newFoodEvent: FoodEvent = {
-      id: foodEvents.length + 1,
+    const updatedEvent: FoodEvent = {
+      id: event.id ,
       orgName,
       foodName,
       quantity: parseInt(quantity),
       location: selectedOptionLocation?.label || location,
       description,
-      headcount: 0,
+      headcount: event.headcount,
     };
 
-    setfoodEvents([...foodEvents, newFoodEvent]);
+    const updatedEvents = foodEvents.map((e) =>
+      e.id === event.id ? updatedEvent : e
+    ); 
 
-    setOrgName("");
-    setFoodName("");
-    setQuantity("");
-    setLocation("");
+    setfoodEvents(updatedEvents);
+
+    setOrgName(updatedEvent.orgName);
+    setFoodName(updatedEvent.foodName);
+    setQuantity(updatedEvent.quantity.toString());
+    setLocation(updatedEvent.location);
     setSelectedOptionLocation(null);
     setSelectedOptionDiet(null);
+    onClose();
   };
 
-  const handleViewActiveEvents = () => {
-    navigate("/eventdisplay");
-  };
+  useEffect(() => {
+    if (isOpen && focusInputRef.current) {
+      setTimeout(() => {
+        focusInputRef.current!.focus();
+      }, 0);
+    }
+  }, [isOpen]);
+
 
   return (
-    <div className="submission-container">
-      <div className="form-section">
-        <form onSubmit={onSubmit}>
+    <Modal
+      hasCloseBtn={true}
+      isOpen={isOpen}
+      onClose={onClose}>
+      <form onSubmit={onSubmit}>
           <div className="form-group">
             <label htmlFor="orgName" className="label">Organization Name</label>
             <input
@@ -151,39 +182,8 @@ const EventSubmissionForm = () => {
             Submit
           </button>
         </form>
-      </div>
-
-      <div className="events-section">
-        {foodEvents.length > 0 ? (
-          <>
-            <h2>My Events</h2>
-            <p>These are all your past submissions</p>
-            <div className="events-list">
-              {foodEvents.map((event) => (
-                <div key={event.id} className="event-card">
-                  <img src="https://via.placeholder.com/64" alt="Event" />
-                  <div className="event-card-content">
-                    <h3>{event.orgName} - {event.foodName}</h3>
-                    <p><strong>Location:</strong> {event.location}</p>
-                    <p><strong>Quantity:</strong> {event.quantity}</p>
-                  </div>
-                  <EditEventButton event={event} />
-                </div>
-              ))}
-            </div>
-          </>
-        ) : (
-          <div className="no-events-message">
-            <p>You have no submissions so far.</p>
-            <p>Submit a form to view it here!</p>
-          </div>
-        )}
-        <button className="view-active-events-button" onClick={handleViewActiveEvents}>
-          View Active Events
-        </button>
-      </div>
-    </div>
+    </Modal>
   );
 };
 
-export default EventSubmissionForm;
+export default EditEventModal;
