@@ -1,0 +1,5 @@
+.modal-content.wide-modal {
+    width: 80%; /* Adjust the width as needed */
+    max-width: 800px; /* Adjust the max-width as needed */
+    margin: 0 auto; /* Center the modal */
+  }
