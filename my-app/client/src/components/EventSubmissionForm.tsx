@@ -43,6 +43,8 @@ const EventSubmissionForm = () => {
   const [location, setLocation] = useState("");
   const [description, setDescription] = useState("");
 
+  const [showConfirmation, setShowConfirmation] = useState(false); // New state for confirmation
+
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -64,6 +66,9 @@ const EventSubmissionForm = () => {
     setLocation("");
     setSelectedOptionLocation(null);
     setSelectedOptionDiet(null);
+
+    setShowConfirmation(true); // Show confirmation message
+    setTimeout(() => setShowConfirmation(false), 3000); // Hide after 3 seconds
   };
 
   const handleViewActiveEvents = () => {
@@ -74,6 +79,7 @@ const EventSubmissionForm = () => {
     <div className="submission-container">
       <div className="form-section">
         <form onSubmit={onSubmit}>
+          {/* Form Fields */}
           <div className="form-group">
             <label htmlFor="orgName" className="label">Organization Name</label>
             <input
@@ -151,8 +157,14 @@ const EventSubmissionForm = () => {
             Submit
           </button>
         </form>
+        {showConfirmation && (
+        <div className="confirmation-message">
+            🎉 Your event has been successfully submitted!
+        </div>
+        )}
       </div>
 
+      {/* My Events Section */}
       <div className="events-section">
         {foodEvents.length > 0 ? (
           <>
