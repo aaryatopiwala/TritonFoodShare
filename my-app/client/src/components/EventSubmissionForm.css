@@ -167,3 +167,27 @@
   font-family: Arial, sans-serif;
   opacity: 1;
 }
+
+.confirmation-message {
+  background-color: #f0f8ff; /* Light blue background */
+  color: #333; /* Dark text */
+  border: 2px solid #4caf50; /* Green border to indicate success */
+  padding: 15px;
+  margin-top: 15px;
+  border-radius: 8px;
+  font-size: 1.1rem; /* Slightly larger font */
+  font-weight: bold; /* Bold text */
+  text-align: center;
+  animation: fadeInOut 3s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 0;
+  }
+  20%, 80% {
+    opacity: 1;
+  }
+}
+
