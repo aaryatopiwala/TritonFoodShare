@@ -52,7 +52,7 @@ const EventSubmissionForm = () => {
       id: foodEvents.length + 1,
       orgName,
       foodName,
-      quantity: parseInt(quantity),
+      quantity: quantity,
       location: selectedOptionLocation?.label || location,
       description,
       headcount: 0,
