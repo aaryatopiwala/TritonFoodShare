@@ -8,7 +8,7 @@ const mockFoodEvent: FoodEvent = {
   id: 1,
   orgName: 'Test Org',
   foodName: 'Test Food',
-  quantity: 10,
+  quantity: "10",
   location: 'Test Location',
   description: 'Test Description',
   headcount: 5,
