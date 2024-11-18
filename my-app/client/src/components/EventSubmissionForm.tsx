@@ -56,6 +56,7 @@ const EventSubmissionForm = () => {
       location: selectedOptionLocation?.label || location,
       description,
       headcount: 0,
+      dietary: []
     };
 
     setfoodEvents([...foodEvents, newFoodEvent]);

@@ -10,7 +10,8 @@ export const dummyEventList = [
         quantity: 1,
         location: "Location1",
         description: "Description1",
-        headcount: 0
+        headcount: 0,
+        dietary: ["Halal"]
     },
     {
         id: 2,
@@ -19,7 +20,8 @@ export const dummyEventList = [
         quantity: 2,
         location: "Location2",
         description: "Description2",
-        headcount: 0
+        headcount: 0,
+        dietary: []
     },
     {
         id: 3,
@@ -28,7 +30,8 @@ export const dummyEventList = [
         quantity: 3,
         location: "Location3",
         description: "Description3",
-        headcount: 0
+        headcount: 0,
+        dietary: ["Vegetarian"]
     },
     {
         id: 4,
@@ -37,6 +40,7 @@ export const dummyEventList = [
         quantity: 4,
         location: "Location4",
         description: "Description4",
-        headcount: 0
+        headcount: 0,
+        dietary: ["Contains Nuts"]
     },
 ]

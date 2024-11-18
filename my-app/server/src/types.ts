@@ -6,4 +6,5 @@ export interface FoodEvent {
     location: string;
     description: string;
     headcount: number;
+    dietary: string[];
 }
