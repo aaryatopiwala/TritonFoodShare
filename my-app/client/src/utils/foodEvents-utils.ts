@@ -47,7 +47,7 @@ export const fetchFoodEvents = async (): Promise<FoodEvent[]> => {
 
 // Function to update the headcount of a food event. Method: POST
 export const updateFoodEventHeadcount = async (id: number, newHeadcount: number): Promise<void> => {
-  const response = await fetch(`${API_BASE_URL}/foodEvents/reserve/${id}`, {
+  const response = await fetch(`${API_BASE_URL}/foodEvents/reserve/:id`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

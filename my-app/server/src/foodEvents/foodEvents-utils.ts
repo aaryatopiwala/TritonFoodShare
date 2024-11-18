@@ -61,8 +61,8 @@ export async function getFoodEvents(req: Request, res: Response, db: Database) {
 
 // Utility function to update the headcount of a food event
 export async function updateFoodEventHeadcount(req: Request, res: Response, db: Database) {
-    const { id, currentHeadcount } = req.body as { 
-        id: number, 
+    const id = req.params;
+    const { currentHeadcount } = req.body as { 
         currentHeadcount: number 
     };
 
