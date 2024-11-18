@@ -1,5 +1,5 @@
 export interface FoodEvent {
-    id: string;
+    id: number;
     orgName: string;
     foodName: string;
     quantity: string;

@@ -10,13 +10,14 @@ const initDB = async () => {
     // Create a "budget" table if it doesn't exist
     await db.exec(`
         CREATE TABLE IF NOT EXISTS foodEvents (
-        id TEXT PRIMARY KEY,
+        id INTEGER PRIMARY KEY,
         orgName TEXT,
         foodName TEXT,
         quantity TEXT,
         location TEXT,
         description TEXT,
-        headcount INTEGER NOT NULL
+        headcount INTEGER NOT NULL,
+        dietary TEXT ARRAY[20]
         );
     `);
     return db;
