@@ -12,6 +12,7 @@ const mockFoodEvent: FoodEvent = {
   location: 'Test Location',
   description: 'Test Description',
   headcount: 5,
+  dietary: []
 };
 
 const mockContextValue = {

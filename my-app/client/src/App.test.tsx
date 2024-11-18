@@ -20,7 +20,7 @@ describe('EventDisplay tests', () => {
     </BrowserRouter>);
 
     dummyEventList.forEach((event) => {
-      const title = event.orgName + " - " + event.foodName;
+      const title = event.orgName + " - " + event.foodName + " - " + event.quantity;
       expect(screen.getByText(title)).toBeInTheDocument();
       expect(screen.getByText(event.location)).toBeInTheDocument();
     });
@@ -68,6 +68,22 @@ describe('EventDisplay tests', () => {
     const headcountAfterAfter = screen.getByTestId(`headcount-status-${firstEvent.id}`).textContent;
     // Check if the headcount has been updated
     expect(headcountAfterAfter).toBe("0 people have reserved a spot at this event");
+  });
+
+  test('dietary restrictions display', async () => {
+    render(<BrowserRouter>
+      <EventDisplay />
+    </BrowserRouter>);
+
+    const firstEvent = dummyEventList[0];
+    const firstEventButton = screen.getByTestId(`reserve-${firstEvent.id}`);
+    
+    const dietaryRestriction = "Dietary Tags: " + firstEvent.dietary[0]
+
+    const dietaryRestrictionOnScreen = screen.getByTestId(`dietary-tag-${firstEvent.id}`).textContent;
+
+    expect(dietaryRestrictionOnScreen).toBe(dietaryRestriction);
+
   });
 
 });
