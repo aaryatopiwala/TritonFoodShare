@@ -14,6 +14,7 @@ export async function createFoodEventServer(req: Request, res: Response, db: Dat
             location: string, 
             description: string,
             headcount: number 
+            dietary: string[],
         };
  
         if (!id || !orgName || !foodName) {

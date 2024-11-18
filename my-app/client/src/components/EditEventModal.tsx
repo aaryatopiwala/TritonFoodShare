@@ -73,6 +73,7 @@ const EditEventModal: React.FC<EditEventModalProps> = ({
       location: selectedOptionLocation?.label || location,
       description,
       headcount: event.headcount,
+      dietary: []
     };
 
     const updatedEvents = foodEvents.map((e) =>
