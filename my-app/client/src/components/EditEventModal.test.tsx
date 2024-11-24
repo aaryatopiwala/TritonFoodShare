@@ -22,8 +22,12 @@ const mockContextValue = {
 
 beforeAll(() => {
     HTMLDialogElement.prototype.showModal = jest.fn();
-    //HTMLDialogElement.prototype.close = jest.fn();
+    HTMLDialogElement.prototype.close = jest.fn();
   });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+});
 
 describe('EditEventModal tests', () => {
   test('renders EditEventModal correctly', () => {
@@ -37,6 +41,8 @@ describe('EditEventModal tests', () => {
     expect(screen.getByTestId('foodName')).toBeInTheDocument();
     expect(screen.getByTestId('quantity')).toBeInTheDocument();
     expect(screen.getByTestId('location')).toBeInTheDocument();
+    expect(HTMLDialogElement.prototype.showModal).toHaveBeenCalled();
+
   });
 
   test('updates form inputs correctly', () => {
@@ -45,6 +51,7 @@ describe('EditEventModal tests', () => {
         <EditEventModal isOpen={true} onClose={jest.fn()} event={mockFoodEvent} />
       </AppContext.Provider>
     );
+    expect(HTMLDialogElement.prototype.showModal).toHaveBeenCalled();
 
     const orgNameInput = screen.getByTestId('orgName');
     fireEvent.change(orgNameInput, { target: { value: 'Updated Org' } });
@@ -70,8 +77,9 @@ describe('EditEventModal tests', () => {
         <EditEventModal isOpen={true} onClose={handleClose} event={mockFoodEvent} />
       </AppContext.Provider>
     );
+    expect(HTMLDialogElement.prototype.showModal).toHaveBeenCalled();
 
-    const submitButton = screen.getByText('Submit');
+    const submitButton = screen.getByText('Update Submission');
     fireEvent.click(submitButton);
 
     expect(mockContextValue.setfoodEvents).toHaveBeenCalled();
