@@ -1,3 +1,4 @@
+// Source: https://github.com/c99rahul/react-modal
 import React, { useRef, useEffect, useState } from "react";
 import './EditEventModal.css'; // Import the CSS file
 

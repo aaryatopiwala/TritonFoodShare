@@ -7,15 +7,11 @@ import './EventSubmissionForm.css';
 import './EditEventModal.css'; // Import the CSS file
 
 import Modal from './Modal';
+import CloseEventButton from "./CloseEventButton";
 
 interface OptionType {
     value: string;
     label: string;
-  }
-
-  export interface NewsletterModalData {
-    email: string;
-    digestType: string;
   }
 
   interface EditEventModalProps {
@@ -180,9 +176,10 @@ const EditEventModal: React.FC<EditEventModalProps> = ({
             />
           </div>
           <button type="submit" className="submit-button">
-            Submit
+            Update Submission
           </button>
         </form>
+        <CloseEventButton event={event} />
     </Modal>
   );
 };
