@@ -17,8 +17,7 @@ const MyEventsList = () => {
           quantity={foodEvent.quantity}
           location={foodEvent.location}
           description={foodEvent.description || ''}
-          headcount={foodEvent.headcount || 0}
-        />
+          headcount={foodEvent.headcount || 0} dietary={[]}        />
       ))}
     </ul>
   );
