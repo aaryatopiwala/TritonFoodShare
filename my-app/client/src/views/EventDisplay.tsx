@@ -104,7 +104,7 @@ export const EventDisplay = () => {
                                 )}
                             </div>  
                         <div className = "report">
-                            <Link to={'/'}>Report this submission</Link>
+                            <Link to={'/contact'}>Report this submission</Link>
                         </div>
                         
                     </div>
