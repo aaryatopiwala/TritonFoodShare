@@ -3,6 +3,10 @@ import { AppContext } from "../context/AppContext";
 import { FoodEvent } from "../types/types";
 import Select, { SingleValue } from 'react-select';
 import './EventSubmissionForm.css';
+import EditEventButton from "./EditEventButton";
+import { useNavigate } from "react-router-dom";
+
+
 
 interface OptionType {
   value: string;
@@ -11,6 +15,7 @@ interface OptionType {
 
 const EventSubmissionForm = () => {
   const { foodEvents, setfoodEvents } = useContext(AppContext);
+  const navigate = useNavigate();
 
   // Location tags
   const [selectedOptionLoction, setSelectedOptionLocation] = useState<SingleValue<OptionType>>(null);
@@ -41,57 +46,61 @@ const EventSubmissionForm = () => {
   const [quantity, setQuantity] = useState("");
   const [location, setLocation] = useState("");
   const [description, setDescription] = useState("");
+  const [showConfirmation, setShowConfirmation] = useState(false);
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // Generate a unique numeric ID using Date.now() and Math.random()
     const id = Math.floor(Date.now() + Math.random() * 1000);
-
-    // Prepare the form data to send to the backend
     const submissionData = {
-      id, // Use the generated numeric id
-      orgName,
-      foodName,
-      quantity: parseInt(quantity), // Ensure quantity is a number
-      locationDescription: location,
-      bigLocation: selectedOptionLoction?.value || '',
-      diet: selectedOptionDiet?.value || '',
+        id,
+        orgName,
+        foodName,
+        quantity: parseInt(quantity),
+        locationDescription: location,
+        bigLocation: selectedOptionLoction?.value || '',
+        diet: selectedOptionDiet?.value || '',
     };
 
     try {
-      // Send a POST request to your backend API
-      const response = await fetch('http://localhost:8080/submissionForm', { // Replace with your backend URL
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(submissionData),
-      });
+        const response = await fetch('http://localhost:8080/submissionForm', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(submissionData),
+        });
 
+        if (response.ok) {
+            const newFoodEvent: FoodEvent = {
+                id,
+                orgName,
+                foodName,
+                quantity: parseInt(quantity),
+                location,
+                description: '',
+                headcount: 0,
+            };
 
-      // Check if the request was successful
-      if (response.ok) {
-        const newFoodEvent: FoodEvent = {
-          id, // Use the numeric id
-          orgName,
-          foodName,
-          quantity: parseInt(quantity),
-          location,
-          description: '',
-          headcount: 0,
-        };
+            setfoodEvents([...foodEvents, newFoodEvent]);
+            setOrgName('');
+            setFoodName('');
+            setQuantity('');
+            setLocation('');
+            setSelectedOptionLocation(null);
+            setSelectedOptionDiet(null);
 
-        // Update the local state with the new event
-        setfoodEvents([...foodEvents, newFoodEvent]);
-        console.log('Submission successful:', foodEvents);
-      } else {
-        console.error('Failed to submit the form');
-      }
+            setShowConfirmation(true); // Show confirmation message
+            setTimeout(() => setShowConfirmation(false), 3000); // Hide after 3 seconds
+        } else {
+            console.error('Failed to submit the form');
+        }
     } catch (error) {
-      console.error('An error occurred while submitting the form:', error);
+        console.error('An error occurred while submitting the form:', error);
     }
   };
+  const handleViewActiveEvents = () => {
+    navigate("/eventdisplay");
+  };
+
 
   return (
     <div className="custom-container">
@@ -173,7 +182,42 @@ const EventSubmissionForm = () => {
           Submit
         </button>
       </form>
+      {showConfirmation && (
+        <div className="confirmation-message">
+            🎉 Your event has been successfully submitted!
+        </div>
+      )}
+      <div className="events-section">
+        {foodEvents.length > 0 ? (
+          <>
+            <h2>My Events</h2>
+            <p>These are all your past submissions</p>
+            <div className="events-list">
+              {foodEvents.map((event) => (
+                <div key={event.id} className="event-card">
+                  <img src="https://via.placeholder.com/64" alt="Event" />
+                  <div className="event-card-content">
+                    <h3>{event.orgName} - {event.foodName}</h3>
+                    <p><strong>Location:</strong> {event.location}</p>
+                    <p><strong>Quantity:</strong> {event.quantity}</p>
+                  </div>
+                  <EditEventButton event={event} />
+                </div>
+              ))}
+            </div>
+          </>
+        ) : (
+          <div className="no-events-message">
+            <p>You have no submissions so far.</p>
+            <p>Submit a form to view it here!</p>
+          </div>
+        )}
+      </div>
+      <button className="view-active-events-button" onClick={handleViewActiveEvents}>
+          View Active Events
+      </button>
     </div>
+    
   );
 };
 
