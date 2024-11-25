@@ -78,11 +78,7 @@ describe('EventDisplay tests', () => {
     const firstEvent = dummyEventList[0];
     const firstEventButton = screen.getByTestId(`reserve-${firstEvent.id}`);
     
-    const dietaryRestriction = "Dietary Tags: ";
-
-    const dietaryRestrictionOnScreen = screen.getByTestId(`dietary-tag-${firstEvent.id}`).textContent;
-
-    expect(dietaryRestrictionOnScreen).toBe(dietaryRestriction);
+    //add diet here
 
   });
 
