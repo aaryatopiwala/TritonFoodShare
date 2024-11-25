@@ -42,21 +42,55 @@ const EventSubmissionForm = () => {
   const [location, setLocation] = useState("");
   const [description, setDescription] = useState("");
 
-  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const newFoodEvent: FoodEvent = {
-      id: foodEvents.length + 1,
+    // Generate a unique numeric ID using Date.now() and Math.random()
+    const id = Math.floor(Date.now() + Math.random() * 1000);
+
+    // Prepare the form data to send to the backend
+    const submissionData = {
+      id, // Use the generated numeric id
       orgName,
       foodName,
-      quantity: parseInt(quantity),
-      location,
-      description: '',
-      headcount: 0,
+      quantity: parseInt(quantity), // Ensure quantity is a number
+      locationDescription: location,
+      bigLocation: selectedOptionLoction?.value || '',
+      diet: selectedOptionDiet?.value || '',
     };
 
-    setfoodEvents([...foodEvents, newFoodEvent]);
-    console.log(foodEvents);
+    try {
+      // Send a POST request to your backend API
+      const response = await fetch('http://localhost:8080/submissionForm', { // Replace with your backend URL
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(submissionData),
+      });
+
+
+      // Check if the request was successful
+      if (response.ok) {
+        const newFoodEvent: FoodEvent = {
+          id, // Use the numeric id
+          orgName,
+          foodName,
+          quantity: parseInt(quantity),
+          location,
+          description: '',
+          headcount: 0,
+        };
+
+        // Update the local state with the new event
+        setfoodEvents([...foodEvents, newFoodEvent]);
+        console.log('Submission successful:', foodEvents);
+      } else {
+        console.error('Failed to submit the form');
+      }
+    } catch (error) {
+      console.error('An error occurred while submitting the form:', error);
+    }
   };
 
   return (
@@ -92,7 +126,7 @@ const EventSubmissionForm = () => {
           <label htmlFor="quantity" className="custom-label">Quantity</label>
           <input
             required
-            type="text"
+            type="number" // Use type="number" for numeric input
             placeholder="23"
             data-testid="quantity"
             id="quantity"
