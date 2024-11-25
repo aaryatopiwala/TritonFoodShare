@@ -152,3 +152,15 @@ button:hover {
   color: red;  
   text-decoration: underline;
 }
+
+.dietary-tags {
+  align-self: flex-start; 
+  color: #555;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.dietary-tags strong {
+  font-weight: bold;
+  color: #333;
+}
