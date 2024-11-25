@@ -82,7 +82,7 @@ export const EventDisplay = () => {
                         className="event-item">
                         <div
                         className = "event-title"
-                        > {event.orgName + " - " + event.foodName + " - " + event.quantity} </div>
+                        > {event.orgName + " - " + event.foodName} </div>
                         <div
                         className = "event-content"
                         >{event.location} </div>
@@ -96,13 +96,6 @@ export const EventDisplay = () => {
                                 {event.headcount + " people have reserved a spot at this event"}
                             </div>
                         </div>
-                        <div data-testid = {`dietary-tag-${event.id}`} className = "dietary-tags">
-                                {event.dietary.length > 0 && (
-                                  <div>
-                                    <strong>Dietary Tags:</strong> {event.dietary.join(', ')}
-                                  </div>
-                                )}
-                            </div>  
                         <div className = "report">
                             <Link to={'/contact'}>Report this submission</Link>
                         </div>

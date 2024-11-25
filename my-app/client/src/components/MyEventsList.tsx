@@ -1,25 +1,23 @@
+// Display the events currently submitted by the form user.
+// This will not show ALL the events
+
+//import ExpenseItem from "./ExpenseItem";
 import { AppContext } from "../context/AppContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { FoodEvent } from "../types/types";
 import FoodEventItem from "./FoodEventItem";
+//import { fetchExpenses } from "../../utils/expense-utils";
 
 const MyEventsList = () => {
-  const { foodEvents } = useContext(AppContext);
-
+  const { foodEvents, setfoodEvents } = useContext(AppContext);
+  
   return (
     <ul className="list-group">
       {foodEvents.map((foodEvent: FoodEvent) => (
-        <FoodEventItem
-          key={foodEvent.id}
-          id={foodEvent.id}
-          orgName={foodEvent.orgName}
-          foodName={foodEvent.foodName}
-          quantity={foodEvent.quantity}
-          location={foodEvent.location}
-          description={foodEvent.description || ''}
-          headcount={foodEvent.headcount || 0} dietary={[]}        />
+        <FoodEventItem id={foodEvent.id} orgName={foodEvent.orgName} foodName={foodEvent.foodName} quantity={foodEvent.quantity} location={foodEvent.location} description={foodEvent.description || ''}
+        headcount={foodEvent.headcount || 0}    />
       ))}
-    </ul>
+    </ul> 
   );
 };
 

@@ -12,14 +12,19 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@libsql/client": "^0.14.0",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "drizzle-orm": "^0.36.3",
     "express": "^4.21.1",
     "sqlite": "^5.1.1",
     "sqlite3": "^5.1.7"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/node": "^22.7.9",
+    "drizzle-kit": "^0.28.1",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.6.3"

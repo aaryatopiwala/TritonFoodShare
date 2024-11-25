@@ -1,5 +1,5 @@
 import { Database } from "sqlite";
-import { createFoodEventServer, deleteFoodEvent, getFoodEvents, updateFoodEvent, updateFoodEventHeadcount} from "./foodEvents-utils";
+import { createFoodEventServer, deleteFoodEvent, getFoodEvents, updateFoodEventHeadcount} from "./foodEvents-utils";
 import { Request, Response } from 'express';
 
 export function createFoodEventsEndpoints(app: any, db: Database) {
@@ -24,13 +24,10 @@ export function createFoodEventsEndpoints(app: any, db: Database) {
 
     });
 
-    // update an event's headcount
-    app.put("/foodEvents/reserve/:id", (req: Request, res: Response) => {
+    //update an event's headcount
+    app.put("/foodEvents/reserve", (req: Request, res: Response) => {
         updateFoodEventHeadcount(req, res, db);
     });
 
-    // update an event's edited information
-    app.put("/foodEvents/update", (req: Request, res: Response) => {
-        updateFoodEvent(req, res, db);
-    });
+
 }

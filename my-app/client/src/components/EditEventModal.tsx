@@ -54,7 +54,7 @@ const EditEventModal: React.FC<EditEventModalProps> = ({
 
   const [orgName, setOrgName] = useState(event.orgName);
   const [foodName, setFoodName] = useState(event.foodName);
-  const [quantity, setQuantity] = useState(event.quantity.toString());
+  const [quantity, setQuantity] = useState(event.quantity);
   const [location, setLocation] = useState(event.location);
   const [description, setDescription] = useState("");
 
@@ -69,7 +69,6 @@ const EditEventModal: React.FC<EditEventModalProps> = ({
       location: selectedOptionLocation?.label || location,
       description,
       headcount: event.headcount,
-      dietary: []
     };
 
     const updatedEvents = foodEvents.map((e) =>
@@ -80,7 +79,7 @@ const EditEventModal: React.FC<EditEventModalProps> = ({
 
     setOrgName(updatedEvent.orgName);
     setFoodName(updatedEvent.foodName);
-    setQuantity(updatedEvent.quantity.toString());
+    setQuantity(updatedEvent.quantity);
     setLocation(updatedEvent.location);
     setSelectedOptionLocation(null);
     setSelectedOptionDiet(null);
@@ -137,7 +136,7 @@ const EditEventModal: React.FC<EditEventModalProps> = ({
               data-testid="quantity"
               id="quantity"
               value={quantity}
-              onChange={(event) => setQuantity(event.target.value)}
+              onChange={(event) => setQuantity(Number(event.target.value))}
               className="custom-input"
             />
           </div>

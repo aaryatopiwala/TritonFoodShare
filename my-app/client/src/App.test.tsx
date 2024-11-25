@@ -20,7 +20,7 @@ describe('EventDisplay tests', () => {
     </BrowserRouter>);
 
     dummyEventList.forEach((event) => {
-      const title = event.orgName + " - " + event.foodName + " - " + event.quantity;
+      const title = event.orgName + " - " + event.foodName;
       expect(screen.getByText(title)).toBeInTheDocument();
       expect(screen.getByText(event.location)).toBeInTheDocument();
     });
@@ -78,11 +78,7 @@ describe('EventDisplay tests', () => {
     const firstEvent = dummyEventList[0];
     const firstEventButton = screen.getByTestId(`reserve-${firstEvent.id}`);
     
-    const dietaryRestriction = "Dietary Tags: " + firstEvent.dietary[0]
-
-    const dietaryRestrictionOnScreen = screen.getByTestId(`dietary-tag-${firstEvent.id}`).textContent;
-
-    expect(dietaryRestrictionOnScreen).toBe(dietaryRestriction);
+    //add diet here
 
   });
 

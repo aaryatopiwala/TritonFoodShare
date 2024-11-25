@@ -1,6 +1,9 @@
 import { Response } from "express";
 import { createFoodEventsEndpoints } from "./foodEvents/foodEvents-endpoints";
 import initDB from "./createTable";
+import 'dotenv/config';
+import { submissionFormRoute } from "./routes/submissionForm";
+
 
 const express = require("express");
 const cors = require("cors");
@@ -11,9 +14,11 @@ const port = 8080;
 app.use(cors());
 app.use(express.json());
 
+app.use("/submissionForm", submissionFormRoute);
+
 // Start the server
-app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
+var server = app.listen(port, () => {
+    console.log(`[server]: Server is running at http://localhost:${port}`);
 });
 
 // Initialize the database and start the server
@@ -27,3 +32,8 @@ app.listen(port, () => {
 
     createFoodEventsEndpoints(app, db);
 })();
+
+module.exports = { 
+    app: app,
+    server: server 
+};

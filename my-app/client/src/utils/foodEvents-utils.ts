@@ -2,13 +2,13 @@ import { API_BASE_URL } from "../constants/constants";
 import { FoodEvent } from "../types/types";
 
 // Function to create an Food Event in the backend. Method: POST
-export const createFoodEvent = async (foodEvent: FoodEvent): Promise<FoodEvent> => {
+export const createFoodEvent = async (expense: FoodEvent): Promise<FoodEvent> => {
 	const response = await fetch(`${API_BASE_URL}/foodEvents`, {
     	method: "POST",
     	headers: {
         	"Content-Type": "application/json",
     	},
-    	body: JSON.stringify(foodEvent),
+    	body: JSON.stringify(expense),
 	});
 	if (!response.ok) {
     	throw new Error("Failed to create Food Event");
@@ -28,9 +28,7 @@ export const deleteFoodEvent = async (id: string): Promise<void> => {
 
 // Function to get all expenses from the backend. Method: GET
 export const fetchFoodEvents = async (): Promise<FoodEvent[]> => {
-	const response = await fetch(`${API_BASE_URL}/foodEvents`, {
-        method: "GET",
-    });
+	const response = await fetch(`${API_BASE_URL}/foodEvents`);
 	if (!response.ok) {
     	throw new Error('Failed to fetch Food Events');
 	}
@@ -46,8 +44,8 @@ export const fetchFoodEvents = async (): Promise<FoodEvent[]> => {
 };
 
 // Function to update the headcount of a food event. Method: POST
-export const updateFoodEventHeadcount = async (id: number, newHeadcount: number): Promise<void> => {
-  const response = await fetch(`${API_BASE_URL}/foodEvents/reserve/:id`, {
+export const updateFoodEventHeadcount = async (eventId: number, newHeadcount: number): Promise<void> => {
+  const response = await fetch(`${API_BASE_URL}/foodEvents/${eventId}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -58,17 +56,3 @@ export const updateFoodEventHeadcount = async (id: number, newHeadcount: number)
     throw new Error("Failed to update headcount");
   }
 };
-
-// Function to update a food event. Method: POST
-export const updateFoodEvent = async (foodEvent: FoodEvent): Promise<void> => {
-    const response = await fetch(`${API_BASE_URL}/foodEvents/update`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ foodEvent }),
-    });
-    if (!response.ok) {
-      throw new Error("Failed to update headcount");
-    }
-  };
