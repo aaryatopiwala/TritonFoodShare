@@ -4,7 +4,7 @@ import App from './App';
 import { BrowserRouter, MemoryRouter } from 'react-router-dom';  
 import { EventDisplay } from './views/EventDisplay'; 
 import { dummyEventList } from './constants/constants';
-
+import ReportSubmission from "./views/ReportSubmission" 
 
 test('renders learn react link', () => {
   render(<App />);
@@ -69,5 +69,44 @@ describe('EventDisplay tests', () => {
     // Check if the headcount has been updated
     expect(headcountAfterAfter).toBe("0 people have reserved a spot at this event");
   });
+
+  test('dietary restrictions display', async () => {
+    render(<BrowserRouter>
+      <EventDisplay />
+    </BrowserRouter>);
+
+    const firstEvent = dummyEventList[0];
+    const firstEventButton = screen.getByTestId(`reserve-${firstEvent.id}`);
+    
+    const dietaryRestriction = "Dietary Tags: ";
+
+    const dietaryRestrictionOnScreen = screen.getByTestId(`dietary-tag-${firstEvent.id}`).textContent;
+
+    expect(dietaryRestrictionOnScreen).toBe(dietaryRestriction);
+
+  });
+
+});
+
+describe('contact form tests', () => {
+
+  test('form displayed', async () => {
+    render(<BrowserRouter>
+      <ReportSubmission />
+    </BrowserRouter>);
+
+      // Check if placeholders are present for Name, Email, Issue, and Event Name fields
+    const namePlaceholder = screen.getByPlaceholderText('Your Name');
+    const emailPlaceholder = screen.getByPlaceholderText('Your email, so we can get back to you!');
+    const issuePlaceholder = screen.getByPlaceholderText('What issue are you facing with this event? Ex. Inactive Event');
+    const eventPlaceholder = screen.getByPlaceholderText('Title of the event you are reporting');
+
+    // Assert that all placeholders are in the document
+    expect(namePlaceholder).toBeInTheDocument();
+    expect(emailPlaceholder).toBeInTheDocument();
+    expect(issuePlaceholder).toBeInTheDocument();
+    expect(eventPlaceholder).toBeInTheDocument();
+  });
+
 
 });

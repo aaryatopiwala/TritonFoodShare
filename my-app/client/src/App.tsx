@@ -5,7 +5,11 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import EventSubmission from './views/EventSubmission';
 import NavBar from './components/NavBar';
 import { EventDisplay } from './views/EventDisplay';
+import ReportSubmission from "./views/ReportSubmission"
 import { AppProvider } from './context/AppContext';
+import Login from './components/login';
+import Signup from './components/signup';
+
 
 function App() {
   return (
@@ -41,6 +45,9 @@ function App() {
                 }
               />
               <Route path="/eventdisplay" element={<EventDisplay />} />
+              <Route path="/login" element={<Login/>} />
+              <Route path="/signup" element={<Signup/>} />
+              <Route path = "/contact" element = {<ReportSubmission/>} />
             </Routes>
           </div>
         </BrowserRouter>

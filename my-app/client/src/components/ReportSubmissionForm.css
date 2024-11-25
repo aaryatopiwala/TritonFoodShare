@@ -1,0 +1,82 @@
+.email-page-container{
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
+    min-height: 100vh; /* Full viewport height to center vertically */
+    text-align: center; /* Center-align text within children (optional) */
+    padding: 0;
+    margin: 0;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 600px;
+    background-color: #f9f9f9; /* Optional: light background for visibility */
+  }
+  
+  /* Styling the form */
+  .emailForm {
+    display: flex;
+    flex-direction: column;
+    background: white; /* White background for form */
+    padding: 2rem; /* Padding around the form */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow for better visibility */
+    width: 100%; /* Ensure form doesn't exceed its container */
+    max-height: 600px;
+  }
+
+  .emailForm label {
+    display: block; /* Ensure labels are on their own line */
+    font-size: 1rem; /* Set font size */
+    font-weight: bold; /* Make text bold */
+    color: #333; /* Dark gray text */
+  }
+
+  .email-page-container h2{
+    color: #757575;
+    font-size:11px;
+    padding: 10px;
+  }
+
+  .emailForm input,
+.emailForm textarea {
+  width: 100%; /* Full width */
+  padding: 0.75rem; /* Padding inside the input/textarea */
+  margin-bottom: 1rem; /* Space between fields */
+  font-size: 1rem; /* Font size for consistency */
+  border: 1px solid #ccc; /* Border style */
+  border-radius: 4px; /* Rounded corners */
+  outline: none; /* Remove default outline on focus */
+  box-sizing: border-box; /* Ensure padding and border are included in width */
+}
+
+/* Optional: Style input fields on focus */
+.emailForm input:focus,
+.emailForm textarea:focus {
+  border-color: #007bff; /* Change border color on focus */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Optional: Add focus shadow */
+}
+
+.popup-message {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto; /* Center the popup horizontally */
+    box-sizing: border-box; /* Include padding in width */
+}
+
+.success {
+    color: #28a745; /* Green for success */
+}
+
+.error {
+    color: #dc3545; /* Red for error */
+}
