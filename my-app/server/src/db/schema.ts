@@ -16,9 +16,10 @@ export const foodEventsTable = sqliteTable('foodEvents', {
   dietary: text('dietary').notNull(),
   description: text('description').notNull(),
   headcount: integer('headcount').notNull(),
-  userId: text('userId').references(
-    () => usersTable.username, { onDelete: 'cascade' }
-  ).notNull()
+  userId: text('userId').notNull()
+  // .references(
+  //   () => usersTable.username, { onDelete: 'cascade' }
+  // )
 });
 
 export const reservedEventsTable = sqliteTable('reservedEvents', {
