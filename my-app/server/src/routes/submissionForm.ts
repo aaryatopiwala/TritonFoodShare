@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { db } from "../submissionForm/db";
-import { submissionFormTable } from "../submissionForm/schema";
-import { createSubmission } from "../submissionForm/queries/insert";
+import { db } from "../db";
+import { submissionFormTable } from "../db/schema";
+import { createSubmission } from "../db/queries/insert";
 
 
 export const submissionFormRoute = Router();

@@ -1,5 +1,5 @@
 import { asc, count, eq, getTableColumns, gt, sql } from 'drizzle-orm';
-import { db } from '../db';
+import { db } from '..';
 import { SelectSubmission, submissionFormTable } from '../schema';
 
 // Function to get submission by orgName

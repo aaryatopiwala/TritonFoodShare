@@ -1,4 +1,4 @@
-import { db } from '../db';
+import { db } from '..';
 import { InsertSubmission, submissionFormTable } from '../schema';
 
 export async function createSubmission(data: InsertSubmission) {

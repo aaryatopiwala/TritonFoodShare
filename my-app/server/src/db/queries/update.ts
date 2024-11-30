@@ -1,5 +1,5 @@
 import { eq } from 'drizzle-orm';
-import { db } from '../db';
+import { db } from '..';
 import { SelectSubmission, submissionFormTable } from '../schema';
 
 export async function updateSubmission(
