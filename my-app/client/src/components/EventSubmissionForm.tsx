@@ -51,7 +51,7 @@ const EventSubmissionForm = () => {
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const id = Math.floor(Date.now() + Math.random() * 1000);
+    const id = Math.floor(Date.now());
     const submissionData = {
         id,
         orgName,
