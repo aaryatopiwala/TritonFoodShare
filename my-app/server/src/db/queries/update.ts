@@ -1,13 +1,13 @@
 import { eq } from 'drizzle-orm';
 import { db } from '..';
-import { SelectSubmission, submissionFormTable } from '../schema';
+import { SelectFoodEvent, InsertFoodEvent, foodEventsTable } from '../schema';
 
 export async function updateSubmission(
-  id: SelectSubmission['id'], 
-  data: Partial<Omit<SelectSubmission, 'id'>>
+  id: SelectFoodEvent['id'], 
+  data: Partial<Omit<SelectFoodEvent, 'id'>>
 ) {
   await db
-    .update(submissionFormTable)
+    .update(foodEventsTable)
     .set(data)
-    .where(eq(submissionFormTable.id, id));
+    .where(eq(foodEventsTable.id, id));
 }

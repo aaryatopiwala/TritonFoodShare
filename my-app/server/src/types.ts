@@ -8,4 +8,5 @@ export interface FoodEvent {
     dietary: string;
     description: string;
     headcount: number;
+    userId: string;
 }

@@ -1,7 +1,7 @@
 import { db } from '..';
-import { InsertSubmission, submissionFormTable } from '../schema';
+import { InsertFoodEvent, foodEventsTable } from '../schema';
 
-export async function createSubmission(data: InsertSubmission) {
-  await db.insert(submissionFormTable).values(data);
+export async function createSubmission(data: InsertFoodEvent) {
+  await db.insert(foodEventsTable).values(data);
 }
 
