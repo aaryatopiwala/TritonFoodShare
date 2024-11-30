@@ -85,7 +85,7 @@ export const EventDisplay = () => {
                         > {event.orgName + " - " + event.foodName} </div>
                         <div
                         className = "event-content"
-                        >{event.location} </div>
+                        >{event.locationDescription} </div>
                         <div className = "reserve-box">
                             <div>
                             <button data-testid={`reserve-${event.id}`} onClick={() => handleReservationDummy(event.id, event.headcount)}>

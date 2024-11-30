@@ -4,7 +4,7 @@ import { FoodEvent } from "../types/types";
 import Select, { SingleValue } from 'react-select';
 import './EventSubmissionForm.css';
 import EditEventButton from "./EditEventButton";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useRevalidator } from "react-router-dom";
 
 
 
@@ -53,13 +53,16 @@ const EventSubmissionForm = () => {
 
     const id = Math.floor(Date.now());
     const submissionData = {
-        id,
-        orgName,
-        foodName,
-        quantity: parseInt(quantity),
+        id: id,
+        orgName : orgName,
+        foodName : foodName,
+        quantity: quantity,
         locationDescription: location,
         bigLocation: selectedOptionLocation?.value || '',
-        diet: selectedOptionDiet?.value || '',
+        dietary: selectedOptionDiet?.value || '',
+        description: description,
+        headcount: 0,
+        userId: '1',
     };
 
     try {
@@ -74,10 +77,13 @@ const EventSubmissionForm = () => {
                 id,
                 orgName,
                 foodName,
-                quantity: parseInt(quantity),
-                location,
+                quantity: quantity,
+                locationDescription: location,
+                biglocation: selectedOptionLocation?.value || '',
                 description: '',
+                dietary: selectedOptionDiet?.value || '',
                 headcount: 0,
+                userId: '',
             };
 
             setfoodEvents([...foodEvents, newFoodEvent]);
@@ -146,6 +152,19 @@ const EventSubmissionForm = () => {
             />
           </div>
           <div className="form-group">
+            <label htmlFor="description" className="label">General Description</label>
+            <input
+              required
+              type="string"
+              placeholder="Add a description for your event"
+              data-testid="description"
+              id="description"
+              value={description}
+              onChange={(event) => setDescription(event.target.value)}
+              className="custom-input"
+            />
+          </div>
+          <div className="form-group">
             <label htmlFor="location" className="label">Location Description</label>
             <textarea
               required
@@ -202,7 +221,7 @@ const EventSubmissionForm = () => {
                   <img src="https://via.placeholder.com/64" alt="Event" />
                   <div className="event-card-content">
                     <h3>{event.orgName} - {event.foodName}</h3>
-                    <p><strong>Location:</strong> {event.location}</p>
+                    <p><strong>Location:</strong> {event.locationDescription}</p>
                     <p><strong>Quantity:</strong> {event.quantity}</p>
                   </div>
                   <EditEventButton event={event} />

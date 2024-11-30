@@ -7,36 +7,48 @@ export const dummyEventList = [
         id: 1,
         orgName: "Org1",
         foodName: "Food1",
-        quantity: 1,
-        location: "Location1",
+        quantity: "1",
+        locationDescription: "Location1",
+        biglocation: "Location1",
         description: "Description1",
-        headcount: 0
+        dietary: "",
+        headcount: 0,
+        userId: ""
     },
     {
         id: 2,
         orgName: "Org2",
         foodName: "Food2",
-        quantity: 2,
-        location: "Location2",
+        quantity: "2",
+        locationDescription: "Location2",
+        biglocation: "Location2",
         description: "Description2",
-        headcount: 0
+        dietary: "",
+        headcount: 0,
+        userId: ""
     },
     {
         id: 3,
         orgName: "Org3",
         foodName: "Food3",
-        quantity: 3,
-        location: "Location3",
+        quantity: "3",
+        locationDescription: "Location3",
+        biglocation: "Location3",
         description: "Description3",
-        headcount: 0
+        dietary: "",
+        headcount: 0,
+        userId: ""
     },
     {
         id: 4,
         orgName: "Org4",
         foodName: "Food4",
-        quantity: 4,
-        location: "Location4",
+        quantity: "4",
+        locationDescription: "Location4",
+        biglocation: "Location4",
         description: "Description4",
-        headcount: 0
+        dietary: "",
+        headcount: 0,
+        userId: ""
     },
 ]

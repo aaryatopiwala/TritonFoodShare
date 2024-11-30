@@ -55,7 +55,7 @@ const EditEventModal: React.FC<EditEventModalProps> = ({
   const [orgName, setOrgName] = useState(event.orgName);
   const [foodName, setFoodName] = useState(event.foodName);
   const [quantity, setQuantity] = useState(event.quantity);
-  const [location, setLocation] = useState(event.location);
+  const [location, setLocation] = useState(event.locationDescription);
   const [description, setDescription] = useState("");
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -66,9 +66,12 @@ const EditEventModal: React.FC<EditEventModalProps> = ({
       orgName,
       foodName,
       quantity: quantity,
-      location: selectedOptionLocation?.label || location,
+      locationDescription: location,
+      biglocation: selectedOptionLocation?.label || location,
       description,
+      dietary: selectedOptionDiet?.value || '',
       headcount: event.headcount,
+      userId: event.userId,
     };
 
     const updatedEvents = foodEvents.map((e) =>
@@ -80,7 +83,7 @@ const EditEventModal: React.FC<EditEventModalProps> = ({
     setOrgName(updatedEvent.orgName);
     setFoodName(updatedEvent.foodName);
     setQuantity(updatedEvent.quantity);
-    setLocation(updatedEvent.location);
+    setLocation(updatedEvent.locationDescription);
     setSelectedOptionLocation(null);
     setSelectedOptionDiet(null);
     onClose();
@@ -136,7 +139,7 @@ const EditEventModal: React.FC<EditEventModalProps> = ({
               data-testid="quantity"
               id="quantity"
               value={quantity}
-              onChange={(event) => setQuantity(Number(event.target.value))}
+              onChange={(event) => setQuantity(event.target.value)}
               className="custom-input"
             />
           </div>
