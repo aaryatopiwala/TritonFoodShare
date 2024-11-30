@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { db } from "../submissionForm/db";
-import { submissionFormTable } from "../submissionForm/schema";
-import { createSubmission } from "../submissionForm/queries/insert";
+import { db } from "../db";
+import { foodEventsTable } from "../db/schema";
+import { createSubmission } from "../db/queries/insert";
 
 
 export const submissionFormRoute = Router();
@@ -9,7 +9,7 @@ export const submissionFormRoute = Router();
 submissionFormRoute.get("", async (req, res) => {
   try {
     // Fetch items from the database
-    const items = await db.select().from(submissionFormTable);
+    const items = await db.select().from(foodEventsTable);
 
     // Simplify the items if necessary to remove any complex or circular references
     const simplifiedItems = items.map(item => ({
@@ -19,7 +19,9 @@ submissionFormRoute.get("", async (req, res) => {
       quantity: item.quantity,
       locationDescription: item.locationDescription,
       bigLocation: item.bigLocation,
-      diet: item.diet,
+      diet: item.dietary,
+      descrption: item.description,
+      headcount: item.headcount
     }));
 
     // Send the simplified items as JSON

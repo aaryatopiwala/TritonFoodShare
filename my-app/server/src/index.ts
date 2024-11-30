@@ -1,9 +1,7 @@
 import { Response } from "express";
-import { createFoodEventsEndpoints } from "./foodEvents/foodEvents-endpoints";
-import initDB from "./createTable";
 import 'dotenv/config';
 import { submissionFormRoute } from "./routes/submissionForm";
-
+import { db } from "./db/index"
 
 const express = require("express");
 const cors = require("cors");
@@ -20,18 +18,6 @@ app.use("/submissionForm", submissionFormRoute);
 var server = app.listen(port, () => {
     console.log(`[server]: Server is running at http://localhost:${port}`);
 });
-
-// Initialize the database and start the server
-(async () => {
-    const db = await initDB();
-
-    // Root endpoint to get test if the server is running
-    app.get("/", (req: Request, res: Response) => {
-        res.status(200).send({ "data": "Hello, TypeScript Express!" });
-    });
-
-    createFoodEventsEndpoints(app, db);
-})();
 
 module.exports = { 
     app: app,

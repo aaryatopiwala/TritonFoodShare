@@ -8,10 +8,13 @@ const mockFoodEvent: FoodEvent = {
     id: 1,
     orgName: 'Test Org',
     foodName: 'Test Food',
-    quantity: 10,
-    location: 'Test Location',
+    quantity: "10",
+    locationDescription: 'Test Location',
+    biglocation: 'Test Big Location',
+    dietary: '',
     description: 'Test Description',
     headcount: 5,
+    userId: ''
 };
 
 const mockContextValue = {

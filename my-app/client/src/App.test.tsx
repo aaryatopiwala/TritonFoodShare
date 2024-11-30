@@ -22,7 +22,7 @@ describe('EventDisplay tests', () => {
     dummyEventList.forEach((event) => {
       const title = event.orgName + " - " + event.foodName;
       expect(screen.getByText(title)).toBeInTheDocument();
-      expect(screen.getByText(event.location)).toBeInTheDocument();
+      expect(screen.getByText(event.locationDescription)).toBeInTheDocument();
     });
   });
 

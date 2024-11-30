@@ -15,6 +15,13 @@
       "when": 1732056781212,
       "tag": "0001_aspiring_lockheed",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1732949586006,
+      "tag": "0002_skinny_ares",
+      "breakpoints": true
     }
   ]
 }

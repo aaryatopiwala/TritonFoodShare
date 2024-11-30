@@ -1,9 +1,12 @@
 export interface FoodEvent {
-    id: string;
+    id: number;
     orgName: string;
     foodName: string;
     quantity: string;
-    location: string;
+    locationDescription: string;
+    bigLocation: string;
+    dietary: string;
     description: string;
     headcount: number;
+    userId: string;
 }
