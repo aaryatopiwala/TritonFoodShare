@@ -10,10 +10,12 @@ export async function getSubmissionByOrgName(
     id: number;
     orgName: string;
     foodName: string;
-    quantity: number;
+    quantity: string;
     locationDescription: string;
     bigLocation: string;
-    diet: string;
+    dietary: string;
+    description: string;
+    headcount: number;
   }>
 > {
   return db
@@ -32,16 +34,18 @@ export async function getSubmissionsWithDietCount(
     id: number;
     orgName: string;
     foodName: string;
-    quantity: number;
+    quantity: string;
     locationDescription: string;
     bigLocation: string;
-    diet: string;
+    dietary: string;
+    description: string;
+    headcount: number;
   }>
 > {
   return db
     .select({
       ...getTableColumns(submissionFormTable),
-      dietCount: count(submissionFormTable.diet),
+      dietCount: count(submissionFormTable.dietary),
     })
     .from(submissionFormTable)
     .groupBy(submissionFormTable.id) // Grouping by 'id' for uniqueness

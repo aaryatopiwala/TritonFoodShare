@@ -1,15 +1,16 @@
 import { sql } from 'drizzle-orm';
 import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 
-export const submissionFormTable = sqliteTable('users', {
+export const submissionFormTable = sqliteTable('foodEvents', {
   id: integer('id').primaryKey().notNull(),
   orgName: text('orgName').notNull(),
   foodName: text('foodName').notNull(),
-  quantity: integer('quantity').notNull(),
+  quantity: text('quantity').notNull(),
   locationDescription: text('locationDescriotion').notNull(),
   bigLocation: text('BigLocation').notNull(),
-  diet: text('diet').notNull(),
-
+  dietary: text('dietary').notNull(),
+  description: text('description').notNull(),
+  headcount: integer('headcount').notNull(),
 });
 
 

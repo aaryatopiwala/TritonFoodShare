@@ -19,7 +19,9 @@ submissionFormRoute.get("", async (req, res) => {
       quantity: item.quantity,
       locationDescription: item.locationDescription,
       bigLocation: item.bigLocation,
-      diet: item.diet,
+      diet: item.dietary,
+      descrption: item.description,
+      headcount: item.headcount
     }));
 
     // Send the simplified items as JSON
