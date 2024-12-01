@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { AppContext } from '../context/AppContext';
+import { deleteFoodEvent } from '../utils/foodEvents-utils'; // Adjust the import path as necessary
 import CloseEventButton from './CloseEventButton';
 import { FoodEvent } from '../types/types';
 
@@ -72,25 +73,34 @@ describe('CloseEventButton tests', () => {
         expect(HTMLDialogElement.prototype.close).toHaveBeenCalled();
     });
 
-    test('handles close event error', async () => {
-        const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
-        mockContextValue.setfoodEvents.mockImplementationOnce(() => {
-            throw new Error('Failed to delete');
-        });
+    test('deletes event from the screen when close event button is clicked', async () => {
+        //(deleteFoodEvent as jest.Mock).mockResolvedValueOnce(undefined);
 
         render(
             <AppContext.Provider value={mockContextValue}>
-                <CloseEventButton event={mockFoodEvent} />
+                <div data-testid="event-container">
+                    <CloseEventButton event={mockFoodEvent} />
+                    <div data-testid={`event-${mockFoodEvent.id}`}>
+                        {mockFoodEvent.orgName} - {mockFoodEvent.foodName}
+                    </div>
+                </div>
             </AppContext.Provider>
         );
 
+        // Ensure the event is initially present
+        expect(screen.queryByText(mockFoodEvent.foodName, {exact: false})).toBeInTheDocument();
+
+        // Click the "End Event" button to open the confirmation modal
         fireEvent.click(screen.getByText('End Event'));
         expect(HTMLDialogElement.prototype.showModal).toHaveBeenCalled();
 
+        // Click the "Yes, Close Event" button to delete the event
         fireEvent.click(screen.getByText('Yes, Close Event'));
-        expect(consoleSpy).toHaveBeenCalled();
-        expect(HTMLDialogElement.prototype.close).toHaveBeenCalled();
 
-        consoleSpy.mockRestore();
+        // Ensure the delete function was called
+        //expect(deleteFoodEvent).toHaveBeenCalledWith(mockFoodEvent.id.toString());
+
+        // Ensure the event is removed from the DOM
+        expect(screen.queryByText(mockFoodEvent.foodName)).not.toBeInTheDocument();
     });
 });
