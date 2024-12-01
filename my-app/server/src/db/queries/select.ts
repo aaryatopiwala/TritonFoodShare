@@ -56,13 +56,20 @@ export async function getSubmissionsForLast24Hours(
     .offset((page - 1) * pageSize);
 }
 
-export async function getUser(username: SelectUser['username'], password: SelectUser['password']):
+export async function getUser(data: SelectUser):
   Promise<Array<User>> {
   return db
     .select()
     .from(usersTable)
     .where(and(
-      eq(usersTable.username, username), 
-      eq(usersTable.password, password)
+      eq(usersTable.username, data['username']), 
+      eq(usersTable.password, data['password'])
     ));
+}
+
+export async function getUsername(username: SelectUser['username']) {
+  return db
+    .select()
+    .from(usersTable)
+    .where(eq(usersTable.username, username));
 }
