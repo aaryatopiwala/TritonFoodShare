@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { AppContext } from '../context/AppContext';
+import { FoodEventContext } from '../context/AppContext';
 import CloseEventButton from './CloseEventButton';
 import { FoodEvent } from '../types/types';
 
@@ -34,9 +34,9 @@ afterEach(() => {
 describe('CloseEventButton tests', () => {
     test('renders close event button', () => {
         render(
-            <AppContext.Provider value={mockContextValue}>
+            <FoodEventContext.Provider value={mockContextValue}>
                 <CloseEventButton event={mockFoodEvent} />
-            </AppContext.Provider>
+            </FoodEventContext.Provider>
         );
 
         expect(screen.getByText('End Event')).toBeInTheDocument();
@@ -45,9 +45,9 @@ describe('CloseEventButton tests', () => {
 
     test('opens confirmation modal when clicking End Event button', () => {
         render(
-            <AppContext.Provider value={mockContextValue}>
+            <FoodEventContext.Provider value={mockContextValue}>
                 <CloseEventButton event={mockFoodEvent} />
-            </AppContext.Provider>
+            </FoodEventContext.Provider>
         );
 
         fireEvent.click(screen.getByText('End Event'));
@@ -60,9 +60,9 @@ describe('CloseEventButton tests', () => {
 
     test('closes modal when clicking Cancel', () => {
         render(
-            <AppContext.Provider value={mockContextValue}>
+            <FoodEventContext.Provider value={mockContextValue}>
                 <CloseEventButton event={mockFoodEvent} />
-            </AppContext.Provider>
+            </FoodEventContext.Provider>
         );
 
         fireEvent.click(screen.getByText('End Event'));
@@ -79,9 +79,9 @@ describe('CloseEventButton tests', () => {
         });
 
         render(
-            <AppContext.Provider value={mockContextValue}>
+            <FoodEventContext.Provider value={mockContextValue}>
                 <CloseEventButton event={mockFoodEvent} />
-            </AppContext.Provider>
+            </FoodEventContext.Provider>
         );
 
         fireEvent.click(screen.getByText('End Event'));

@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Select, { SingleValue } from 'react-select';
-import { AppContext } from "../context/AppContext";
+import { FoodEventContext } from "../context/AppContext";
 import { FoodEvent } from "../types/types";
 import './EventSubmissionForm.css';
 import './EditEventModal.css'; // Import the CSS file
@@ -28,7 +28,7 @@ const EditEventModal: React.FC<EditEventModalProps> = ({
 
   const focusInputRef = useRef<HTMLInputElement | null>(null);
   
-  const { foodEvents, setfoodEvents } = useContext(AppContext);
+  const { foodEvents, setfoodEvents } = useContext(FoodEventContext);
 
   const [selectedOptionLocation, setSelectedOptionLocation] = useState<SingleValue<OptionType>>(null);
   const locationOptions = [

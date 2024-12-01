@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { AppContext } from "../context/AppContext";
+import { FoodEventContext } from "../context/AppContext";
 import { FoodEvent } from "../types/types";
 import Select, { SingleValue } from 'react-select';
 import './EventSubmissionForm.css';
@@ -14,7 +14,7 @@ interface OptionType {
 }
 
 const EventSubmissionForm = () => {
-  const { foodEvents, setfoodEvents } = useContext(AppContext);
+  const { foodEvents, setfoodEvents } = useContext(FoodEventContext);
   const navigate = useNavigate();
 
   // Location tags
