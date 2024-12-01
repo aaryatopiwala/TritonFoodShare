@@ -1,7 +1,7 @@
-import { asc, count, eq, getTableColumns, gt, sql } from 'drizzle-orm';
+import { asc, count, eq, getTableColumns, gt, sql, and } from 'drizzle-orm';
 import { db } from '..';
-import { SelectFoodEvent, foodEventsTable } from '../schema';
-import { FoodEvent } from '../../types';
+import { SelectFoodEvent, SelectUser, foodEventsTable, usersTable } from '../schema';
+import { FoodEvent, User } from '../../types';
 
 // Function to get submission by orgName
 export async function getSubmissionByOrgName(
@@ -54,4 +54,15 @@ export async function getSubmissionsForLast24Hours(
     .orderBy(asc(foodEventsTable.foodName), asc(foodEventsTable.orgName))
     .limit(pageSize)
     .offset((page - 1) * pageSize);
+}
+
+export async function getUser(username: SelectUser['username'], password: SelectUser['password']):
+  Promise<Array<User>> {
+  return db
+    .select()
+    .from(usersTable)
+    .where(and(
+      eq(usersTable.username, username), 
+      eq(usersTable.password, password)
+    ));
 }
