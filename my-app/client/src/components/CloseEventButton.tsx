@@ -23,7 +23,7 @@ const CloseEventButton: React.FC<CloseEventButtonProps> = ({ event }) => {
     const handleConfirmClose = async () => {
         try {
             // Commented out since it causes an error.
-            //await deleteFoodEvent(event.id.toString());
+            await deleteFoodEvent(event.id.toString());
             
             const updatedEvents = foodEvents.filter(e => e.id !== event.id);
             setfoodEvents(updatedEvents);
