@@ -37,10 +37,11 @@ export const EventDisplay = () => {
     // Check if the event is currently reserved, by default it should be unreserved
     const isReserved = reservedEvents[eventId];
     const newHeadcount = isReserved ? headcount - 1 : headcount + 1;
-    console.log(headcount);
+    //console.log(headcount);
+    //console.log(eventId);
     try {
       // Update the headcount on the server (backend)
-      await updateFoodEventHeadcount(eventId, newHeadcount);
+      await updateFoodEventHeadcount(eventId.toString(), newHeadcount);
 
       // Update the local state to reflect the change (toggle reservation for this user)
       setEvents((prevEvents) =>
@@ -106,7 +107,7 @@ export const EventDisplay = () => {
                         >{event.locationDescription} </div>
                         <div className = "reserve-box">
                             <div>
-                            <button data-testid={`reserve-${event.id}`} onClick={() => handleReservationDummy(event.id, event.headcount)}>
+                            <button data-testid={`reserve-${event.id}`} onClick={() => handleReservation(event.id, event.headcount)}>
                                     {reservedEvents[event.id] ? 'I can no longer attend' : 'Reserve Now'}
                             </button>
                             </div>
