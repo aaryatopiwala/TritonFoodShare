@@ -90,4 +90,18 @@ foodEventsRoute.get("/user/:userId", async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 
-})
+});
+
+foodEventsRoute.put("/:id", async (req, res) => {
+  const id = parseInt(req.params.id);
+  const { headcount } = req.body;
+  const submissionData = req.body;
+  console.log(`Received request to update headcount for food event with ID: ${id}`);
+  try {
+    await updateFoodEvent(id, submissionData);
+    res.status(200).json({ message: "Headcount updated successfully" });
+  } catch (error) {
+    console.error("Error updating headcount:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});

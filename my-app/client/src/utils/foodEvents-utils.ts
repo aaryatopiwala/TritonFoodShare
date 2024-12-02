@@ -60,7 +60,7 @@ export const updateFoodEventHeadcount = async (id: number, newHeadcount: number)
   }
 };
 
-// Function to update a food event. Method: POST
+// Function to update a food event. Method: PUT
 export const updateFoodEvent = async (id: string ,foodEvent: FoodEvent): Promise<void> => {
     const response = await fetch(`${API_BASE_URL}/foodEvents/${id}`, {
       method: "PUT",
