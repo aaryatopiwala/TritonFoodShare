@@ -2,18 +2,18 @@ import { API_BASE_URL } from "../constants/constants";
 import { FoodEvent } from "../types/types";
 
 // Function to create an Food Event in the backend. Method: POST
-export const createFoodEvent = async (foodEvent: FoodEvent): Promise<FoodEvent> => {
-	const response = await fetch(`${API_BASE_URL}/foodEvents`, {
-    	method: "POST",
-    	headers: {
-        	"Content-Type": "application/json",
-    	},
-    	body: JSON.stringify(foodEvent),
-	});
-	if (!response.ok) {
-    	throw new Error("Failed to create Food Event");
-	}
-	return response.json();
+export const createFoodEvent = async (submissionData: any): Promise<any> => {
+    const response = await fetch(`${API_BASE_URL}/foodEvents/`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(submissionData),
+    });
+
+    if (!response.ok) {
+        throw new Error('Failed to create Food Event');
+    }
+
+    return response.json();
 };
 
 // Function to delete an Food Event in the backend. Method: DELETE
@@ -63,3 +63,22 @@ export const updateFoodEvent = async (id: string ,foodEvent: FoodEvent): Promise
       throw new Error("Failed to update food event");
     }
   };
+
+// Function to get all Food Events created by given user. Method: GET
+export const getFoodEventsByUser = async (userId: string): Promise<FoodEvent[]> => {
+	const response = await fetch(`${API_BASE_URL}/foodEvents/user/${userId}`, {
+        method: "GET",
+    });
+	if (!response.ok) {
+    	throw new Error('Failed to fetch Food Events');
+	}
+
+	// Parsing the response to get the data
+	let foodEventsList = response.json().then((jsonResponse) => {
+    	console.log("data in fetchFoodEvents for user", jsonResponse);
+    	return jsonResponse;
+	});
+
+	console.log("response in fetchFoodEvents for user", foodEventsList);
+	return foodEventsList;
+}

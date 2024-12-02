@@ -14,7 +14,7 @@ export const signup = async (user: User): Promise<boolean> => {
     	throw new Error("Failed to create User");
 	}
 	
-    if (response.status == 200) {
+    if (response.status === 200) {
         return true;
     } else {
         return false;
@@ -23,18 +23,18 @@ export const signup = async (user: User): Promise<boolean> => {
 
 // Function to attempt to login to a user. Method: GET
 export const login = async (user: User): Promise<boolean> => {
-	const response = await fetch(`${API_BASE_URL}/users/login`, {
-        method: "GET",
+	console.log("Login attempted");
+    console.log(user);
+    const response = await fetch(`${API_BASE_URL}/users/${user.username}/${user.password}`, {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(user)
     });
 	if (!response.ok) {
     	throw new Error('Failed to fetch User');
 	}
 
-	if (response.status == 200) {
+	if (response.status === 200) {
         return true;
     } else {
         return false;

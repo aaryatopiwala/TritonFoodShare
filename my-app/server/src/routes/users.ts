@@ -48,13 +48,14 @@ usersRoute.post("/signup", async (req, res) => {
     }
 });
 
-usersRoute.get("/login", async (req, res) => {
-    const userData = req.body;
-    console.log(`Received request to login to user ${userData.username} with password ${userData.password}`);
+usersRoute.get("/:username/:password", async (req, res) => {
+    const username = req.params.username;
+    const password = req.params.password;
+    console.log(`Received request to login to user ${username} with password ${password}`);
 
     try {
         // Try to get user from userData
-        const user = await getUser(userData);
+        const user = await getUser({username, password});
         
         // Check if login information was correct
         if (user.length == 0) {
