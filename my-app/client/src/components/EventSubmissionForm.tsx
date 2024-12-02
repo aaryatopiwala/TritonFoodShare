@@ -1,11 +1,12 @@
 import React, { useState, useContext, useEffect } from "react";
-import { FoodEventContext } from "../context/AppContext";
+import { FoodEventContext,UserContext } from "../context/AppContext";
 import { FoodEvent } from "../types/types";
 import Select, { SingleValue } from 'react-select';
 import './EventSubmissionForm.css';
 import EditEventButton from "./EditEventButton";
-import { useNavigate, useRevalidator } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import CloseEventButton from "./CloseEventButton";
+import {fetchFoodEvents,createFoodEvent} from "../utils/foodEvents-utils";
 
 
 
@@ -16,6 +17,7 @@ interface OptionType {
 
 const EventSubmissionForm = () => {
   const { foodEvents, setfoodEvents } = useContext(FoodEventContext);
+  const {username} = useContext(UserContext);
   const navigate = useNavigate();
   useEffect(() => {
     loadFoodEvents();
@@ -23,9 +25,9 @@ const EventSubmissionForm = () => {
 
   const loadFoodEvents = async () => {
     try {
-      const response = await fetch('http://localhost:8080/foodEvents');
-      if (response.ok) {
-        const foodEvents = await response.json();
+      const response = await fetchFoodEvents();
+      if (response) {
+        const foodEvents = await response;
         setfoodEvents(foodEvents);
       } else {
         console.error('Failed to fetch food events');
@@ -83,13 +85,9 @@ const EventSubmissionForm = () => {
     };
 
     try {
-        const response = await fetch('http://localhost:8080/foodEvents', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(submissionData),
-        });
+        const response = await createFoodEvent(submissionData);
 
-        if (response.ok) {
+        if (response) {
             const newFoodEvent: FoodEvent = {
                 id,
                 orgName,
@@ -100,7 +98,7 @@ const EventSubmissionForm = () => {
                 description: '',
                 dietary: selectedOptionDiet?.value || '',
                 headcount: 0,
-                userId: '',
+                userId: username || '',
             };
 
             setfoodEvents([...foodEvents, newFoodEvent]);

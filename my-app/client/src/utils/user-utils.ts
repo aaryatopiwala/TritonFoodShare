@@ -14,7 +14,7 @@ export const signup = async (user: User): Promise<boolean> => {
     	throw new Error("Failed to create User");
 	}
 	
-    if (response.status == 200) {
+    if (response.status === 200) {
         return true;
     } else {
         return false;
@@ -34,7 +34,7 @@ export const login = async (user: User): Promise<boolean> => {
     	throw new Error('Failed to fetch User');
 	}
 
-	if (response.status == 200) {
+	if (response.status === 200) {
         return true;
     } else {
         return false;
