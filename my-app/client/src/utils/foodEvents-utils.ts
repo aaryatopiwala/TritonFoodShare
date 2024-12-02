@@ -39,7 +39,7 @@ export const fetchFoodEvents = async (): Promise<FoodEvent[]> => {
 	// Parsing the response to get the data
 	let foodEventsList = await response.json().then((jsonResponse) => {
     	console.log("data in fetchFoodEvents", jsonResponse);
-		const foodEventsList = jsonResponse.data as FoodEvent[];
+		const foodEventsList = jsonResponse as FoodEvent[];
     	return foodEventsList;
 	});
 

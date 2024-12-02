@@ -3,7 +3,7 @@ import { useState, useEffect, useContext } from 'react';
 import {FoodEvent} from '../types/types'
 import { dummyEventList } from '../constants/constants';
 import { Link } from 'react-router-dom';
-import { getReservations } from '../utils/reserveEvent-utils';  // Function to fetch user's reservations from backend
+import { getReservations, makeReservation, removeReservation } from '../utils/reserveEvent-utils';  // Function to fetch user's reservations from backend
 import { API_BASE_URL } from '../constants/constants';
 import { UserContext } from '../context/AppContext'; 
 import { fetchFoodEvents } from '../utils/foodEvents-utils'; 
@@ -19,31 +19,6 @@ export const EventDisplay = () => {
 
   const { username } = useContext(UserContext);
 
-  //Function for reserving
-  const handleReservation = async (eventId: number, headcount: number) => {
-    // Check if the event is currently reserved, by default it should be unreserved
-    const isReserved = reservedEvents[eventId];
-    const newHeadcount = isReserved ? headcount - 1 : headcount + 1;
-    console.log(headcount);
-    try {
-
-      // Update the local state to reflect the change (toggle reservation for this user)
-      setEvents((prevEvents) =>
-        prevEvents.map((event) =>
-          event.id === eventId ? { ...event, headcount: newHeadcount } : event
-        )
-      );
-
-      // Update the local reserved state for this user
-      setReservedEvents((prevReserved) => ({
-        ...prevReserved,
-        [eventId]: !isReserved, // Toggle the reserved status for this event
-      }));
-    } catch (error) {
-      console.error('Failed to update the headcount', error);
-    }
-  };
-
   // Fetch events from the backend when the component mounts
 // Fetch events from the backend when the component mounts
 useEffect(() => {
@@ -51,8 +26,6 @@ useEffect(() => {
     try {
       const foodEvents = await fetchFoodEvents(); // Call the utility function
       console.log(typeof foodEvents)
-      console.log('here');
-      console.log('Fetched food events:', foodEvents);
       setEvents(foodEvents); // Update the state with the fetched events
 
       // Initialize reservedEvents with all IDs set to false
@@ -72,17 +45,18 @@ useEffect(() => {
   fetchEvents();
 }, []); 
 
-
  useEffect(() => {
     const fetchReservations = async () => {
       try {
         const userId = username;  // Replace with actual user ID
         const userReservations = await getReservations(userId);
+        console.log('here at reserations', userReservations)
         const reservedStatus: Record<number, boolean> = {};
 
         // Set the reserved status for each event
         userReservations.forEach((eventId) => {
           reservedStatus[eventId] = true;
+          console.log(eventId)
         });
 
         setReservedEvents(reservedStatus);
@@ -93,6 +67,30 @@ useEffect(() => {
 
     fetchReservations();
   }, []);
+  //Function for reserving
+  const handleReservation = async (eventId: number, headcount: number) => {
+    // Check if the event is currently reserved, by default it should be unreserved
+    const isReserved = reservedEvents[eventId];
+    // const newHeadcount = isReserved ? headcount - 1 : headcount + 1;
+    // console.log(headcount);
+    console.log("before", reservedEvents[eventId])
+    setReservedEvents((prevReserved) => ({
+      ...prevReserved,
+      [eventId]: !isReserved, // Toggle the reserved status for this event
+    }));
+    console.log("after", reservedEvents[eventId])
+
+    try {
+      if (isReserved) {
+        await removeReservation(eventId, username);  // Remove reservation
+      } else {
+        await makeReservation(eventId, username);  // Make reservation
+      }
+
+    } catch (error) {
+      console.error('Failed to update the headcount', error);
+    }
+  };
 
   return(
     <div className = "page-container-display">
