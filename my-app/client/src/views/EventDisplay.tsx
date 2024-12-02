@@ -14,81 +14,99 @@ export const EventDisplay = () => {
     //Favorites function
   const [events, setEvents] = useState<FoodEvent[]>([]);
   //Reserved status for events for each user:
-  const [reservedEvents, setReservedEvents] = useState<Record<number, boolean>>({}); 
-  const [loading, setLoading] = useState(true);
+  const [reservedEvents, setReservedEvents] = useState<Record<number, boolean>>(
+    () => {
+      const storedReservedEvents = localStorage.getItem('reservedEvents');
+      return storedReservedEvents ? JSON.parse(storedReservedEvents) : {}; // Default to an empty object if nothing is stored
+    }
+  );  const [loading, setLoading] = useState(true);
 
   const { username } = useContext(UserContext);
 
-  // Fetch events from the backend when the component mounts
+useEffect(() => {
+  const storedReservedEvents = localStorage.getItem('reservedEvents');
+  if (storedReservedEvents) {
+    setReservedEvents(JSON.parse(storedReservedEvents));
+  }
+}, []); // Only on initial mount
+
+  
 // Fetch events from the backend when the component mounts
 useEffect(() => {
-  const fetchEvents = async () => {
+  const initializeState = async () => {
     try {
-      const foodEvents = await fetchFoodEvents(); // Call the utility function
-      setEvents(foodEvents); // Update the state with the fetched events
+      // Fetch food events
+      const foodEvents = await fetchFoodEvents();
+      setEvents(foodEvents);
 
-      // Initialize reservedEvents with all IDs set to false
+      // Initialize reserved status for events
       const initialReservedStatus: Record<number, boolean> = {};
       foodEvents.forEach((event) => {
-        initialReservedStatus[event.id] = false; // Set reserved status to false for each event
+        initialReservedStatus[event.id] = false;
       });
 
-      setReservedEvents(initialReservedStatus); // Update the reservedEvents state
+      // Fetch user reservations
+      const userReservations = await getReservations(username);
+
+      // Merge localStorage and backend reservations
+      const storedReservedEvents = localStorage.getItem('reservedEvents');
+      const localReserved = storedReservedEvents ? JSON.parse(storedReservedEvents) : {};
+      userReservations.forEach((eventId) => {
+        initialReservedStatus[eventId] = true;
+      });
+
+      setReservedEvents({ ...initialReservedStatus, ...localReserved });
     } catch (error) {
-      console.error('Error fetching food events:', error);
+      console.error("Error initializing state:", error);
     } finally {
-      setLoading(false); // Set loading to false after fetch completes
+      setLoading(false);
     }
   };
 
-  fetchEvents();
-}, []); 
+  initializeState();
+}, [username]); // Dependency ensures this runs when the username changes
 
- useEffect(() => {
-    const fetchReservations = async () => {
-      try {
-        const userId = username;  // Replace with actual user ID
-        const userReservations = await getReservations(userId);
-        console.log('here at reserations', userReservations)
-        const reservedStatus: Record<number, boolean> = {};
 
-        // Set the reserved status for each event
-        userReservations.forEach((eventId) => {
-          reservedStatus[eventId] = true;
-          console.log(eventId)
-        });
-
-        setReservedEvents(reservedStatus);
-      } catch (error) {
-        console.error('Error fetching reservations:', error);
-      }
-    };
-
-    fetchReservations();
-  }, []);
   //Function for reserving
   const handleReservation = async (eventId: number, headcount: number) => {
-    // Check if the event is currently reserved, by default it should be unreserved
+    // Check if the event is currently reserved
     const isReserved = reservedEvents[eventId];
-    // const newHeadcount = isReserved ? headcount - 1 : headcount + 1;
-    // console.log(headcount);
-    console.log("before", reservedEvents[eventId])
-    setReservedEvents((prevReserved) => ({
-      ...prevReserved,
-      [eventId]: !isReserved, // Toggle the reserved status for this event
-    }));
-
+  
+    // Update the local headcount
+    const newHeadcount = isReserved ? headcount - 1 : headcount + 1;
+    setEvents((prevEvents) =>
+      prevEvents.map((event) =>
+        event.id === eventId ? { ...event, headcount: newHeadcount } : event
+      )
+    );
+  
+    // Update the reserved status locally
+    setReservedEvents((prevReserved) => {
+      const updatedReserved = {
+        ...prevReserved,
+        [eventId]: !isReserved, // Toggle the reserved status
+      };
+  
+      // Save the updated reserved status to localStorage
+      localStorage.setItem('reservedEvents', JSON.stringify(updatedReserved));
+      return updatedReserved;
+    });
+  
     try {
       if (isReserved) {
-        await removeReservation(eventId, username);  // Remove reservation
+        await removeReservation(eventId, username); // Remove reservation
       } else {
-        await makeReservation(eventId, username);  // Make reservation
+        await makeReservation(eventId, username); // Make reservation
       }
-
     } catch (error) {
-      console.error('Failed to update the headcount', error);
+      console.error('Failed to update the reservation status:', error);
     }
   };
+  
+  useEffect(() => {
+    localStorage.setItem('reservedEvents', JSON.stringify(reservedEvents));
+    console.log('set', reservedEvents)
+  }, [reservedEvents]);
 
   useEffect(() => {
     console.log("Updated reserved events:", reservedEvents);
@@ -99,8 +117,15 @@ useEffect(() => {
     const storedReservedEvents = localStorage.getItem('reservedEvents');
     if (storedReservedEvents) {
       setReservedEvents(JSON.parse(storedReservedEvents));
+    } else {
+      // Initialize reservedEvents with all IDs set to false (fallback)
+      const initialReservedStatus: Record<number, boolean> = {};
+      events.forEach((event) => {
+        initialReservedStatus[event.id] = false;
+      });
+      setReservedEvents(initialReservedStatus);
     }
-  }, []); // Only run this once when the component mounts
+  }, [events]); // Update only when events change (to handle new events)
 
   console.log(username)
   return(
