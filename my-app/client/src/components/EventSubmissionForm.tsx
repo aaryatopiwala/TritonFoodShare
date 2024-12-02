@@ -5,6 +5,7 @@ import Select, { SingleValue } from 'react-select';
 import './EventSubmissionForm.css';
 import EditEventButton from "./EditEventButton";
 import { useNavigate, useRevalidator } from "react-router-dom";
+import CloseEventButton from "./CloseEventButton";
 
 
 
@@ -224,6 +225,7 @@ const EventSubmissionForm = () => {
                     <p><strong>Location:</strong> {event.locationDescription}</p>
                     <p><strong>Quantity:</strong> {event.quantity}</p>
                   </div>
+                  <CloseEventButton event={event} />
                   <EditEventButton event={event} />
                 </div>
               ))}
