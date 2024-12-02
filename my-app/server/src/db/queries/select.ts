@@ -1,6 +1,6 @@
 import { asc, count, eq, getTableColumns, gt, sql, and } from 'drizzle-orm';
 import { db } from '..';
-import { SelectFoodEvent, SelectUser, foodEventsTable, usersTable } from '../schema';
+import { SelectFoodEvent, SelectReserveEvent, SelectUser, foodEventsTable, reservedEventsTable, usersTable } from '../schema';
 import { FoodEvent, User } from '../../types';
 
 // Function to get submission by orgName
@@ -72,4 +72,11 @@ export async function getUsername(username: SelectUser['username']) {
     .select()
     .from(usersTable)
     .where(eq(usersTable.username, username));
+}
+
+export async function getReservations(userId: SelectReserveEvent['userId']) {
+  return db
+    .select({eventId: reservedEventsTable.eventId})
+    .from(reservedEventsTable)
+    .where(eq(reservedEventsTable.userId, userId));
 }

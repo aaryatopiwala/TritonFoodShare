@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import {FoodEvent} from '../types/types'
 import { dummyEventList } from '../constants/constants';
-import { updateFoodEventHeadcount } from '../utils/foodEvents-utils'
+import { updateFoodEventHeadcount } from '../utils/foodEvents-utils';
 import { Link } from 'react-router-dom';
 
 export const EventDisplay = () => {

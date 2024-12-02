@@ -1,6 +1,6 @@
 import { db } from '..';
 import { eq, and } from 'drizzle-orm';
-import { InsertFoodEvent, InsertUser, foodEventsTable, usersTable } from '../schema';
+import { InsertFoodEvent, InsertReserveEvent, InsertUser, foodEventsTable, reservedEventsTable, usersTable } from '../schema';
 
 export async function createSubmission(data: InsertFoodEvent) {
   await db.insert(foodEventsTable).values(data);
@@ -16,4 +16,9 @@ export async function createUser(data: InsertUser) {
   await db.insert(usersTable)
   .values(data)
   .onConflictDoNothing();
+}
+
+// Function to insert a reservation for a user
+export async function createReservation(data: InsertReserveEvent) {
+  await db.insert(reservedEventsTable).values(data);
 }
