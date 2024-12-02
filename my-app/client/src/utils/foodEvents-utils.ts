@@ -76,7 +76,7 @@ export const updateFoodEvent = async (id: string ,foodEvent: FoodEvent): Promise
 
 // Function to get all Food Events created by given user. Method: GET
 export const getFoodEventsByUser = async (userId: string): Promise<FoodEvent[]> => {
-	const response = await fetch(`${API_BASE_URL}/foodEvents/${userId}`, {
+	const response = await fetch(`${API_BASE_URL}/foodEvents/user/${userId}`, {
         method: "GET",
     });
 	if (!response.ok) {

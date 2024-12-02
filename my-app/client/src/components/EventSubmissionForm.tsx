@@ -82,7 +82,7 @@ const EventSubmissionForm = () => {
     };
 
     fetchUserEvents();
-  }, [username]);
+  }, [foodEvents,username]);
 
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {

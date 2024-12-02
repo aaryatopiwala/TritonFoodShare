@@ -63,7 +63,7 @@ foodEventsRoute.delete("/:id", async (req, res) => {
   }
 });
 
-foodEventsRoute.get("/:userId", async (req, res) => {
+foodEventsRoute.get("/user/:userId", async (req, res) => {
   const userId = req.params.userId;
   try {
     const items = await getFoodEventsByUser(userId);
@@ -84,6 +84,7 @@ foodEventsRoute.get("/:userId", async (req, res) => {
 
     // Send the simplified items as JSON
     res.json(simplifiedItems);
+    console.log("response in fetchFoodEvents", simplifiedItems);
   } catch (error) {
     console.error("Error fetching items:", error);
     res.status(500).json({ message: "Internal Server Error" });
