@@ -69,6 +69,23 @@ export const EventDisplay = () => {
     // Persist the reservedEvents state in localStorage
     localStorage.setItem('reservedEvents', JSON.stringify(reservedEvents));
   }, [reservedEvents]);
+  useEffect(() => {
+    loadFoodEvents();
+  }, []);
+
+  const loadFoodEvents = async () => {
+    try {
+      const response = await fetch('http://localhost:8080/foodEvents');
+      if (response.ok) {
+        const events = await response.json();
+        setEvents(events);
+      } else {
+        console.error('Failed to fetch food events');
+      }
+    } catch (error) {
+      console.error('An error occurred while fetching food events:', error);
+    }
+  }
 
   return(
     <div className = "page-container-display">

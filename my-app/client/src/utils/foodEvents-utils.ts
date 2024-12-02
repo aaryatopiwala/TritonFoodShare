@@ -86,7 +86,7 @@ export const getFoodEventsByUser = async (userId: string): Promise<FoodEvent[]> 
 	// Parsing the response to get the data
 	let foodEventsList = response.json().then((jsonResponse) => {
     	console.log("data in fetchFoodEvents for user", jsonResponse);
-    	return jsonResponse.data;
+    	return jsonResponse;
 	});
 
 	console.log("response in fetchFoodEvents for user", foodEventsList);
