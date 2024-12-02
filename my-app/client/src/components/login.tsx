@@ -17,6 +17,7 @@ const LoginPage: React.FC = () => {
         try {
             const user = { username: email, password }; // Adjust if backend expects different fields
             const isValid = await login(user); // Call login function from user-utils
+            console.log(isValid);
             if (isValid) {
                 setLogin(true); // Update global login state
                 setUsername(email); // Update global username
