@@ -1,13 +1,13 @@
 import { Router } from "express";
 import { db } from "../db";
 import { foodEventsTable } from "../db/schema";
-import { createSubmission } from "../db/queries/insert";
-import { deleteSubmission } from "../db/queries/delete";
+import { createFoodEvent } from "../db/queries/insert";
+import { deleteFoodEvent } from "../db/queries/delete";
 
 
-export const submissionFormRoute = Router();
+export const foodEventsRoute = Router();
 
-submissionFormRoute.get("", async (req, res) => {
+foodEventsRoute.get("", async (req, res) => {
   try {
     // Fetch items from the database
     const items = await db.select().from(foodEventsTable);
@@ -35,13 +35,13 @@ submissionFormRoute.get("", async (req, res) => {
 
 
 
-// POST route to handle form submissions
-submissionFormRoute.post("/", async (req, res) => {
-  const submissionData = req.body;
-
+// POST route to handle Food Event Submissions
+foodEventsRoute.post("/submit", async (req, res) => {
+  const foodEventData = req.body;
+  console.log(`Received request to post food event with ID: ${foodEventData.id}`)
   try {
     // Use the createSubmission function to insert data into the database
-    await createSubmission(submissionData);
+    await createFoodEvent(foodEventData);
 
     // Respond with a success message
     res.status(200).json({ message: "Submission successful" });
@@ -51,11 +51,11 @@ submissionFormRoute.post("/", async (req, res) => {
   }
 });
 
-submissionFormRoute.delete("/:id", async (req, res) => {
+foodEventsRoute.delete("/:id", async (req, res) => {
   const id = parseInt(req.params.id);
   console.log(`Received request to delete food event with ID: ${id}`);
   try {
-    await deleteSubmission(id);
+    await deleteFoodEvent(id);
     res.status(200).json({ message: "Food event deleted successfully" });
   } catch (error) {
     console.error("Error deleting the food event:", error);

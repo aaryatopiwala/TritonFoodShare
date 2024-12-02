@@ -67,7 +67,7 @@ const EventSubmissionForm = () => {
     };
 
     try {
-        const response = await fetch('http://localhost:8080/submissionForm', {
+        const response = await fetch('http://localhost:8080/foodEvents/submit', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(submissionData),

@@ -1,6 +1,6 @@
 import { Response } from "express";
 import 'dotenv/config';
-import { submissionFormRoute } from "./routes/submissionForm";
+import { foodEventsRoute } from "./routes/foodEvents";
 import { db } from "./db/index"
 
 const express = require("express");
@@ -12,7 +12,7 @@ const port = 8080;
 app.use(cors());
 app.use(express.json());
 
-app.use("/submissionForm", submissionFormRoute);
+app.use("/foodEvents", foodEventsRoute);
 
 // Start the server
 var server = app.listen(port, () => {

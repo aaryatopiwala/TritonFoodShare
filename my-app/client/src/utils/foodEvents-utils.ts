@@ -18,7 +18,7 @@ export const createFoodEvent = async (foodEvent: FoodEvent): Promise<FoodEvent> 
 
 // Function to delete an Food Event in the backend. Method: DELETE
 export const deleteFoodEvent = async (id: string): Promise<void> => {
-	const response = await fetch(`${API_BASE_URL}/submissionForm/${id}`, {
+	const response = await fetch(`${API_BASE_URL}/foodEvents/${id}`, {
     	method: "DELETE",
 	});
 	if (!response.ok) {

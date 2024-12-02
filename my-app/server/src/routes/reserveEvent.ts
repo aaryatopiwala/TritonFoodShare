@@ -2,7 +2,7 @@ import { Router } from "express";
 import { createReservation } from "../db/queries/insert";
 import { getHeadcount, getReservations } from "../db/queries/select";
 import { deleteReservation } from "../db/queries/delete";
-import { updateHeadcount, updateSubmission } from "../db/queries/update";
+import { updateHeadcount } from "../db/queries/update";
 
 export const reserveEventRoute = Router();
 

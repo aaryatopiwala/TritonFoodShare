@@ -2,7 +2,7 @@ import { eq } from 'drizzle-orm';
 import { db } from '..';
 import { SelectFoodEvent, InsertFoodEvent, foodEventsTable } from '../schema';
 
-export async function updateSubmission(
+export async function updateFoodEvent(
   id: SelectFoodEvent['id'], 
   data: Partial<Omit<SelectFoodEvent, 'id'>>
 ) {

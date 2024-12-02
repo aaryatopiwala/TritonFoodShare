@@ -4,7 +4,7 @@ import { SelectFoodEvent, SelectReserveEvent, SelectUser, foodEventsTable, reser
 import { FoodEvent, User } from '../../types';
 
 // Function to get submission by orgName
-export async function getSubmissionByOrgName(
+export async function getFoodEventByOrgName(
   orgName: SelectFoodEvent['orgName'],
 ): Promise<
   Array<FoodEvent>
@@ -16,7 +16,7 @@ export async function getSubmissionByOrgName(
 }
 
 // Function to get submissions with a count of unique diets
-export async function getSubmissionsWithDietCount(
+export async function getFoodEventWithDietCount(
   page = 1,
   pageSize = 5,
 ): Promise<
@@ -35,7 +35,7 @@ export async function getSubmissionsWithDietCount(
 }
 
 // Function to get submissions from the last 24 hours
-export async function getSubmissionsForLast24Hours(
+export async function getFoodEventForLast24Hours(
   page = 1,
   pageSize = 5,
 ): Promise<

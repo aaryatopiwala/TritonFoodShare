@@ -2,7 +2,7 @@ import { eq, and } from 'drizzle-orm';
 import { db } from '..';
 import { SelectFoodEvent, SelectReserveEvent, foodEventsTable, reservedEventsTable } from '../schema';
 
-export async function deleteSubmission(id: SelectFoodEvent['id']) {
+export async function deleteFoodEvent(id: SelectFoodEvent['id']) {
   await db.delete(foodEventsTable).where(eq(foodEventsTable.id, id));
 }
 

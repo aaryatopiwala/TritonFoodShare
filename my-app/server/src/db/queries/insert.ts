@@ -2,7 +2,7 @@ import { db } from '..';
 import { eq, and } from 'drizzle-orm';
 import { InsertFoodEvent, InsertReserveEvent, InsertUser, foodEventsTable, reservedEventsTable, usersTable } from '../schema';
 
-export async function createSubmission(data: InsertFoodEvent) {
+export async function createFoodEvent(data: InsertFoodEvent) {
   await db.insert(foodEventsTable).values(data);
 }
 
