@@ -4,7 +4,6 @@ import { foodEventsTable } from "../db/schema";
 import { createFoodEvent } from "../db/queries/insert";
 import { deleteFoodEvent } from "../db/queries/delete";
 
-
 export const foodEventsRoute = Router();
 
 foodEventsRoute.get("", async (req, res) => {
@@ -33,12 +32,10 @@ foodEventsRoute.get("", async (req, res) => {
   }
 });
 
-
-
 // POST route to handle Food Event Submissions
 foodEventsRoute.post("/submit", async (req, res) => {
   const foodEventData = req.body;
-  console.log(`Received request to post food event with ID: ${foodEventData.id}`)
+  console.log(`Received request to post food event with ID: ${foodEventData.id}`);
   try {
     // Use the createSubmission function to insert data into the database
     await createFoodEvent(foodEventData);
