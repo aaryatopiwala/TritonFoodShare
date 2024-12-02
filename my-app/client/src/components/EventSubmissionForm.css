@@ -190,3 +190,24 @@
     opacity: 1;
   }
 }
+
+.edit-event-button{
+  font-size: 13px;
+  margin: 10px;
+  color: white;
+  padding:10px;
+  background-color: #4CAF50;
+}
+
+.close-event-button{
+  color: white;
+  margin: 10px;
+  font-size: 13px;
+  padding:10px;
+  background-color: #AE1414;
+}
+
+.close-event-button:hover{
+  background-color: #AE1414;
+}
+
