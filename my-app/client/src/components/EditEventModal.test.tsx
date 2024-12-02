@@ -22,69 +22,69 @@ const mockContextValue = {
   setfoodEvents: jest.fn(),
 };
 
-// beforeAll(() => {
-//     HTMLDialogElement.prototype.showModal = jest.fn();
-//     HTMLDialogElement.prototype.close = jest.fn();
-//   });
+beforeAll(() => {
+    HTMLDialogElement.prototype.showModal = jest.fn();
+    HTMLDialogElement.prototype.close = jest.fn();
+  });
 
-//   afterEach(() => {
-//     jest.clearAllMocks();
-// });
+  afterEach(() => {
+    jest.clearAllMocks();
+});
 
-// describe('EditEventModal tests', () => {
-//   test('renders EditEventModal correctly', () => {
-//     render(
-//       <AppContext.Provider value={mockContextValue}>
-//         <EditEventModal isOpen={true} onClose={jest.fn()} event={mockFoodEvent} />
-//       </AppContext.Provider>
-//     );
+describe('EditEventModal tests', () => {
+  test('renders EditEventModal correctly', () => {
+    render(
+      <AppContext.Provider value={mockContextValue}>
+        <EditEventModal isOpen={true} onClose={jest.fn()} event={mockFoodEvent} />
+      </AppContext.Provider>
+    );
 
-//     expect(screen.getByTestId('orgName')).toBeInTheDocument();
-//     expect(screen.getByTestId('foodName')).toBeInTheDocument();
-//     expect(screen.getByTestId('quantity')).toBeInTheDocument();
-//     expect(screen.getByTestId('location')).toBeInTheDocument();
-//     expect(HTMLDialogElement.prototype.showModal).toHaveBeenCalled();
+    expect(screen.getByTestId('orgName')).toBeInTheDocument();
+    expect(screen.getByTestId('foodName')).toBeInTheDocument();
+    expect(screen.getByTestId('quantity')).toBeInTheDocument();
+    expect(screen.getByTestId('location')).toBeInTheDocument();
+    expect(HTMLDialogElement.prototype.showModal).toHaveBeenCalled();
 
-//   });
+  });
 
-//   test('updates form inputs correctly', () => {
-//     render(
-//       <AppContext.Provider value={mockContextValue}>
-//         <EditEventModal isOpen={true} onClose={jest.fn()} event={mockFoodEvent} />
-//       </AppContext.Provider>
-//     );
-//     expect(HTMLDialogElement.prototype.showModal).toHaveBeenCalled();
+  test('updates form inputs correctly', () => {
+    render(
+      <AppContext.Provider value={mockContextValue}>
+        <EditEventModal isOpen={true} onClose={jest.fn()} event={mockFoodEvent} />
+      </AppContext.Provider>
+    );
+    expect(HTMLDialogElement.prototype.showModal).toHaveBeenCalled();
 
-//     const orgNameInput = screen.getByTestId('orgName');
-//     fireEvent.change(orgNameInput, { target: { value: 'Updated Org' } });
-//     expect(orgNameInput).toHaveValue('Updated Org');
+    const orgNameInput = screen.getByTestId('orgName');
+    fireEvent.change(orgNameInput, { target: { value: 'Updated Org' } });
+    expect(orgNameInput).toHaveValue('Updated Org');
 
-//     const foodNameInput = screen.getByTestId('foodName');
-//     fireEvent.change(foodNameInput, { target: { value: 'Updated Food' } });
-//     expect(foodNameInput).toHaveValue('Updated Food');
+    const foodNameInput = screen.getByTestId('foodName');
+    fireEvent.change(foodNameInput, { target: { value: 'Updated Food' } });
+    expect(foodNameInput).toHaveValue('Updated Food');
 
-//     const quantityInput = screen.getByTestId('quantity');
-//     fireEvent.change(quantityInput, { target: { value: '20' } });
-//     expect(quantityInput).toHaveValue(20);
+    const quantityInput = screen.getByTestId('quantity');
+    fireEvent.change(quantityInput, { target: { value: '20' } });
+    expect(quantityInput).toHaveValue(20);
 
-//     const locationInput = screen.getByTestId('location');
-//     fireEvent.change(locationInput, { target: { value: 'Updated Location' } });
-//     expect(locationInput).toHaveValue('Updated Location');
-//   });
+    const locationInput = screen.getByTestId('location');
+    fireEvent.change(locationInput, { target: { value: 'Updated Location' } });
+    expect(locationInput).toHaveValue('Updated Location');
+  });
 
-//   test('submits the form correctly', () => {
-//     const handleClose = jest.fn();
-//     render(
-//       <AppContext.Provider value={mockContextValue}>
-//         <EditEventModal isOpen={true} onClose={handleClose} event={mockFoodEvent} />
-//       </AppContext.Provider>
-//     );
-//     expect(HTMLDialogElement.prototype.showModal).toHaveBeenCalled();
+  // test('submits the form correctly', () => {
+  //   const handleClose = jest.fn();
+  //   render(
+  //     <AppContext.Provider value={mockContextValue}>
+  //       <EditEventModal isOpen={true} onClose={handleClose} event={mockFoodEvent} />
+  //     </AppContext.Provider>
+  //   );
+  //   expect(HTMLDialogElement.prototype.showModal).toHaveBeenCalled();
 
-//     const submitButton = screen.getByText('Update Submission');
-//     fireEvent.click(submitButton);
+  //   const submitButton = screen.getByText('Update Submission');
+  //   fireEvent.click(submitButton);
 
-//     expect(mockContextValue.setfoodEvents).toHaveBeenCalled();
-//     expect(handleClose).toHaveBeenCalled();
-//   });
-// });
+  //   expect(mockContextValue.setfoodEvents).toHaveBeenCalled();
+  //   expect(handleClose).toHaveBeenCalled();
+  // });
+});
