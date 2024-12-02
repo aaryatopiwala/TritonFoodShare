@@ -2,6 +2,7 @@ import { Router } from "express";
 import { db } from "../db";
 import { foodEventsTable } from "../db/schema";
 import { createSubmission } from "../db/queries/insert";
+import { deleteSubmission } from "../db/queries/delete";
 
 
 export const submissionFormRoute = Router();
@@ -46,6 +47,18 @@ submissionFormRoute.post("/", async (req, res) => {
     res.status(200).json({ message: "Submission successful" });
   } catch (error) {
     console.error("Error saving to the database:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
+submissionFormRoute.delete("/:id", async (req, res) => {
+  const id = parseInt(req.params.id);
+  console.log(`Received request to delete food event with ID: ${id}`);
+  try {
+    await deleteSubmission(id);
+    res.status(200).json({ message: "Food event deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting the food event:", error);
     res.status(500).json({ message: "Internal Server Error" });
   }
 });

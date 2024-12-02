@@ -194,7 +194,7 @@ const EditEventModal: React.FC<EditEventModalProps> = ({
             Update Submission
           </button>
         </form>
-        <CloseEventButton event={event} />
+        
     </Modal>
   );
 };
