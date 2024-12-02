@@ -1,27 +1,35 @@
 import React, { useState, useContext } from "react";
-import { UserContext } from "../context/AppContext"; 
-import { login } from "../utils/user-utils"; 
+import { useNavigate } from "react-router-dom"; // For navigation
+import { UserContext } from "../context/AppContext";
+import { login } from "../utils/user-utils";
 import "./login.css";
 
 const LoginPage: React.FC = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const [success, setSuccess] = useState(false); // New state for confirmation message
 
     const { setLogin, setUsername } = useContext(UserContext);
+    const navigate = useNavigate(); // React Router's navigation hook
 
     const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault(); // Prevent page refresh
-        setError(""); // Clear any previous errors
+        e.preventDefault();
+        setError("");
+        setSuccess(false);
 
         try {
-            const user = { username: email, password }; // Adjust if backend expects different fields
-            const isValid = await login(user); // Call login function from user-utils
-            console.log(isValid);
+            const user = { username: email, password };
+            const isValid = await login(user);
             if (isValid) {
-                setLogin(true); // Update global login state
-                setUsername(email); // Update global username
-                console.log("User logged in:", email);
+                setLogin(true);
+                setUsername(email);
+                setSuccess(true); // Show confirmation message
+
+                // Delay redirection to allow user to see the confirmation message
+                setTimeout(() => {
+                    navigate("/"); // Redirect to home page
+                }, 2000); // 2 seconds delay
             } else {
                 setError("Invalid email or password");
             }
@@ -45,7 +53,7 @@ const LoginPage: React.FC = () => {
                     <form onSubmit={handleSubmit}>
                         <label htmlFor="username">Username</label>
                         <input
-                            type="username"
+                            type="text"
                             id="username"
                             placeholder="Enter your email"
                             value={email}
@@ -66,6 +74,11 @@ const LoginPage: React.FC = () => {
                         <button type="submit">Log in</button>
                     </form>
                     {error && <p className="error-message">{error}</p>}
+                    {success && (
+                        <p className="success-message">
+                            Login successful! Redirecting to the home page...
+                        </p>
+                    )}
                     <p>
                         Don’t have an account? <a href="/signup">Sign up here!</a>
                     </p>
