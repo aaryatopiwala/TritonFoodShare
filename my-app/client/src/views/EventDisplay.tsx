@@ -25,7 +25,6 @@ useEffect(() => {
   const fetchEvents = async () => {
     try {
       const foodEvents = await fetchFoodEvents(); // Call the utility function
-      console.log(typeof foodEvents)
       setEvents(foodEvents); // Update the state with the fetched events
 
       // Initialize reservedEvents with all IDs set to false
@@ -78,7 +77,6 @@ useEffect(() => {
       ...prevReserved,
       [eventId]: !isReserved, // Toggle the reserved status for this event
     }));
-    console.log("after", reservedEvents[eventId])
 
     try {
       if (isReserved) {
@@ -92,6 +90,19 @@ useEffect(() => {
     }
   };
 
+  useEffect(() => {
+    console.log("Updated reserved events:", reservedEvents);
+  }, [reservedEvents]);
+  
+  // Load reservedEvents from localStorage when the component mounts
+  useEffect(() => {
+    const storedReservedEvents = localStorage.getItem('reservedEvents');
+    if (storedReservedEvents) {
+      setReservedEvents(JSON.parse(storedReservedEvents));
+    }
+  }, []); // Only run this once when the component mounts
+
+  console.log(username)
   return(
     <div className = "page-container-display">
         <div className = "box">
