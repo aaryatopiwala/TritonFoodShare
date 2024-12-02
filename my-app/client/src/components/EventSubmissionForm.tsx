@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { FoodEventContext } from "../context/AppContext";
+import { FoodEventContext,UserContext } from "../context/AppContext";
 import { FoodEvent } from "../types/types";
 import Select, { SingleValue } from 'react-select';
 import './EventSubmissionForm.css';
@@ -17,6 +17,7 @@ interface OptionType {
 
 const EventSubmissionForm = () => {
   const { foodEvents, setfoodEvents } = useContext(FoodEventContext);
+  const {username} = useContext(UserContext);
   const navigate = useNavigate();
   useEffect(() => {
     loadFoodEvents();
@@ -97,7 +98,7 @@ const EventSubmissionForm = () => {
                 description: '',
                 dietary: selectedOptionDiet?.value || '',
                 headcount: 0,
-                userId: '',
+                userId: username || '',
             };
 
             setfoodEvents([...foodEvents, newFoodEvent]);
