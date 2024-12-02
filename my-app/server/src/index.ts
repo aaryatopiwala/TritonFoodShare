@@ -1,7 +1,7 @@
 import { Response } from "express";
 import 'dotenv/config';
 import { foodEventsRoute } from "./routes/foodEvents";
-import { db } from "./db/index"
+import { usersRoute } from "./routes/users";
 
 const express = require("express");
 const cors = require("cors");
@@ -13,6 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/foodEvents", foodEventsRoute);
+app.use("/users", usersRoute)
 
 // Start the server
 var server = app.listen(port, () => {
