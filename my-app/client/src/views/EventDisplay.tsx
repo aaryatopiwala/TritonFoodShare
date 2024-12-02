@@ -1,36 +1,23 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import {FoodEvent} from '../types/types'
 import { dummyEventList } from '../constants/constants';
-import { updateFoodEventHeadcount } from '../utils/foodEvents-utils';
 import { Link } from 'react-router-dom';
+import { getReservations } from '../utils/reserveEvent-utils';  // Function to fetch user's reservations from backend
+import { API_BASE_URL } from '../constants/constants';
+import { UserContext } from '../context/AppContext'; 
+import { fetchFoodEvents } from '../utils/foodEvents-utils'; 
+
+
 
 export const EventDisplay = () => {
     //Favorites function
-  const [events, setEvents] = useState<FoodEvent[]>(dummyEventList);
-
+  const [events, setEvents] = useState<FoodEvent[]>([]);
   //Reserved status for events for each user:
-  const [reservedEvents, setReservedEvents] = useState<Record<number, boolean>>(dummyEventList.reduce((acc, event) => {
-    acc[event.id] = false; // Initialize all events as unreserved
-    return acc;
-  }, {} as Record<number, boolean>)); 
+  const [reservedEvents, setReservedEvents] = useState<Record<number, boolean>>({}); 
+  const [loading, setLoading] = useState(true);
 
-  const handleReservationDummy = async(eventId: number, headcount: number) =>{
-    const isReserved = reservedEvents[eventId];
-    const newHeadcount = isReserved ? headcount - 1 : headcount + 1;
-
-    setEvents((prevEvents) =>
-      prevEvents.map((event) =>
-        event.id === eventId ? { ...event, headcount: newHeadcount } : event
-      )
-    );
-
-    setReservedEvents((prevReserved) => ({
-      ...prevReserved,
-      [eventId]: !isReserved, 
-    }));
-
-  }
+  const { username } = useContext(UserContext);
 
   //Function for reserving
   const handleReservation = async (eventId: number, headcount: number) => {
@@ -39,8 +26,6 @@ export const EventDisplay = () => {
     const newHeadcount = isReserved ? headcount - 1 : headcount + 1;
     console.log(headcount);
     try {
-      // Update the headcount on the server (backend)
-      await updateFoodEventHeadcount(eventId, newHeadcount);
 
       // Update the local state to reflect the change (toggle reservation for this user)
       setEvents((prevEvents) =>
@@ -59,16 +44,55 @@ export const EventDisplay = () => {
     }
   };
 
-  useEffect(() => {
-    // Initialize the reservedEvents state, e.g., from localStorage or default to false
-    const storedReservedEvents = JSON.parse(localStorage.getItem('reservedEvents') || '{}');
-    setReservedEvents(storedReservedEvents);
-  }, []);
+  // Fetch events from the backend when the component mounts
+// Fetch events from the backend when the component mounts
+useEffect(() => {
+  const fetchEvents = async () => {
+    try {
+      const foodEvents = await fetchFoodEvents(); // Call the utility function
+      console.log(typeof foodEvents)
+      console.log('here');
+      console.log('Fetched food events:', foodEvents);
+      setEvents(foodEvents); // Update the state with the fetched events
 
-  useEffect(() => {
-    // Persist the reservedEvents state in localStorage
-    localStorage.setItem('reservedEvents', JSON.stringify(reservedEvents));
-  }, [reservedEvents]);
+      // Initialize reservedEvents with all IDs set to false
+      const initialReservedStatus: Record<number, boolean> = {};
+      foodEvents.forEach((event) => {
+        initialReservedStatus[event.id] = false; // Set reserved status to false for each event
+      });
+
+      setReservedEvents(initialReservedStatus); // Update the reservedEvents state
+    } catch (error) {
+      console.error('Error fetching food events:', error);
+    } finally {
+      setLoading(false); // Set loading to false after fetch completes
+    }
+  };
+
+  fetchEvents();
+}, []); 
+
+
+ useEffect(() => {
+    const fetchReservations = async () => {
+      try {
+        const userId = username;  // Replace with actual user ID
+        const userReservations = await getReservations(userId);
+        const reservedStatus: Record<number, boolean> = {};
+
+        // Set the reserved status for each event
+        userReservations.forEach((eventId) => {
+          reservedStatus[eventId] = true;
+        });
+
+        setReservedEvents(reservedStatus);
+      } catch (error) {
+        console.error('Error fetching reservations:', error);
+      }
+    };
+
+    fetchReservations();
+  }, []);
 
   return(
     <div className = "page-container-display">
@@ -76,7 +100,7 @@ export const EventDisplay = () => {
             <h1>Active Events</h1>
             <h3>Events that are sharing food right now!</h3>
             <div className="events-grid"  >
-                    {events.map((event) => (
+                    {Array.isArray(events) &&  events.map((event) => (
                         <div
                         key={event.id}
                         className="event-item">
@@ -88,7 +112,7 @@ export const EventDisplay = () => {
                         >{event.locationDescription} </div>
                         <div className = "reserve-box">
                             <div>
-                            <button data-testid={`reserve-${event.id}`} onClick={() => handleReservationDummy(event.id, event.headcount)}>
+                            <button data-testid={`reserve-${event.id}`} onClick={() => handleReservation(event.id, event.headcount)}>
                                     {reservedEvents[event.id] ? 'I can no longer attend' : 'Reserve Now'}
                             </button>
                             </div>
