@@ -2,18 +2,18 @@ import { API_BASE_URL } from "../constants/constants";
 import { FoodEvent } from "../types/types";
 
 // Function to create an Food Event in the backend. Method: POST
-export const createFoodEvent = async (foodEvent: FoodEvent): Promise<FoodEvent> => {
-	const response = await fetch(`${API_BASE_URL}/foodEvents`, {
-    	method: "POST",
-    	headers: {
-        	"Content-Type": "application/json",
-    	},
-    	body: JSON.stringify(foodEvent),
-	});
-	if (!response.ok) {
-    	throw new Error("Failed to create Food Event");
-	}
-	return response.json();
+export const createFoodEvent = async (submissionData: any): Promise<any> => {
+    const response = await fetch('http://localhost:8080/foodEvents', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(submissionData),
+    });
+
+    if (!response.ok) {
+        throw new Error('Failed to create Food Event');
+    }
+
+    return response.json();
 };
 
 // Function to delete an Food Event in the backend. Method: DELETE
@@ -29,21 +29,16 @@ export const deleteFoodEvent = async (id: string): Promise<void> => {
 
 // Function to get all expenses from the backend. Method: GET
 export const fetchFoodEvents = async (): Promise<FoodEvent[]> => {
-	const response = await fetch(`${API_BASE_URL}/foodEvents`, {
-        method: "GET",
-    });
-	if (!response.ok) {
-    	throw new Error('Failed to fetch Food Events');
-	}
+    const response = await fetch('http://localhost:8080/foodEvents');
 
-	// Parsing the response to get the data
-	let foodEventsList = response.json().then((jsonResponse) => {
-    	console.log("data in fetchFoodEvents", jsonResponse);
-    	return jsonResponse.data;
-	});
+    if (!response.ok) {
+        throw new Error('Failed to fetch Food Events');
+    }
 
-	console.log("response in fetchFoodEvents", foodEventsList);
-	return foodEventsList;
+	//put it in json
+    const jsonResponse = await response.json();
+    const foodEventsList = jsonResponse.data || jsonResponse;
+    return foodEventsList;
 };
 
 // Function to update the headcount of a food event. Method: POST
