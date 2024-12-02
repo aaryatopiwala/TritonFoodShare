@@ -55,7 +55,7 @@ export const updateFoodEventHeadcount = async (id: number, newHeadcount: number)
   }
 };
 
-// Function to update a food event. Method: POST
+// Function to update a food event. Method: PUT
 export const updateFoodEvent = async (id: string ,foodEvent: FoodEvent): Promise<void> => {
     const response = await fetch(`${API_BASE_URL}/foodEvents/${id}`, {
       method: "PUT",
@@ -68,3 +68,22 @@ export const updateFoodEvent = async (id: string ,foodEvent: FoodEvent): Promise
       throw new Error("Failed to update food event");
     }
   };
+
+// Function to get all Food Events created by given user. Method: GET
+export const getFoodEventsByUser = async (userId: string): Promise<FoodEvent[]> => {
+	const response = await fetch(`${API_BASE_URL}/foodEvents/user/${userId}`, {
+        method: "GET",
+    });
+	if (!response.ok) {
+    	throw new Error('Failed to fetch Food Events');
+	}
+
+	// Parsing the response to get the data
+	let foodEventsList = response.json().then((jsonResponse) => {
+    	console.log("data in fetchFoodEvents for user", jsonResponse);
+    	return jsonResponse;
+	});
+
+	console.log("response in fetchFoodEvents for user", foodEventsList);
+	return foodEventsList;
+}

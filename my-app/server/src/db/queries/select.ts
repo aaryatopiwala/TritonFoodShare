@@ -87,3 +87,12 @@ export async function getHeadcount(eventId: SelectFoodEvent['id']) {
     .from(foodEventsTable)
     .where(eq(foodEventsTable.id, eventId));
 }
+
+export async function getFoodEventsByUser(
+  userId: SelectFoodEvent['userId']
+): Promise<Array<SelectFoodEvent>> {
+  return db
+    .select()
+    .from(foodEventsTable)
+    .where(eq(foodEventsTable.userId, userId))
+}
