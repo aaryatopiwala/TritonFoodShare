@@ -13,6 +13,8 @@
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   width: 600px;
+  max-height: 1100px; /* Let the height adjust based on the content */
+  flex-shrink: 0;  /* Ensure it doesn't shrink */
 }
 
 .form-group {
@@ -24,6 +26,7 @@
   margin-bottom: 8px;
   display: block;
   color: #333;
+  font-weight: bold; /* Add this line to make the labels bold */
 }
 
 .custom-input,
@@ -66,6 +69,7 @@
   width: 600px;
   display: flex;
   flex-direction: column;
+  flex-grow: 0;
 }
 
 .events-section h2 {
@@ -190,3 +194,24 @@
     opacity: 1;
   }
 }
+
+.edit-event-button{
+  font-size: 13px;
+  margin: 10px;
+  color: white;
+  padding:10px;
+  background-color: #4CAF50;
+}
+
+.close-event-button{
+  color: white;
+  margin: 10px;
+  font-size: 13px;
+  padding:10px;
+  background-color: #AE1414;
+}
+
+.close-event-button:hover{
+  background-color: #AE1414;
+}
+

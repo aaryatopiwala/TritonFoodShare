@@ -3,6 +3,7 @@ import { db } from "../db";
 import { foodEventsTable } from "../db/schema";
 import { createFoodEvent } from "../db/queries/insert";
 import { deleteFoodEvent } from "../db/queries/delete";
+import { updateSubmission } from "../db/queries/update";
 
 export const foodEventsRoute = Router();
 
@@ -56,6 +57,20 @@ foodEventsRoute.delete("/:id", async (req, res) => {
     res.status(200).json({ message: "Food event deleted successfully" });
   } catch (error) {
     console.error("Error deleting the food event:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
+submissionFormRoute.put("/:id", async (req, res) => {
+  const id = parseInt(req.params.id);
+  const { headcount } = req.body;
+  const submissionData = req.body;
+  console.log(`Received request to update headcount for food event with ID: ${id}`);
+  try {
+    await updateSubmission(id, submissionData);
+    res.status(200).json({ message: "Headcount updated successfully" });
+  } catch (error) {
+    console.error("Error updating headcount:", error);
     res.status(500).json({ message: "Internal Server Error" });
   }
 });

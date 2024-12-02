@@ -41,16 +41,9 @@ const CloseEventButton: React.FC<CloseEventButtonProps> = ({ event }) => {
     return (
         <div>
             <button
+                className = "close-event-button"
                 type="button"
-                onClick={handleCloseEventClick}
-                style={{
-                    backgroundColor: '#dc3545',
-                    color: 'white',
-                    padding: '10px 20px',
-                    border: 'none',
-                    borderRadius: '4px',
-                    cursor: 'pointer'
-                }}>
+                onClick={handleCloseEventClick}>
                 End Event
             </button>
             <Modal
@@ -58,8 +51,11 @@ const CloseEventButton: React.FC<CloseEventButtonProps> = ({ event }) => {
                 isOpen={isConfirmationOpen}
                 onClose={handleCancelClose}>
                 <div style={{ padding: '20px', textAlign: 'center' }}>
-                    <h3>Are you sure you want to close this event?</h3>
-                    <p>This action cannot be undone.</p>
+                    <div className = "close-event-text-content">
+                        <h3>Are you sure you want to close this event?</h3>
+                        <p>This action cannot be undone.</p>
+                    </div>
+                   
                     <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginTop: '20px' }}>
                         <button
                             onClick={handleConfirmClose}
