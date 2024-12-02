@@ -9,6 +9,8 @@ import ReportSubmission from "./views/ReportSubmission"
 import { AppProvider } from './context/AppContext';
 import Login from './components/login';
 import Signup from './components/signup';
+import HomePage from './views/Home'; 
+
 
 
 function App() {
@@ -17,14 +19,12 @@ function App() {
       <AppProvider>
         <BrowserRouter>
           <NavBar />
-          <div style={{ display: 'flex', padding: '20px' }}>
+          <div >
             <Routes>
               <Route
                 path="/"
                 element={
-                  <div>
-                    <h1>Welcome to my app</h1>
-                  </div>
+                  <HomePage />
                 }
               />
               <Route

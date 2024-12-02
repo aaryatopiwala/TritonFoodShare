@@ -1,0 +1,55 @@
+.main-container {
+    display: flex;
+    flex-direction: column;   /* Stack child elements vertically */
+    justify-content: center;  /* Vertically center content */
+    align-items: center;      /* Horizontally center content */
+    height: 100vh;            /* Make the container take up the full height of the viewport */
+    text-align: center;       /* Center the text */
+    margin: 0;                /* Remove default margin */
+  }
+  
+  .text-content {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .account-buttons {
+    margin-bottom: 40px;
+  }
+  
+  .home-login-button, .home-signup-button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+  
+  .home-login-button:hover, .home-signup-button:hover {
+    background-color: #45a049;
+  }
+  
+  .about-us {
+    max-width: 800px;  /* Limit the width for better readability */
+  }
+  
+  .text-content-box {
+    margin-bottom: 30px;
+  }
+  
+  .text-content-box h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+  }
+  
+  .text-content-box p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  
