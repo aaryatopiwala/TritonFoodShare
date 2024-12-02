@@ -55,7 +55,7 @@ useEffect(() => {
         initialReservedStatus[eventId] = true;
       });
 
-      setReservedEvents({ ...initialReservedStatus, ...localReserved });
+      setReservedEvents({ ...localReserved, ...initialReservedStatus });
     } catch (error) {
       console.error("Error initializing state:", error);
     } finally {
@@ -88,6 +88,7 @@ useEffect(() => {
       };
   
       // Save the updated reserved status to localStorage
+      
       localStorage.setItem('reservedEvents', JSON.stringify(updatedReserved));
       return updatedReserved;
     });
