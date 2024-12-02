@@ -4,6 +4,7 @@ import { foodEventsTable } from "../db/schema";
 import { createFoodEvent } from "../db/queries/insert";
 import { deleteFoodEvent } from "../db/queries/delete";
 import { updateFoodEvent } from "../db/queries/update";
+import { getFoodEventsByUser } from "../db/queries/select";
 
 export const foodEventsRoute = Router();
 
@@ -61,3 +62,31 @@ foodEventsRoute.delete("/:id", async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 });
+
+foodEventsRoute.get("/:userId", async (req, res) => {
+  const userId = req.params.userId;
+  try {
+    const items = await getFoodEventsByUser(userId);
+
+    // Simplify the items if necessary to remove any complex or circular references
+    const simplifiedItems = items.map(item => ({
+      id: item.id,
+      orgName: item.orgName,
+      foodName: item.foodName,
+      quantity: item.quantity,
+      locationDescription: item.locationDescription,
+      bigLocation: item.bigLocation,
+      diet: item.dietary,
+      descrption: item.description,
+      headcount: item.headcount,
+      userId: item.userId
+    }));
+
+    // Send the simplified items as JSON
+    res.json(simplifiedItems);
+  } catch (error) {
+    console.error("Error fetching items:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+
+})
