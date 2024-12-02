@@ -241,8 +241,8 @@ const EventSubmissionForm = () => {
                     <p><strong>Location:</strong> {event.locationDescription}</p>
                     <p><strong>Quantity:</strong> {event.quantity}</p>
                   </div>
-                  <CloseEventButton event={event} />
-                  <EditEventButton event={event} />
+                    <EditEventButton event={event} />
+                    <CloseEventButton event={event} />
                 </div>
               ))}
             </div>

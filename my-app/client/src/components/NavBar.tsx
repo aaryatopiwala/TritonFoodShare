@@ -38,11 +38,14 @@ const NavBar: React.FC = () => {
           />
           <span className="navbar-title">Triton FoodShare</span>
         </div>
-        <Link to="/">Home</Link>
-        <Link to="/eventsubmit">Event Submission</Link>
-        <Link to="/eventdisplay">Event Display</Link>
-        <Link to="/login">Login</Link>
-        <Link to="/signup">Sign Up</Link>
+        <div className = "navbar-links">
+          <Link to="/">Home</Link>
+          <Link to="/eventsubmit">Event Submission</Link>
+          <Link to="/eventdisplay">Event Display</Link>
+          <Link to = "/contact">Contact Us</Link>
+          <Link to="/login">Login</Link>
+          <Link to="/signup">Sign Up</Link>
+        </div>
         <div className="navbar-right">
           <img
             src="https://static.vecteezy.com/system/resources/thumbnails/019/879/198/small_2x/user-icon-on-transparent-background-free-png.png"
