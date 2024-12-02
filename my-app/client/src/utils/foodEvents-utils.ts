@@ -3,7 +3,7 @@ import { FoodEvent } from "../types/types";
 
 // Function to create an Food Event in the backend. Method: POST
 export const createFoodEvent = async (submissionData: any): Promise<any> => {
-    const response = await fetch('http://localhost:8080/foodEvents', {
+    const response = await fetch(`${API_BASE_URL}/foodEvents/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(submissionData),
@@ -29,7 +29,7 @@ export const deleteFoodEvent = async (id: string): Promise<void> => {
 
 // Function to get all expenses from the backend. Method: GET
 export const fetchFoodEvents = async (): Promise<FoodEvent[]> => {
-    const response = await fetch('http://localhost:8080/foodEvents');
+    const response = await fetch(`${API_BASE_URL}/foodEvents/`);
 
     if (!response.ok) {
         throw new Error('Failed to fetch Food Events');
