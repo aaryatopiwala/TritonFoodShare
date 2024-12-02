@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import './NavBar.css';
 import { Link } from "react-router-dom";
+import {UserContext } from "../context/AppContext";
+
 
 const NavBar: React.FC = () => {
+  const username = React.useContext(UserContext).username;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const [userProfile, setUserProfile] = useState({
@@ -74,8 +77,7 @@ const NavBar: React.FC = () => {
             {/* Display Mode */}
             {!isEditMode ? (
               <>
-                <p><strong>Name:</strong> {userProfile.name}</p>
-                <p><strong>Email:</strong> {userProfile.email}</p>
+                <p><strong>Name:</strong> {username}</p>
                 <p><strong>Dietary Preferences:</strong> {userProfile.dietaryPreferences.join(", ")}</p>
                 <button className="edit-btn" onClick={() => setIsEditMode(true)}>
                   Edit Profile

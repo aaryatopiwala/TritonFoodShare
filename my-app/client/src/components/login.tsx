@@ -55,7 +55,7 @@ const LoginPage: React.FC = () => {
                         <input
                             type="text"
                             id="username"
-                            placeholder="Enter your email"
+                            placeholder="Enter your username"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
