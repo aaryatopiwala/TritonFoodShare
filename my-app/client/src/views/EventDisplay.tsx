@@ -37,11 +37,10 @@ export const EventDisplay = () => {
     // Check if the event is currently reserved, by default it should be unreserved
     const isReserved = reservedEvents[eventId];
     const newHeadcount = isReserved ? headcount - 1 : headcount + 1;
-    //console.log(headcount);
-    //console.log(eventId);
+    console.log(headcount);
     try {
       // Update the headcount on the server (backend)
-      await updateFoodEventHeadcount(eventId.toString(), newHeadcount);
+      await updateFoodEventHeadcount(eventId, newHeadcount);
 
       // Update the local state to reflect the change (toggle reservation for this user)
       setEvents((prevEvents) =>
@@ -71,24 +70,6 @@ export const EventDisplay = () => {
     localStorage.setItem('reservedEvents', JSON.stringify(reservedEvents));
   }, [reservedEvents]);
 
-  useEffect(() => {
-    loadFoodEvents();
-  }, []);
-
-  const loadFoodEvents = async () => {
-    try {
-      const response = await fetch('http://localhost:8080/submissionForm');
-      if (response.ok) {
-        const events = await response.json();
-        setEvents(events);
-      } else {
-        console.error('Failed to fetch food events');
-      }
-    } catch (error) {
-      console.error('An error occurred while fetching food events:', error);
-    }
-  }
-
   return(
     <div className = "page-container-display">
         <div className = "box">
@@ -107,7 +88,7 @@ export const EventDisplay = () => {
                         >{event.locationDescription} </div>
                         <div className = "reserve-box">
                             <div>
-                            <button data-testid={`reserve-${event.id}`} onClick={() => handleReservation(event.id, event.headcount)}>
+                            <button data-testid={`reserve-${event.id}`} onClick={() => handleReservationDummy(event.id, event.headcount)}>
                                     {reservedEvents[event.id] ? 'I can no longer attend' : 'Reserve Now'}
                             </button>
                             </div>

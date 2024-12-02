@@ -20,6 +20,9 @@ app.use("/reserve", reserveEventRoute);
 // Start the server
 var server = app.listen(port, () => {
     console.log(`[server]: Server is running at http://localhost:${port}`);
+    console.log(`Visit https://localhost:${port}/foodEvents to see all food events` );
+    console.log(`Visit https://localhost:${port}/users to see all users` );
+    console.log(`Visit https://localhost:${port}/reserve to see all reservations` );
 });
 
 module.exports = { 

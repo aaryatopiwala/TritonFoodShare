@@ -23,7 +23,7 @@ const EventSubmissionForm = () => {
 
   const loadFoodEvents = async () => {
     try {
-      const response = await fetch('http://localhost:8080/submissionForm');
+      const response = await fetch('http://localhost:8080/foodEvents');
       if (response.ok) {
         const foodEvents = await response.json();
         setfoodEvents(foodEvents);
@@ -83,7 +83,7 @@ const EventSubmissionForm = () => {
     };
 
     try {
-        const response = await fetch('http://localhost:8080/foodEvents/submit', {
+        const response = await fetch('http://localhost:8080/foodEvents', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(submissionData),
