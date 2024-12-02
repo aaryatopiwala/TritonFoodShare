@@ -96,3 +96,16 @@ export async function getFoodEventsByUser(
     .from(foodEventsTable)
     .where(eq(foodEventsTable.userId, userId))
 }
+
+export async function getDuplicateReservations(
+  eventId: SelectReserveEvent['eventId'],
+  userId: SelectReserveEvent['userId']
+): Promise<Array<SelectReserveEvent>> {
+  return db
+    .select()
+    .from(reservedEventsTable)
+    .where(and(
+      eq(reservedEventsTable.eventId, eventId),
+      eq(reservedEventsTable.userId, userId)
+    ))
+}

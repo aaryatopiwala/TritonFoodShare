@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { createReservation } from "../db/queries/insert";
-import { getHeadcount, getReservations } from "../db/queries/select";
+import { getDuplicateReservations, getHeadcount, getReservations } from "../db/queries/select";
 import { deleteReservation } from "../db/queries/delete";
 import { updateHeadcount } from "../db/queries/update";
 import { reservedEventsTable } from "../db/schema";
@@ -33,13 +33,20 @@ reserveEventRoute.post("", async (req, res) => {
     const { eventId, userId } = req.body;
     console.log(`Received request to post reservation for user ${userId} to event ${eventId}`);
     try {
-        // Create Reservation
-        await createReservation({eventId, userId});
+        // Check if reservation is already made
+        const reservations = await getDuplicateReservations(eventId, userId);
+        if (reservations.length == 0) {
+            // Create Reservation
+            await createReservation({eventId, userId});
 
-        // Update Food Event headcount
-        const items = await getHeadcount(eventId);
-        const headcount = items[0].headcount + 1
-        await updateHeadcount(eventId, headcount);
+            // Update Food Event headcount
+            const items = await getHeadcount(eventId);
+            const headcount = items[0].headcount + 1
+            await updateHeadcount(eventId, headcount);
+            res.status(200).send({ message: "Reservation successfully created" })
+        } else {
+            res.status(201).send({ message:"Reservation already exists" })
+        }
 
     } catch (error) {
         console.error("Error saving to the database:", error);
