@@ -6,15 +6,32 @@ interface FoodEventContextType {
   setfoodEvents: React.Dispatch<React.SetStateAction<FoodEvent[]>>;
 }
 
-const initialState: FoodEventContextType = {
+const foodEventContextInitialState: FoodEventContextType = {
   foodEvents: [],
   setfoodEvents: () => {},
 };
 
-export const FoodEventContext = createContext<FoodEventContextType>(initialState);
+interface UserContextType {
+  login: boolean;
+  setLogin: React.Dispatch<React.SetStateAction<boolean>>;
+  username: string;
+  setUsername: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const userContextInitialState: UserContextType = {
+  login: false,
+  setLogin: () => {},
+  username: '',
+  setUsername: () => {}
+}
+
+export const FoodEventContext = createContext<FoodEventContextType>(foodEventContextInitialState);
+export const UserContext = createContext<UserContextType>(userContextInitialState);
 
 export const AppProvider = (props: any) => {
-  const [foodEvents, setfoodEvents] = useState<FoodEvent[]>(initialState.foodEvents);
+  const [foodEvents, setfoodEvents] = useState<FoodEvent[]>(foodEventContextInitialState.foodEvents);
+  const [login, setLogin] = useState<boolean>(userContextInitialState.login);
+  const [username, setUsername] = useState<string>(userContextInitialState.username);
 
   return (
     <FoodEventContext.Provider
@@ -23,7 +40,16 @@ export const AppProvider = (props: any) => {
         setfoodEvents: setfoodEvents,
       }}
     >
-      {props.children}
+      <UserContext.Provider
+        value={{
+          login: login,
+          setLogin: setLogin,
+          username: username,
+          setUsername: setUsername,
+        }}
+      >
+        {props.children}
+      </UserContext.Provider>
     </FoodEventContext.Provider>
   );
 };
