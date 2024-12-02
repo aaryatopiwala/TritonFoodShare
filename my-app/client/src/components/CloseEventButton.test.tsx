@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { AppContext } from '../context/AppContext';
+import { FoodEventContext } from '../context/AppContext';
 import { deleteFoodEvent } from '../utils/foodEvents-utils'; // Adjust the import path as necessary
 import CloseEventButton from './CloseEventButton';
 import { FoodEvent } from '../types/types';
@@ -35,9 +35,9 @@ afterEach(() => {
 describe('CloseEventButton tests', () => {
     test('renders close event button', () => {
         render(
-            <AppContext.Provider value={mockContextValue}>
+            <FoodEventContext.Provider value={mockContextValue}>
                 <CloseEventButton event={mockFoodEvent} />
-            </AppContext.Provider>
+            </FoodEventContext.Provider>
         );
 
         expect(screen.getByText('End Event')).toBeInTheDocument();
@@ -46,9 +46,9 @@ describe('CloseEventButton tests', () => {
 
     test('opens confirmation modal when clicking End Event button', () => {
         render(
-            <AppContext.Provider value={mockContextValue}>
+            <FoodEventContext.Provider value={mockContextValue}>
                 <CloseEventButton event={mockFoodEvent} />
-            </AppContext.Provider>
+            </FoodEventContext.Provider>
         );
 
         fireEvent.click(screen.getByText('End Event'));
@@ -61,9 +61,9 @@ describe('CloseEventButton tests', () => {
 
     test('closes modal when clicking Cancel', () => {
         render(
-            <AppContext.Provider value={mockContextValue}>
+            <FoodEventContext.Provider value={mockContextValue}>
                 <CloseEventButton event={mockFoodEvent} />
-            </AppContext.Provider>
+            </FoodEventContext.Provider>
         );
 
         fireEvent.click(screen.getByText('End Event'));
@@ -77,14 +77,14 @@ describe('CloseEventButton tests', () => {
         //(deleteFoodEvent as jest.Mock).mockResolvedValueOnce(undefined);
 
         render(
-            <AppContext.Provider value={mockContextValue}>
+            <FoodEventContext.Provider value={mockContextValue}>
                 <div data-testid="event-container">
                     <CloseEventButton event={mockFoodEvent} />
                     <div data-testid={`event-${mockFoodEvent.id}`}>
                         {mockFoodEvent.orgName} - {mockFoodEvent.foodName}
                     </div>
                 </div>
-            </AppContext.Provider>
+            </FoodEventContext.Provider>
         );
 
         // Ensure the event is initially present

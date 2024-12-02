@@ -1,33 +1,55 @@
 import { createContext, useState } from "react";
 import { FoodEvent } from "../types/types";
 
-// Exercise: Create add budget to the context
-
-
-
-interface AppContextType {
+interface FoodEventContextType {
   foodEvents: FoodEvent[];
   setfoodEvents: React.Dispatch<React.SetStateAction<FoodEvent[]>>;
 }
 
-const initialState: AppContextType = {
+const foodEventContextInitialState: FoodEventContextType = {
   foodEvents: [],
   setfoodEvents: () => {},
 };
 
-export const AppContext = createContext<AppContextType>(initialState);
+interface UserContextType {
+  login: boolean;
+  setLogin: React.Dispatch<React.SetStateAction<boolean>>;
+  username: string;
+  setUsername: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const userContextInitialState: UserContextType = {
+  login: false,
+  setLogin: () => {},
+  username: '',
+  setUsername: () => {}
+}
+
+export const FoodEventContext = createContext<FoodEventContextType>(foodEventContextInitialState);
+export const UserContext = createContext<UserContextType>(userContextInitialState);
 
 export const AppProvider = (props: any) => {
-  const [foodEvents, setfoodEvents] = useState<FoodEvent[]>(initialState.foodEvents);
+  const [foodEvents, setfoodEvents] = useState<FoodEvent[]>(foodEventContextInitialState.foodEvents);
+  const [login, setLogin] = useState<boolean>(userContextInitialState.login);
+  const [username, setUsername] = useState<string>(userContextInitialState.username);
 
   return (
-    <AppContext.Provider
+    <FoodEventContext.Provider
       value={{
         foodEvents: foodEvents,
-        setfoodEvents: setfoodEvents
+        setfoodEvents: setfoodEvents,
       }}
     >
-      {props.children}
-    </AppContext.Provider>
+      <UserContext.Provider
+        value={{
+          login: login,
+          setLogin: setLogin,
+          username: username,
+          setUsername: setUsername,
+        }}
+      >
+        {props.children}
+      </UserContext.Provider>
+    </FoodEventContext.Provider>
   );
 };

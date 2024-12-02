@@ -1,10 +1,10 @@
-import { asc, count, eq, getTableColumns, gt, sql } from 'drizzle-orm';
+import { asc, count, eq, getTableColumns, gt, sql, and } from 'drizzle-orm';
 import { db } from '..';
-import { SelectFoodEvent, foodEventsTable } from '../schema';
-import { FoodEvent } from '../../types';
+import { SelectFoodEvent, SelectReserveEvent, SelectUser, foodEventsTable, reservedEventsTable, usersTable } from '../schema';
+import { FoodEvent, User } from '../../types';
 
 // Function to get submission by orgName
-export async function getSubmissionByOrgName(
+export async function getFoodEventByOrgName(
   orgName: SelectFoodEvent['orgName'],
 ): Promise<
   Array<FoodEvent>
@@ -16,7 +16,7 @@ export async function getSubmissionByOrgName(
 }
 
 // Function to get submissions with a count of unique diets
-export async function getSubmissionsWithDietCount(
+export async function getFoodEventWithDietCount(
   page = 1,
   pageSize = 5,
 ): Promise<
@@ -35,7 +35,7 @@ export async function getSubmissionsWithDietCount(
 }
 
 // Function to get submissions from the last 24 hours
-export async function getSubmissionsForLast24Hours(
+export async function getFoodEventForLast24Hours(
   page = 1,
   pageSize = 5,
 ): Promise<
@@ -54,4 +54,36 @@ export async function getSubmissionsForLast24Hours(
     .orderBy(asc(foodEventsTable.foodName), asc(foodEventsTable.orgName))
     .limit(pageSize)
     .offset((page - 1) * pageSize);
+}
+
+export async function getUser(data: SelectUser):
+  Promise<Array<User>> {
+  return db
+    .select()
+    .from(usersTable)
+    .where(and(
+      eq(usersTable.username, data['username']), 
+      eq(usersTable.password, data['password'])
+    ));
+}
+
+export async function getUsername(username: SelectUser['username']) {
+  return db
+    .select()
+    .from(usersTable)
+    .where(eq(usersTable.username, username));
+}
+
+export async function getReservations(userId: SelectReserveEvent['userId']) {
+  return db
+    .select({eventId: reservedEventsTable.eventId})
+    .from(reservedEventsTable)
+    .where(eq(reservedEventsTable.userId, userId));
+}
+
+export async function getHeadcount(eventId: SelectFoodEvent['id']) {
+  return db
+    .select({headcount: foodEventsTable.headcount})
+    .from(foodEventsTable)
+    .where(eq(foodEventsTable.id, eventId));
 }

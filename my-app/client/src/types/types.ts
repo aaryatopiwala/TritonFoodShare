@@ -10,3 +10,8 @@ export type FoodEvent = {
     headcount: number;
     userId: string;
 };
+
+export type User = {
+    username: string;
+    password: string;
+}

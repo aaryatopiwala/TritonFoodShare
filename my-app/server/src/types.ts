@@ -10,3 +10,8 @@ export interface FoodEvent {
     headcount: number;
     userId: string;
 }
+
+export interface User {
+    username: string;
+    password: string;
+}

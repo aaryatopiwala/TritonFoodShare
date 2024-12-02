@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect, useRef } from "react";
-import { AppContext } from "../context/AppContext";
+import { FoodEventContext } from "../context/AppContext";
 import { FoodEvent } from "../types/types";
 import './EventSubmissionForm.css';
 import './EditEventModal.css';
@@ -15,7 +15,7 @@ const CloseEventButton: React.FC<CloseEventButtonProps> = ({ event }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
     const focusInputRef = useRef<HTMLInputElement | null>(null);
-    const { foodEvents, setfoodEvents } = useContext(AppContext);
+    const { foodEvents, setfoodEvents } = useContext(FoodEventContext);
 
     const handleCloseEventClick = () => {
         setIsConfirmationOpen(true);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import EditEventModal from './EditEventModal';
-import { AppContext } from '../context/AppContext';
+import { FoodEventContext } from '../context/AppContext';
 import { FoodEvent } from '../types/types';
 
 const mockFoodEvent: FoodEvent = {
@@ -34,9 +34,9 @@ beforeAll(() => {
 describe('EditEventModal tests', () => {
   test('renders EditEventModal correctly', () => {
     render(
-      <AppContext.Provider value={mockContextValue}>
+      <FoodEventContext.Provider value={mockContextValue}>
         <EditEventModal isOpen={true} onClose={jest.fn()} event={mockFoodEvent} />
-      </AppContext.Provider>
+      </FoodEventContext.Provider>
     );
 
     expect(screen.getByTestId('orgName')).toBeInTheDocument();
@@ -49,9 +49,9 @@ describe('EditEventModal tests', () => {
 
   test('updates form inputs correctly', () => {
     render(
-      <AppContext.Provider value={mockContextValue}>
+      <FoodEventContext.Provider value={mockContextValue}>
         <EditEventModal isOpen={true} onClose={jest.fn()} event={mockFoodEvent} />
-      </AppContext.Provider>
+      </FoodEventContext.Provider>
     );
     expect(HTMLDialogElement.prototype.showModal).toHaveBeenCalled();
 
