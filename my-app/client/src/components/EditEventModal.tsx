@@ -8,6 +8,7 @@ import './EditEventModal.css'; // Import the CSS file
 
 import Modal from './Modal';
 import CloseEventButton from "./CloseEventButton";
+import { updateFoodEvent } from "../utils/foodEvents-utils";
 
 interface OptionType {
     value: string;
@@ -58,13 +59,13 @@ const EditEventModal: React.FC<EditEventModalProps> = ({
   const [location, setLocation] = useState(event.locationDescription);
   const [description, setDescription] = useState(event.description);
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const updatedEvent: FoodEvent = {
       id: event.id ,
-      orgName,
-      foodName,
+      orgName: orgName,
+      foodName: foodName,
       quantity: quantity,
       locationDescription: location,
       biglocation: selectedOptionLocation?.label || location,
@@ -74,6 +75,8 @@ const EditEventModal: React.FC<EditEventModalProps> = ({
       userId: event.userId,
     };
 
+    try {
+      await updateFoodEvent(event.id.toString() ,updatedEvent);
     const updatedEvents = foodEvents.map((e) =>
       e.id === event.id ? updatedEvent : e
     ); 
@@ -87,6 +90,9 @@ const EditEventModal: React.FC<EditEventModalProps> = ({
     setSelectedOptionLocation(null);
     setSelectedOptionDiet(null);
     onClose();
+} catch (error) {
+  console.error('Failed to update the event', error);
+}
   };
 
   useEffect(() => {

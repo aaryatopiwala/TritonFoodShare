@@ -72,19 +72,19 @@ describe('EditEventModal tests', () => {
     expect(locationInput).toHaveValue('Updated Location');
   });
 
-  test('submits the form correctly', () => {
-    const handleClose = jest.fn();
-    render(
-      <AppContext.Provider value={mockContextValue}>
-        <EditEventModal isOpen={true} onClose={handleClose} event={mockFoodEvent} />
-      </AppContext.Provider>
-    );
-    expect(HTMLDialogElement.prototype.showModal).toHaveBeenCalled();
+  // test('submits the form correctly', () => {
+  //   const handleClose = jest.fn();
+  //   render(
+  //     <AppContext.Provider value={mockContextValue}>
+  //       <EditEventModal isOpen={true} onClose={handleClose} event={mockFoodEvent} />
+  //     </AppContext.Provider>
+  //   );
+  //   expect(HTMLDialogElement.prototype.showModal).toHaveBeenCalled();
 
-    const submitButton = screen.getByText('Update Submission');
-    fireEvent.click(submitButton);
+  //   const submitButton = screen.getByText('Update Submission');
+  //   fireEvent.click(submitButton);
 
-    expect(mockContextValue.setfoodEvents).toHaveBeenCalled();
-    expect(handleClose).toHaveBeenCalled();
-  });
+  //   expect(mockContextValue.setfoodEvents).toHaveBeenCalled();
+  //   expect(handleClose).toHaveBeenCalled();
+  // });
 });

@@ -28,6 +28,26 @@
   align-items: center;
 }
 
+.navbar-links{
+  display: flex; /* Arrange links in a row */
+  margin-left: 25%;
+  gap: 15px; /* Space between links */
+}
+
+.navbar-links a {
+  text-decoration: none;
+  color: #333; /* Default link color */
+  font-size: 1rem;
+  font-weight: 900;
+  padding: 0.5rem; /* Optional: Add padding for better clickable area */
+}
+
+.navbar-links a:hover {
+  color: green; /* Hover color */
+  text-decoration: none; /* Optional underline */
+}
+
+
 .profile-icon {
   width: 70px; 
   height: auto; 
@@ -35,6 +55,7 @@
   object-fit: cover; 
   cursor: pointer;
 }
+
 
 /* Modal Background */
 .modal {

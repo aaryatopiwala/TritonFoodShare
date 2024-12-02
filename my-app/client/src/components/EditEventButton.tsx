@@ -22,8 +22,8 @@ const EditEventButton: React.FC<EditEventButtonProps> = ({ event }) => {
   };
 
   return (
-    <div>
-      <button onClick={handleButtonClick}>Edit Event</button>
+    <div className = "view-edit-button">
+      <button className = "edit-event-button"onClick={handleButtonClick}>Edit Event</button>
       <EditEventModal isOpen={isModalOpen} onClose={handleCloseModal} event={event} />
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { AppContext } from "../context/AppContext";
 import { FoodEvent } from "../types/types";
 import Select, { SingleValue } from 'react-select';
@@ -17,7 +17,23 @@ interface OptionType {
 const EventSubmissionForm = () => {
   const { foodEvents, setfoodEvents } = useContext(AppContext);
   const navigate = useNavigate();
+  useEffect(() => {
+    loadFoodEvents();
+  }, []);
 
+  const loadFoodEvents = async () => {
+    try {
+      const response = await fetch('http://localhost:8080/submissionForm');
+      if (response.ok) {
+        const foodEvents = await response.json();
+        setfoodEvents(foodEvents);
+      } else {
+        console.error('Failed to fetch food events');
+      }
+    } catch (error) {
+      console.error('An error occurred while fetching food events:', error);
+    }
+  }
   // Location tags
   const [selectedOptionLocation, setSelectedOptionLocation] = useState<SingleValue<OptionType>>(null);
   const locationOptions = [
@@ -225,8 +241,8 @@ const EventSubmissionForm = () => {
                     <p><strong>Location:</strong> {event.locationDescription}</p>
                     <p><strong>Quantity:</strong> {event.quantity}</p>
                   </div>
-                  <CloseEventButton event={event} />
-                  <EditEventButton event={event} />
+                    <EditEventButton event={event} />
+                    <CloseEventButton event={event} />
                 </div>
               ))}
             </div>
