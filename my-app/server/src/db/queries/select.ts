@@ -80,3 +80,10 @@ export async function getReservations(userId: SelectReserveEvent['userId']) {
     .from(reservedEventsTable)
     .where(eq(reservedEventsTable.userId, userId));
 }
+
+export async function getHeadcount(eventId: SelectFoodEvent['id']) {
+  return db
+    .select({headcount: foodEventsTable.headcount})
+    .from(foodEventsTable)
+    .where(eq(foodEventsTable.id, eventId));
+}
