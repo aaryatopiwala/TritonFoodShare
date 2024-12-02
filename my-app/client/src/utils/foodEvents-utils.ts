@@ -29,7 +29,7 @@ export const deleteFoodEvent = async (id: string): Promise<void> => {
 
 // Function to get all expenses from the backend. Method: GET
 export const fetchFoodEvents = async (): Promise<FoodEvent[]> => {
-	const response = await fetch(`${API_BASE_URL}/foodEvents`, {
+	const response = await fetch(`${API_BASE_URL}/submissionForm`, {
         method: "GET",
     });
 	if (!response.ok) {
