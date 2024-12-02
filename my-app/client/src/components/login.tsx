@@ -42,10 +42,10 @@ const LoginPage: React.FC = () => {
                     </div>
                     <h1>Log in</h1>
                     <form onSubmit={handleSubmit}>
-                        <label htmlFor="email">Email</label>
+                        <label htmlFor="username">Username</label>
                         <input
-                            type="email"
-                            id="email"
+                            type="username"
+                            id="username"
                             placeholder="Enter your email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
