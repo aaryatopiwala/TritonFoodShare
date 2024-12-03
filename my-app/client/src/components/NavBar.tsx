@@ -6,7 +6,7 @@ import { log } from 'console';
 
 
 const NavBar: React.FC = () => {
-  const {username, login, setLogin} = useContext(UserContext);
+  const {setUsername,username, login, setLogin} = useContext(UserContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const [userProfile, setUserProfile] = useState({
@@ -32,6 +32,7 @@ const NavBar: React.FC = () => {
 
   const logout = () => {
     setLogin(false);
+    setUsername("Have not logged in");
     setUserProfile({
       name: "",
       email: "",
