@@ -66,6 +66,7 @@ const ReportSubmissionForm = () => {
         <div className = "contact">
             <h1>Contact Us!</h1>
         </div>
+        
 
         <div className = "form-container">
             <form  onSubmit={handleSubmit} className = "emailForm">
