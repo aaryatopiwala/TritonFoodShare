@@ -79,7 +79,10 @@ reserveEventRoute.delete("", async (req, res) => {
 
         // Update Food Event headcount
         const items = await getHeadcount(eventId);
-        const headcount = items[0].headcount - 1
+        let headcount = items[0].headcount - 1
+        if (headcount < 0) {
+            headcount = 0;
+        }
         await updateHeadcount(eventId, headcount);
     } catch (error) {
         console.error("Error connecting to the database:", error);
