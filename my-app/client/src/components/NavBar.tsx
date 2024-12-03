@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import './NavBar.css';
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {UserContext } from "../context/AppContext";
 import { log } from 'console';
 import { useNavigate } from 'react-router-dom';
@@ -23,7 +23,11 @@ interface EditableProfile {
 
 const NavBar: React.FC = () => {
   const { setUsername, username, login, setLogin } = useContext(UserContext);
-
+  const location = useLocation();
+  const getLinkClass = (path: string) => {
+    return location.pathname === path ? "active-link" : "";
+  };
+  
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
 
@@ -87,10 +91,10 @@ const NavBar: React.FC = () => {
         <div className="navbar-links">
           {login ? (
             <>
-              <Link to="/">Home</Link>
-              <Link to="/eventsubmit">Event Submission</Link>
-              <Link to="/eventdisplay">Event Display</Link>
-              <Link to="/contact">Contact Us</Link>
+              <Link to="/" className={getLinkClass("/")}>Home</Link>
+              <Link to="/eventsubmit" className={getLinkClass("/eventsubmit")}>Event Submission</Link>
+              <Link to="/eventdisplay" className={getLinkClass("/eventdisplay")}>Event Display</Link>
+              <Link to="/contact" className={getLinkClass("/contact")}>Contact Us</Link>
             </>
           ) : (
             <>
@@ -98,6 +102,9 @@ const NavBar: React.FC = () => {
               <Link to = "/contact">Contact Us</Link>
               <Link to="/login">Login</Link>
               <Link to="/signup">Sign Up</Link>
+              <Link to="/eventsubmit">Event Submission</Link>
+              <Link to="/eventdisplay">Event Display</Link>
+              <Link to="/contact">Contact Us</Link>
             </>
           )}
         </div>
