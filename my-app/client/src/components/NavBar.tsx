@@ -99,9 +99,9 @@ const NavBar: React.FC = () => {
           ) : (
             <>
                <Link to="/" className={getLinkClass("/")}>Home</Link>
-              <Link to="/eventsubmit" className={getLinkClass("/eventsubmit")}>Event Submission</Link>
-              <Link to="/eventdisplay" className={getLinkClass("/eventdisplay")}>Event Display</Link>
               <Link to="/contact" className={getLinkClass("/contact")}>Contact Us</Link>
+              <Link to="/login" className={getLinkClass("/login")}>Login</Link>
+              <Link to="/signup" className={getLinkClass("/signup")}>Sign Up</Link>
             </>
           )}
         </div>
