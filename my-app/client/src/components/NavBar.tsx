@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import './NavBar.css';
 import { Link } from "react-router-dom";
 import {UserContext } from "../context/AppContext";
+import { log } from 'console';
 
 
 const NavBar: React.FC = () => {
-  const username = React.useContext(UserContext).username;
+  const {username, login, setLogin} = useContext(UserContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const [userProfile, setUserProfile] = useState({
-    name: "John Doe",
-    email: "johndoe@example.com",
+    name: "",
+    email: "",
     dietaryPreferences: ["Vegan", "Gluten-Free"],
   });
 
@@ -29,6 +30,16 @@ const NavBar: React.FC = () => {
     setIsEditMode(false); // Exit edit mode
   };
 
+  const logout = () => {
+    setLogin(false);
+    setUserProfile({
+      name: "",
+      email: "",
+      dietaryPreferences: ["Vegan", "Gluten-Free"],
+    });
+    setIsModalOpen(false); // Close modal on logout
+  };
+
   return (
     <>
       {/* Navigation Bar */}
@@ -41,13 +52,25 @@ const NavBar: React.FC = () => {
           />
           <span className="navbar-title">Triton FoodShare</span>
         </div>
+        {/* only if the user hasnt logged in */}
         <div className = "navbar-links">
-          <Link to="/">Home</Link>
-          <Link to="/eventsubmit">Event Submission</Link>
-          <Link to="/eventdisplay">Event Display</Link>
-          <Link to = "/contact">Contact Us</Link>
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
+          {login ? (
+            <>
+              <Link to="/">Home</Link>
+              <Link to="/eventsubmit">Event Submission</Link>
+              <Link to="/eventdisplay">Event Display</Link>
+              <Link to = "/contact">Contact Us</Link>
+            </>
+          ) : (
+            <>
+              <Link to="/">Home</Link>
+              <Link to="/eventsubmit">Event Submission</Link>
+              <Link to="/eventdisplay">Event Display</Link>
+              <Link to = "/contact">Contact Us</Link>
+              <Link to="/login">Login</Link>
+              <Link to="/signup">Sign Up</Link>
+            </>
+          )}
         </div>
         <div className="navbar-right">
           <img
@@ -77,11 +100,22 @@ const NavBar: React.FC = () => {
             {/* Display Mode */}
             {!isEditMode ? (
               <>
-                <p><strong>Name:</strong> {username}</p>
-                <p><strong>Dietary Preferences:</strong> {userProfile.dietaryPreferences.join(", ")}</p>
+              <p><strong>Name:</strong> {username}</p>
+              <p><strong>Dietary Preferences:</strong> {userProfile.dietaryPreferences.join(", ")}</p>
+              <div className="button-container">
                 <button className="edit-btn" onClick={() => setIsEditMode(true)}>
                   Edit Profile
                 </button>
+                {login ? (
+                  <button className="edit-btn" onClick={logout}>
+                    Logout
+                  </button>
+                ) : (
+                  <Link to="/login" className="edit-btn">
+                    Login
+                  </Link>
+                )}
+              </div>
               </>
             ) : (
               // Edit Mode

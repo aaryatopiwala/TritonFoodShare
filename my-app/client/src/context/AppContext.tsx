@@ -21,7 +21,7 @@ interface UserContextType {
 const userContextInitialState: UserContextType = {
   login: false,
   setLogin: () => {},
-  username: 'Admin',
+  username: 'Have not logged in',
   setUsername: () => {}
 }
 
