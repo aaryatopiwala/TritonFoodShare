@@ -5,7 +5,7 @@
     flex-direction: column;   /* Stack child elements vertically */
     justify-content: center;  /* Vertically center content */
     align-items: center;      /* Horizontally center content */
-    height: 100vh;            /* Make the container take up the full height of the viewport */
+    height: 130vh;            /* Make the container take up the full height of the viewport */
     text-align: center;       /* Center the text */
     margin: 0;                /* Remove default margin */
   }
@@ -113,5 +113,14 @@
 
 .user-options p {
   line-height: 1.6; /* Improve readability */
+}
+
+/* General style for all images */
+img {
+  width: 300px; 
+  height: auto; 
+  border-radius: 10px;
+  margin: 10px 0;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Subtle shadow for depth */
 }
 
