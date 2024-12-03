@@ -147,8 +147,10 @@ useEffect(() => {
                         >{event.locationDescription} </div>
                         <div className = "reserve-box">
                             <div>
-                            <button className = "reserve-button" data-testid={`reserve-${event.id}`} onClick={() => handleReservation(event.id, event.headcount)}>
-                                    {reservedEvents[event.id] ? 'I can no longer attend' : 'Reserve Now'}
+                            <button className={`reserve-button ${
+                        reservedEvents[event.id] ? "cancel" : ""
+                      }`} data-testid={`reserve-${event.id}`} onClick={() => handleReservation(event.id, event.headcount)}>
+                                    {reservedEvents[event.id] ? 'Cancel My Reservation' : 'Reserve Now'}
                             </button>
                             </div>
                             <div data-testid = {`headcount-status-${event.id}`} className = "headcount-status">

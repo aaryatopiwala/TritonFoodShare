@@ -14,7 +14,15 @@
     background-color: rgb(202, 202, 202);
 }
 
-
+.reserve-button.cancel {
+    background-color: #f8d7da; /* Light red background for "Cancel Reservation */
+    color: #721c24; /* Dark red text */
+  }
+  
+  .reserve-button.cancel:hover {
+    background-color: #f1b0b7; /* Darker red on hover */
+  }
+  
 .box{
     display: flex;
     flex-direction: column;
