@@ -1,7 +1,10 @@
 import React, { useState, useContext } from 'react';
 import './NavBar.css';
 import { Link } from "react-router-dom";
-import { UserContext } from "../context/AppContext";
+import {UserContext } from "../context/AppContext";
+import { log } from 'console';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 interface UserProfile {
   name: string;
@@ -14,6 +17,9 @@ interface EditableProfile {
   name: string;
   dietaryPreferences: string; // Comma-separated string
 }
+
+
+
 
 const NavBar: React.FC = () => {
   const { setUsername, username, login, setLogin } = useContext(UserContext);
@@ -55,6 +61,15 @@ const NavBar: React.FC = () => {
     });
     setIsModalOpen(false); // Close modal on logout
   };
+  
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!login) {
+      navigate('/');
+    }
+  }, [login]);
 
   return (
     <>
@@ -80,9 +95,7 @@ const NavBar: React.FC = () => {
           ) : (
             <>
               <Link to="/">Home</Link>
-              <Link to="/eventsubmit">Event Submission</Link>
-              <Link to="/eventdisplay">Event Display</Link>
-              <Link to="/contact">Contact Us</Link>
+              <Link to = "/contact">Contact Us</Link>
               <Link to="/login">Login</Link>
               <Link to="/signup">Sign Up</Link>
             </>
