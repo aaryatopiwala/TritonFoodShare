@@ -54,22 +54,29 @@
 
 .navbar-links {
   display: flex; /* Arrange links in a row */
-  margin-left: 25%;
+  margin-left: 30%;
   gap: 15px; /* Space between links */
   padding: 20px;
+  max-width: 100%;
 }
 
 .navbar-links a {
   text-decoration: none;
   color: #333; /* Default link color */
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 900;
   padding: 0.5rem; /* Optional: Add padding for better clickable area */
+  cursor: pointer;
 }
 
 .navbar-links a:hover {
   color: green; /* Hover color */
   text-decoration: none; /* Optional underline */
+}
+
+.navbar-links .active-link {
+  color: #45a049; /* Active link color */
+  border-bottom: 2px solid #45a049; /* Optional: Visual indicator */
 }
 
 .profile-icon {
