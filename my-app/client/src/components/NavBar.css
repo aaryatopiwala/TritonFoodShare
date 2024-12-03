@@ -1,3 +1,22 @@
+.button-container {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  gap: 15px; 
+  margin-top: 20px; 
+}
+
+.edit-btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.edit-btn:hover {
+  background-color: #ddd; /* Optional: Add a hover effect */
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
