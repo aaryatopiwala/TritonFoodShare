@@ -98,13 +98,10 @@ const NavBar: React.FC = () => {
             </>
           ) : (
             <>
-              <Link to="/">Home</Link>
-              <Link to = "/contact">Contact Us</Link>
-              <Link to="/login">Login</Link>
-              <Link to="/signup">Sign Up</Link>
-              <Link to="/eventsubmit">Event Submission</Link>
-              <Link to="/eventdisplay">Event Display</Link>
-              <Link to="/contact">Contact Us</Link>
+               <Link to="/" className={getLinkClass("/")}>Home</Link>
+              <Link to="/eventsubmit" className={getLinkClass("/eventsubmit")}>Event Submission</Link>
+              <Link to="/eventdisplay" className={getLinkClass("/eventdisplay")}>Event Display</Link>
+              <Link to="/contact" className={getLinkClass("/contact")}>Contact Us</Link>
             </>
           )}
         </div>
