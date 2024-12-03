@@ -21,15 +21,19 @@ interface UserContextType {
 const userContextInitialState: UserContextType = {
   login: false,
   setLogin: () => {},
-  username: '',
-  setUsername: () => {}
-}
+  username: "Have not logged in", // Resolved to use the more descriptive initial value
+  setUsername: () => {},
+};
 
-export const FoodEventContext = createContext<FoodEventContextType>(foodEventContextInitialState);
+export const FoodEventContext = createContext<FoodEventContextType>(
+  foodEventContextInitialState
+);
 export const UserContext = createContext<UserContextType>(userContextInitialState);
 
 export const AppProvider = (props: any) => {
-  const [foodEvents, setfoodEvents] = useState<FoodEvent[]>(foodEventContextInitialState.foodEvents);
+  const [foodEvents, setfoodEvents] = useState<FoodEvent[]>(
+    foodEventContextInitialState.foodEvents
+  );
   const [login, setLogin] = useState<boolean>(userContextInitialState.login);
   const [username, setUsername] = useState<string>(userContextInitialState.username);
 

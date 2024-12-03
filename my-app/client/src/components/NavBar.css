@@ -1,16 +1,34 @@
 @import url('https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 
+.button-container {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  gap: 15px; 
+  margin-top: 20px; 
+}
+
+.edit-btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.edit-btn:hover {
+  background-color: #ddd; /* Optional: Add a hover effect */
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #ece9e2 ; 
+  background-color: #ece9e2; 
   padding: 1rem 2rem;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  border-bottom:solid #45a049 4px;
+  border-bottom: solid #45a049 4px;
   font-family: "Averia Serif Libre", serif;
   font-weight: 100;
-
 }
 
 .navbar-left {
@@ -34,7 +52,7 @@
   align-items: center;
 }
 
-.navbar-links{
+.navbar-links {
   display: flex; /* Arrange links in a row */
   margin-left: 25%;
   gap: 15px; /* Space between links */
@@ -54,7 +72,6 @@
   text-decoration: none; /* Optional underline */
 }
 
-
 .profile-icon {
   width: 70px; 
   height: auto; 
@@ -63,99 +80,90 @@
   cursor: pointer;
 }
 
-
 /* Modal Background */
 .modal {
-display: flex;
-position: fixed;
-z-index: 1000;
-left: 0;
-top: 0;
-width: 100%;
-height: 100%;
-background-color: rgba(0, 0, 0, 0.5);
-justify-content: center;
-align-items: center;
+  display: flex;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
 }
 
 /* Modal Content */
 .modal-content {
-background-color: #fff;
-padding: 20px;
-border-radius: 8px;
-width: 80%;
-max-width: 400px;
-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-text-align: center;
-position: relative;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 400px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  position: relative;
 }
 
 .modal-content h2 {
-margin-top: 0;
+  margin-top: 0;
 }
 
 /* Close Button */
 .close {
-position: absolute;
-top: 10px;
-right: 15px;
-color: #aaa;
-font-size: 20px;
-font-weight: bold;
-cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: #aaa;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .close:hover {
-color: black;
-}
-
-/* Profile Icon */
-.profile-icon {
-width: 40px;
-height: 40px;
-border-radius: 50%;
-cursor: pointer;
+  color: black;
 }
 
 /* Edit Button */
 .edit-btn, .save-btn, .cancel-btn {
-background-color: #4caf50;
-color: white;
-border: none;
-padding: 10px 15px;
-margin-top: 10px;
-border-radius: 5px;
-cursor: pointer;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  margin-top: 10px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .cancel-btn {
-background-color: #f44336;
+  background-color: #f44336;
 }
 
 .edit-btn:hover, .save-btn:hover, .cancel-btn:hover {
-background-color: #45a049;
+  background-color: #45a049;
 }
 
 .cancel-btn:hover {
-background-color: #e53935;
+  background-color: #e53935;
 }
 
 /* Edit Field Styling */
 .edit-field {
-margin: 15px 0;
-text-align: left;
+  margin: 15px 0;
+  text-align: left;
 }
 
 .edit-field label {
-display: block;
-font-weight: bold;
-margin-bottom: 5px;
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
 }
 
 .edit-field input {
-width: 100%;
-padding: 8px;
-border: 1px solid #ccc;
-border-radius: 5px;
-font-size: 1rem;
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
 }
