@@ -1,10 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #ffffff; 
+  background-color: #ece9e2 ; 
   padding: 1rem 2rem;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-bottom:solid #45a049 4px;
+  font-family: "Averia Serif Libre", serif;
+  font-weight: 100;
+
 }
 
 .navbar-left {
@@ -19,7 +25,7 @@
 }
 
 .navbar-title {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: bold;
 }
 
@@ -32,6 +38,7 @@
   display: flex; /* Arrange links in a row */
   margin-left: 25%;
   gap: 15px; /* Space between links */
+  padding: 20px;
 }
 
 .navbar-links a {

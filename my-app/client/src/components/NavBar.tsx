@@ -1,20 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import './NavBar.css';
 import { Link } from "react-router-dom";
+import { UserContext } from '../context/AppContext'; 
 
+interface UserProfile {
+  name: string;
+  username: string;
+  dietaryPreferences: string[];
+}
+
+interface EditableProfile {
+  name: string;
+  dietaryPreferences: string; // Comma-separated string
+}
 const NavBar: React.FC = () => {
+
+  const { username } = useContext(UserContext);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
-  const [userProfile, setUserProfile] = useState({
-    name: "John Doe",
-    email: "johndoe@example.com",
-    dietaryPreferences: ["Vegan", "Gluten-Free"],
+  const [userProfile, setUserProfile] = useState<UserProfile>({
+    name: "",
+    username: username,
+    dietaryPreferences: [],
   });
 
   const [editableProfile, setEditableProfile] = useState({
     name: userProfile.name,
     dietaryPreferences: userProfile.dietaryPreferences.join(", "),
   });
+
+  
+  console.log(username)
 
   const handleEditSave = () => {
     // Save changes
@@ -75,7 +92,7 @@ const NavBar: React.FC = () => {
             {!isEditMode ? (
               <>
                 <p><strong>Name:</strong> {userProfile.name}</p>
-                <p><strong>Email:</strong> {userProfile.email}</p>
+                <p><strong>Username:</strong> {userProfile.username}</p>
                 <p><strong>Dietary Preferences:</strong> {userProfile.dietaryPreferences.join(", ")}</p>
                 <button className="edit-btn" onClick={() => setIsEditMode(true)}>
                   Edit Profile

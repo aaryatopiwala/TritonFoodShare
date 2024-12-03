@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
 .main-container {
     display: flex;
     flex-direction: column;   /* Stack child elements vertically */
@@ -11,9 +13,31 @@
   .text-content {
     font-size: 2rem;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 60px;
+    margin-top: 100px;
+    align-items: center;
+    text-align: center;
   }
   
+  .text-content h3{
+    padding: 0;
+    margin:0;
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .text-block{
+    align-items: center;
+    text-align: center;
+    margin-left: 300px;
+    margin-right: 300px;
+  }
+  .text-content p{
+    font-size: 1rem;
+  }
+  .text-content h1{
+    font-size: 5rem;
+  }
   .account-buttons {
     margin-bottom: 40px;
   }
@@ -53,3 +77,41 @@
     line-height: 1.6;
   }
   
+  .emphasis {
+    color: #ff9f22; /* Bright orange for visibility */
+    font-weight: bold;
+    /*background-color: #fff9c4; /* Light yellow highlight */
+    padding: 0 4px; 
+    border-radius: 4px; 
+    /*font-size: 20px;*/
+}
+
+.user-options {
+  display: flex; /* Enable flexbox layout */
+  gap: 20px; /* Add space between the boxes */
+  justify-content: center; /* Center the boxes horizontally */
+  align-items: flex-start; /* Align boxes to the top */
+  margin-top: 20px; /* Add some spacing from other content */
+}
+
+.org-box, .student-box {
+  flex: 1; /* Ensure both boxes have equal width */
+  border: 2px solid #4CAF50; /* Optional: Add a border for visual separation */
+  border-radius: 10px; /* Rounded corners */
+  padding: 20px; /* Add some inner spacing */
+  background-color: #f9f9f9; /* Light background for contrast */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  max-width: 500px; /* Limit box width */
+  height: 100%;
+}
+
+.user-options h4 {
+  color: #4CAF50; /* Match theme color */
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
+.user-options p {
+  line-height: 1.6; /* Improve readability */
+}
+
