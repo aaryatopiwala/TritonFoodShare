@@ -29,33 +29,28 @@ export const deleteFoodEvent = async (id: string): Promise<void> => {
 
 // Function to get all expenses from the backend. Method: GET
 export const fetchFoodEvents = async (): Promise<FoodEvent[]> => {
-    const response = await fetch(`${API_BASE_URL}/foodEvents/`);
+	const response = await fetch(`${API_BASE_URL}/foodEvents`, {
+        method: "GET",
+    });
+	if (!response.ok) {
+    	throw new Error('Failed to fetch Food Events');
+	}
 
-    if (!response.ok) {
-        throw new Error('Failed to fetch Food Events');
-    }
+	// Parsing the response to get the data
+	let foodEventsList = await response.json().then((jsonResponse) => {
+    	console.log("data in fetchFoodEvents", jsonResponse);
+		const foodEventsList = jsonResponse as FoodEvent[];
+    	return foodEventsList;
+	});
 
-	//put it in json
-    const jsonResponse = await response.json();
-    const foodEventsList = jsonResponse.data || jsonResponse;
-    return foodEventsList;
+	console.log("response in fetchFoodEvents", foodEventsList);
+	console.log(typeof foodEventsList)
+	return foodEventsList;
 };
 
-// Function to update the headcount of a food event. Method: POST
-export const updateFoodEventHeadcount = async (id: number, newHeadcount: number): Promise<void> => {
-  const response = await fetch(`${API_BASE_URL}/foodEvents/${id}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ headcount: newHeadcount }),
-  });
-  if (!response.ok) {
-    throw new Error("Failed to update headcount");
-  }
-};
 
-// Function to update a food event. Method: PUT
+
+// Function to update a food event. Method: POST
 export const updateFoodEvent = async (id: string ,foodEvent: FoodEvent): Promise<void> => {
     const response = await fetch(`${API_BASE_URL}/foodEvents/${id}`, {
       method: "PUT",

@@ -41,7 +41,7 @@ export const getReservations = async (userId: string): Promise<Array<number>> =>
     } 
     let reservations = response.json().then((jsonResponse) => {
     	console.log("data in reservations", jsonResponse);
-    	return jsonResponse.data;
+    	return jsonResponse.map((item: { eventId: number }) => item.eventId);
 	});
 
 	console.log("response in reservations", reservations);
