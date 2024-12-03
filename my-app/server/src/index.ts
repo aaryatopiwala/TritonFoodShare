@@ -3,6 +3,7 @@ import 'dotenv/config';
 import { foodEventsRoute } from "./routes/foodEvents";
 import { usersRoute } from "./routes/users";
 import { reserveEventRoute } from "./routes/reserveEvent";
+import { clearEvents } from "./db/queries/delete";
 
 const express = require("express");
 const cors = require("cors");
@@ -16,6 +17,9 @@ app.use(express.json());
 app.use("/foodEvents", foodEventsRoute);
 app.use("/users", usersRoute);
 app.use("/reserve", reserveEventRoute);
+
+// clears all Food Events
+// clearEvents();
 
 // Start the server
 var server = app.listen(port, () => {
