@@ -7,7 +7,7 @@ import { getReservations, makeReservation, removeReservation } from '../utils/re
 import { API_BASE_URL } from '../constants/constants';
 import { UserContext } from '../context/AppContext'; 
 import { fetchFoodEvents } from '../utils/foodEvents-utils'; 
-
+import './EventDisplay.css'
 
 
 export const EventDisplay = () => {
@@ -147,7 +147,7 @@ useEffect(() => {
                         >{event.locationDescription} </div>
                         <div className = "reserve-box">
                             <div>
-                            <button data-testid={`reserve-${event.id}`} onClick={() => handleReservation(event.id, event.headcount)}>
+                            <button className = "reserve-button" data-testid={`reserve-${event.id}`} onClick={() => handleReservation(event.id, event.headcount)}>
                                     {reservedEvents[event.id] ? 'I can no longer attend' : 'Reserve Now'}
                             </button>
                             </div>
