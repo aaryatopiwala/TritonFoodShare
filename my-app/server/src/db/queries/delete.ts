@@ -12,3 +12,7 @@ export async function deleteReservation(data: SelectReserveEvent) {
     eq(reservedEventsTable.userId, data['userId'])
   ));
 }
+
+export async function clearEvents() {
+  await db.delete(foodEventsTable);
+}
