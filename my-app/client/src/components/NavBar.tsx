@@ -134,13 +134,7 @@ const NavBar: React.FC = () => {
             {!isEditMode ? (
               <>
                 <p>
-                  <strong>Name:</strong> {userProfile.name || "N/A"}
-                </p>
-                <p>
-                  <strong>Username:</strong> {userProfile.username}
-                </p>
-                <p>
-                  <strong>Email:</strong> {userProfile.email || "N/A"}
+                  <strong>Username:</strong> {username}
                 </p>
                 <p>
                   <strong>Dietary Preferences:</strong>{" "}
