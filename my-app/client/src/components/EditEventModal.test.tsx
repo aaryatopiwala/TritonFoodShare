@@ -4,6 +4,10 @@ import EditEventModal from './EditEventModal';
 import { FoodEventContext } from '../context/AppContext';
 import { FoodEvent } from '../types/types';
 
+jest.mock('../utils/foodEvents-utils', () => ({
+  updateFoodEvent: jest.fn(),
+}));
+
 const mockFoodEvent: FoodEvent = {
   id: 1,
   orgName: 'Test Org',
