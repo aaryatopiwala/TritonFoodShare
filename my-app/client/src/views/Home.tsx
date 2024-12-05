@@ -49,7 +49,7 @@ const HomePage = () => {
                             <img src={img2} alt="Description for img1" />                        </div>
                         <div className = "student-box">
                         <h4>For Students:</h4>
-                                <p>Sign up for an account and start reserving food from events today! Browse active submissions to see all the details shared by organizations, including food type, quantity, and location. If you change your plans, you can easily unreserve your spot with just a click.</p>
+                                <p>Sign up for an account and <strong>start reserving food</strong> from events today! Browse active submissions to see all the details shared by organizations, including food type, quantity, and location. If you change your plans, you can <strong>easily unreserve</strong> your spot with just a click.</p>
                                 <img src={img1} alt="Description for img2" />
                                 </div>
                     </div>

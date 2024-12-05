@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
 import { FoodEventContext, UserContext } from "../context/AppContext";
-
 import { FoodEvent } from "../types/types";
 import Select, { SingleValue } from 'react-select';
 import './EventSubmissionForm.css';
