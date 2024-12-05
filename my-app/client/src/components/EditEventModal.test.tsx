@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import EditEventModal from './EditEventModal';
 import { FoodEventContext } from '../context/AppContext';
 import { FoodEvent } from '../types/types';
@@ -72,19 +72,23 @@ describe('EditEventModal tests', () => {
     expect(locationInput).toHaveValue('Updated Location');
   });
 
-  // test('submits the form correctly', () => {
-  //   const handleClose = jest.fn();
-  //   render(
-  //     <AppContext.Provider value={mockContextValue}>
-  //       <EditEventModal isOpen={true} onClose={handleClose} event={mockFoodEvent} />
-  //     </AppContext.Provider>
-  //   );
-  //   expect(HTMLDialogElement.prototype.showModal).toHaveBeenCalled();
-
-  //   const submitButton = screen.getByText('Update Submission');
-  //   fireEvent.click(submitButton);
-
-  //   expect(mockContextValue.setfoodEvents).toHaveBeenCalled();
-  //   expect(handleClose).toHaveBeenCalled();
-  // });
+  test('submits the form correctly', async () => {
+    const onClose = jest.fn();
+    const setfoodEvents = jest.fn();
+    const mockContext = { ...mockContextValue, setfoodEvents };
+  
+    render(
+      <FoodEventContext.Provider value={mockContext}>
+        <EditEventModal isOpen={true} onClose={onClose} event={mockFoodEvent} />
+      </FoodEventContext.Provider>
+    );
+    
+    const submitButton = screen.getByText('Update Submission');
+    fireEvent.click(submitButton);
+    // need to wait for the async operation to complete
+    await waitFor(() => {
+      expect(setfoodEvents).toHaveBeenCalled();
+      expect(onClose).toHaveBeenCalled();
+    });
+  });
 });
