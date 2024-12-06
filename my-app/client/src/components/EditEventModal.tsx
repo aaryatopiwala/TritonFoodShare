@@ -36,7 +36,11 @@ const EditEventModal: React.FC<EditEventModalProps> = ({
     { value: 'cseBuilding', label: 'CSE Building' },
     { value: 'WLH', label: 'Warren Lecture Hall' },
     { value: 'CENTER', label: 'Center Hall' },
-    { value: 'FAH', label: 'Franklin Antonio Hall' },
+    { value: 'Atkinson', label: 'Atkinson Hall' },
+    { value: 'Sixth Collge', label: 'Sixth College' },
+    { value: 'Peterson', label: 'Peterson Hall' },
+    { value: 'Geisel', label: 'Geisel Library' },
+    { value: 'Price', label: 'Price Center' }
   ];
   const handleChangeLocation = (selectedOption: SingleValue<OptionType>) => {
     setSelectedOptionLocation(selectedOption);
@@ -48,6 +52,9 @@ const EditEventModal: React.FC<EditEventModalProps> = ({
     { value: 'halal', label: 'Halal' },
     { value: 'kosher', label: 'Kosher' },
     { value: 'vegan', label: 'Vegan' },
+    { value: 'lactose', label: 'Lactose' },
+    { value: 'gluten', label: 'Gluten' },
+
   ];
   const handleChangeDiet = (selectedOption: SingleValue<OptionType>) => {
     setSelectedOptionDiet(selectedOption);
