@@ -120,7 +120,7 @@ const EventSubmissionForm = () => {
                 quantity: quantity,
                 locationDescription: location,
                 biglocation: selectedOptionLocation?.value || '',
-                description: '',
+                description: description,
                 dietary: selectedOptionDiet?.value || '',
                 headcount: 0,
                 userId: username || '',
